@@ -45,7 +45,9 @@ export function Header() {
 
   return (
     <header
-      className={`site-header ${scrolled || menuOpen ? 'is-solid' : ''}`.trim()}
+      className={`site-header ${scrolled || menuOpen ? 'is-solid' : ''} ${
+        menuOpen ? 'is-menu-open' : ''
+      }`.trim()}
     >
       <div className="site-header__inner">
         <a href="/" className="site-logo">

@@ -63,6 +63,8 @@ button {
 .site-header.is-solid {
   background: rgba(247, 246, 242, 0.92);
   border-color: var(--color-border);
+}
+.site-header.is-solid:not(.is-menu-open) {
   backdrop-filter: blur(12px);
 }
 .site-header__inner {
