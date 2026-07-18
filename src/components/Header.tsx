@@ -44,41 +44,43 @@ export function Header() {
   const handleNavClick = () => setMenuOpen(false)
 
   return (
-    <header
-      className={`site-header ${scrolled || menuOpen ? 'is-solid' : ''} ${
-        menuOpen ? 'is-menu-open' : ''
-      }`.trim()}
-    >
-      <div className="site-header__inner">
-        <a href="/" className="site-logo">
-          {brand.name}
-        </a>
+    <>
+      <header
+        className={`site-header ${scrolled || menuOpen ? 'is-solid' : ''} ${
+          menuOpen ? 'is-menu-open' : ''
+        }`.trim()}
+      >
+        <div className="site-header__inner">
+          <a href="/" className="site-logo">
+            {brand.name}
+          </a>
 
-        <nav className="site-nav" aria-label="주요 메뉴">
-          <ul className="site-nav__list">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav className="site-nav" aria-label="주요 메뉴">
+            <ul className="site-nav__list">
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <button
-          ref={menuButtonRef}
-          type="button"
-          className="menu-toggle"
-          aria-expanded={menuOpen}
-          aria-controls={menuId}
-          aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="menu-toggle__bars" aria-hidden="true">
-            <span />
-            <span />
-          </span>
-        </button>
-      </div>
+          <button
+            ref={menuButtonRef}
+            type="button"
+            className="menu-toggle"
+            aria-expanded={menuOpen}
+            aria-controls={menuId}
+            aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            <span className="menu-toggle__bars" aria-hidden="true">
+              <span />
+              <span />
+            </span>
+          </button>
+        </div>
+      </header>
 
       <div
         id={menuId}
@@ -116,6 +118,6 @@ export function Header() {
           </ul>
         </nav>
       </div>
-    </header>
+    </>
   )
 }

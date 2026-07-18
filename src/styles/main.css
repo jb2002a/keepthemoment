@@ -136,10 +136,15 @@ button {
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 110;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
   padding: 0 1.25rem 3rem;
+  overflow-y: auto;
+  color: var(--color-text);
   background: var(--color-bg);
 }
 .mobile-menu[hidden] { display: none; }
