@@ -128,7 +128,7 @@ export const products: Product[] = [
 export const storyBlocks: StoryBlock[] = [
   {
     id: 's1',
-    image: '/images/keep-moment-store.webp',
+    image: '/images/keep-moment-store-retouched.png',
     alt: '자연광이 들어오는 Keep The Moment 라이프스타일 공간',
     size: 'wide',
   },
@@ -159,7 +159,7 @@ export const storeInfo = {
   mapUrl: 'https://map.naver.com/',
   placeUrl: 'https://naver.me/',
   instagramUrl: 'https://www.instagram.com/',
-  image: '/images/keep-moment-store.webp',
+  image: '/images/keep-moment-store-retouched.png',
   alt: '우드와 실버 소재로 완성된 밝은 Keep The Moment 매장',
 }
 
