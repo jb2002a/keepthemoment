@@ -109,6 +109,7 @@ function HomePage() {
       <Collections />
       <NewArrivals />
       <HomeLinks />
+      <Store />
     </main>
   )
 }
@@ -128,7 +129,7 @@ function HomeLinks() {
             <strong>Water & Soil.</strong>
             <span>물과 흙 모두에 잘 적응하는 식물.</span>
           </a>
-          <a href="/visit" className="home-link-card">
+          <a href="/#visit" className="home-link-card">
             <span className="section__eyebrow">Visit</span>
             <strong>Haenggung Store.</strong>
             <span>공간과 운영 정보를 확인하세요.</span>

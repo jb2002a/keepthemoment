@@ -46,7 +46,7 @@ export const navItems: NavItem[] = [
   { id: 'shop', label: 'SHOP', href: '/#moments' },
   { id: 'about', label: 'ABOUT', href: '/about' },
   { id: 'care', label: 'CARE', href: '/care' },
-  { id: 'visit', label: 'VISIT', href: '/visit' },
+  { id: 'visit', label: 'VISIT', href: '/#visit' },
 ]
 
 export const hero = {
