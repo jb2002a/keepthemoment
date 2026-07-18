@@ -108,8 +108,8 @@ function HomePage() {
       <Hero />
       <Collections />
       <NewArrivals />
-      <HomeLinks />
       <Store />
+      <HomeLinks />
     </main>
   )
 }
