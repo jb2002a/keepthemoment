@@ -50,7 +50,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const hero = {
-  headline: 'KEEP THE MOMENT',
+  headline: 'Keep The Moment',
   subcopy: '물빛으로 자라는 희귀 수경식물 오브제',
   ctaLabel: 'Scroll to discover',
   ctaHref: '#categories',
