@@ -116,7 +116,7 @@ function HomePage() {
 
 function HomeLinks() {
   return (
-    <section className="section home-links" aria-label="More about Keep The Moment">
+    <section className="section home-links" aria-label="More about KEEP THE MOMENT">
       <div className="section__inner">
         <div className="home-links__grid">
           <a href="/about" className="home-link-card">

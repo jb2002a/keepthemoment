@@ -36,7 +36,7 @@ export type SocialLink = {
 }
 
 export const brand = {
-  name: 'Keep The Moment',
+  name: 'KEEP THE MOMENT',
   tagline: 'Nature meets Memory.',
   shortDescription: '오늘의 순간을 식물과 함께 가져가세요.',
 }
@@ -50,7 +50,7 @@ export const navItems: NavItem[] = [
 ]
 
 export const hero = {
-  headline: 'Keep The Moment',
+  headline: 'KEEP THE MOMENT',
   subcopy: '물빛으로 자라는 희귀 수경식물 오브제',
   ctaLabel: 'Scroll to discover',
   ctaHref: '#categories',
@@ -129,7 +129,7 @@ export const storyBlocks: StoryBlock[] = [
   {
     id: 's1',
     image: '/images/keep-moment-store-retouched.png',
-    alt: '자연광이 들어오는 Keep The Moment 라이프스타일 공간',
+    alt: '자연광이 들어오는 KEEP THE MOMENT 라이프스타일 공간',
     size: 'wide',
   },
   {
@@ -148,7 +148,7 @@ export const hydroponic = {
 }
 
 export const storeInfo = {
-  name: 'Keep The Moment',
+  name: 'KEEP THE MOMENT',
   address: '경기 수원시 팔달구 신풍로63번길 14 2층',
   addressDetail: '2F, 14, Sinpung-ro 63beon-gil, Paldal-gu, Suwon-si, Gyeonggi-do',
   hours: [
@@ -160,7 +160,7 @@ export const storeInfo = {
   placeUrl: 'https://naver.me/',
   instagramUrl: 'https://www.instagram.com/',
   image: '/images/keep-moment-store-retouched.png',
-  alt: '우드와 실버 소재로 완성된 밝은 Keep The Moment 매장',
+  alt: '우드와 실버 소재로 완성된 밝은 KEEP THE MOMENT 매장',
 }
 
 export const footerLinks: SocialLink[] = [
