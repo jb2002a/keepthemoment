@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Collections } from './components/Collections'
-import { NewArrivals } from './components/NewArrivals'
 import { BrandStory } from './components/BrandStory'
 import { PlantCare } from './components/PlantCare'
 import { Store } from './components/Store'
@@ -107,7 +106,6 @@ function HomePage() {
     <main id="main">
       <Hero />
       <Collections />
-      <NewArrivals />
       <Store />
       <HomeLinks />
     </main>

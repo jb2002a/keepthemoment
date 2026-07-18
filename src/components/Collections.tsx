@@ -13,9 +13,9 @@ export function Collections() {
             <Reveal as="li" key={item.id} delay={index * 90}>
               <a
                 id={item.id}
-                href="#moments"
+                href="#visit"
                 className="collection-card"
-                aria-label={`${item.name} 컬렉션 보기`}
+                aria-label={`${item.name} 컬렉션 매장 정보 보기`}
               >
                 <div className="collection-card__media">
                   <img

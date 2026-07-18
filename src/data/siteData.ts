@@ -13,15 +13,6 @@ export type Collection = {
   aspectRatio: string
 }
 
-export type Product = {
-  id: string
-  name: string
-  price: number
-  storeUrl: string
-  image: string
-  alt: string
-}
-
 export type StoryBlock = {
   id: string
   image: string
@@ -43,7 +34,6 @@ export const brand = {
 
 export const navItems: NavItem[] = [
   { id: 'collections', label: 'COLLECTIONS', href: '/#categories' },
-  { id: 'shop', label: 'SHOP', href: '/#moments' },
   { id: 'about', label: 'ABOUT', href: '/about' },
   { id: 'care', label: 'CARE', href: '/care' },
   { id: 'visit', label: 'VISIT', href: '/#visit' },
@@ -90,41 +80,6 @@ export const collections: Collection[] = [
 /** 네이버 스마트스토어 URL — 실제 스토어 주소로 교체하세요 */
 export const naverStoreUrl = 'https://smartstore.naver.com/'
 
-export const products: Product[] = [
-  {
-    id: 'alocasia-turtle',
-    name: '거북 알로카시아',
-    price: 89000,
-    storeUrl: naverStoreUrl,
-    image: '/images/final/거북알로카시아-1.png',
-    alt: '거북 알로카시아 상품 이미지',
-  },
-  {
-    id: 'scindapsus-exotica',
-    name: '스칸답서스 엑조티카',
-    price: 68000,
-    storeUrl: naverStoreUrl,
-    image: '/images/final/스칸답서스-엑조티카-1.png',
-    alt: '스칸답서스 엑조티카 상품 이미지',
-  },
-  {
-    id: 'scindapsus-jade',
-    name: '스칸답서스 제이드',
-    price: 52000,
-    storeUrl: naverStoreUrl,
-    image: '/images/final/스칸답서스-제이드-1.png',
-    alt: '스칸답서스 제이드 상품 이미지',
-  },
-  {
-    id: 'adansonii',
-    name: '몬스테라 아단소니',
-    price: 48000,
-    storeUrl: naverStoreUrl,
-    image: '/images/final/아단소니-1.png',
-    alt: '몬스테라 아단소니 상품 이미지',
-  },
-]
-
 export const storyBlocks: StoryBlock[] = [
   {
     id: 's1',
@@ -170,7 +125,3 @@ export const footerLinks: SocialLink[] = [
 ]
 
 export const privacyPolicyUrl = '#privacy'
-
-export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('ko-KR').format(price) + '원'
-}
