@@ -69,10 +69,6 @@ export const hero = {
       src: '/images/hero/main.jpeg',
       alt: '식물이 가득한 KEEP THE MOMENT 쇼룸 전경',
     },
-    {
-      src: '/images/hero/main2.jpeg',
-      alt: '제품 선반과 창가 디스플레이가 보이는 KEEP THE MOMENT 인테리어',
-    },
   ],
 }
 
