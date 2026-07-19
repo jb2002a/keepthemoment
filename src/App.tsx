@@ -13,6 +13,33 @@ const routes = ['/', '/about', '/care', '/plants', '/visit'] as const
 type Route = (typeof routes)[number]
 const onlineStorePreparingMessage = '현재 온라인은 준비중입니다.'
 const naverStoreHost = new URL(naverStoreUrl).hostname
+const pageSeo: Record<Route, { title: string; description: string }> = {
+  '/': {
+    title: 'KEEP THE MOMENT | 수원 행궁동 수경식물·식물 선물 브랜드',
+    description:
+      '수원 행궁동의 수경식물, 희귀식물, 식물 선물 라이프스타일 브랜드 KEEP THE MOMENT. 물에서 키우기 쉬운 식물 오브제를 만나보세요.',
+  },
+  '/about': {
+    title: '브랜드 스토리 | KEEP THE MOMENT',
+    description:
+      '식물과 향기, 선물로 오늘의 기억을 디자인하는 수원 행궁동 라이프스타일 브랜드 KEEP THE MOMENT를 소개합니다.',
+  },
+  '/care': {
+    title: '수경식물 관리법 | KEEP THE MOMENT',
+    description:
+      '물과 흙 모두에 잘 적응하는 수경식물 관리법과 키우기 쉬운 식물 오브제 이야기를 확인하세요.',
+  },
+  '/plants': {
+    title: '수원 수경식물 컬렉션 | KEEP THE MOMENT',
+    description:
+      '몬스테라, 스킨답서스, 아글라오네마 등 수원 행궁동에서 만나는 수경식물과 희귀식물 컬렉션.',
+  },
+  '/visit': {
+    title: '행궁동 매장 방문 | KEEP THE MOMENT',
+    description:
+      '경기 수원시 팔달구 행궁동에 위치한 KEEP THE MOMENT 매장 주소, 영업시간, 방문 정보를 확인하세요.',
+  },
+}
 
 function getRoute(): Route {
   const path = window.location.pathname
@@ -25,6 +52,32 @@ function isNaverStoreLink(href: string): boolean {
   } catch {
     return false
   }
+}
+
+function updateMeta(name: string, content: string) {
+  const selector = `meta[name="${name}"]`
+  let meta = document.head.querySelector<HTMLMetaElement>(selector)
+
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.name = name
+    document.head.appendChild(meta)
+  }
+
+  meta.content = content
+}
+
+function updatePropertyMeta(property: string, content: string) {
+  const selector = `meta[property="${property}"]`
+  let meta = document.head.querySelector<HTMLMetaElement>(selector)
+
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('property', property)
+    document.head.appendChild(meta)
+  }
+
+  meta.content = content
 }
 
 function App() {
@@ -86,6 +139,16 @@ function App() {
       window.scrollTo({ top: 0 })
     })
   }, [route, hash, navigationVersion])
+
+  useEffect(() => {
+    const seo = pageSeo[route]
+    document.title = seo.title
+    updateMeta('description', seo.description)
+    updateMeta('twitter:title', seo.title)
+    updateMeta('twitter:description', seo.description)
+    updatePropertyMeta('og:title', seo.title)
+    updatePropertyMeta('og:description', seo.description)
+  }, [route])
 
   return (
     <>
