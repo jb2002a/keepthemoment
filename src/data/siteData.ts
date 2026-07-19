@@ -56,13 +56,9 @@ export const navItems: NavItem[] = [
 ]
 
 export const hero = {
-  headline: 'Keep The Moment',
-  subcopy: '물빛으로 자라는 희귀 수경식물 오브제',
-  ctaLabel: 'Scroll to discover',
-  ctaHref: '#categories',
   image: {
-    src: '/images/keep-moment-product-glass-hero-generated.png',
-    alt: '따뜻한 햇살이 드는 창가에 놓인 투명 유리 화병 속 수경식물',
+    src: '/images/items/hero/4k_16x9/KakaoTalk_Photo_2026-07-19-18-06-56_4k_16x9.jpeg',
+    alt: '식물이 가득한 KEEP THE MOMENT 쇼룸 전경',
   },
 }
 

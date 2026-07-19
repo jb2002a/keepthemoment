@@ -189,60 +189,12 @@ button {
   height: 100%;
   min-height: calc(92svh - var(--header-height) - 1.5rem);
   object-fit: cover;
-  object-position: 64% center;
+  object-position: center;
   animation: hero-image-in 1.7s var(--ease-slow) both;
-}
-.hero__content {
-  grid-area: 1 / 1;
-  z-index: 1;
-  display: flex;
-  min-height: calc(92svh - var(--header-height) - 1.5rem);
-  background: linear-gradient(90deg, rgba(247,246,242,.82), rgba(247,246,242,.28) 45%, transparent 70%);
-}
-.hero__content-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: clamp(1.25rem, 5vw, 5rem);
-  padding-top: clamp(5rem, 14vh, 9rem);
-  animation: hero-copy-in 1.2s 0.2s var(--ease-slow) both;
-}
-.hero__title {
-  max-width: 8ch;
-  font-family: var(--font-serif);
-  font-size: clamp(4rem, 9vw, 8.5rem);
-  font-weight: 400;
-  line-height: 0.82;
-  letter-spacing: -0.065em;
-}
-.hero__subcopy {
-  max-width: 22rem;
-  margin-top: clamp(1.25rem, 2.5vw, 2rem);
-  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: -0.01em;
-}
-.hero__cta {
-  margin-top: clamp(5rem, 15vh, 9rem);
-  padding-bottom: 0.25rem;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-bottom: 1px solid currentColor;
 }
 @keyframes hero-image-in {
   from { opacity: 0; transform: scale(1.03); }
   to { opacity: 1; transform: scale(1); }
-}
-@keyframes hero-copy-in {
-  from { opacity: 0; transform: translateY(1rem); }
-  to { opacity: 1; transform: none; }
 }
 
 .section {
@@ -867,10 +819,6 @@ button {
 }
 
 @media (max-width: 699px) {
-  .hero__content {
-    background: linear-gradient(90deg, rgba(247,246,242,.72), rgba(247,246,242,.18) 80%);
-  }
-  .hero__title { font-size: clamp(3.6rem, 19vw, 5.4rem); }
   .plant-items .section__intro--split { align-items: flex-start; }
   .collection-card__caption { align-items: flex-start; }
   .story-gallery {
