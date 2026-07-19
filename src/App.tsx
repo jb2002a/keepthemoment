@@ -6,11 +6,12 @@ import { BrandStory } from './components/BrandStory'
 import { PlantCare } from './components/PlantCare'
 import { PlantItems } from './components/PlantItems'
 import { Gift } from './components/Gift'
+import { Fragrance } from './components/Fragrance'
 import { Store } from './components/Store'
 import { Footer } from './components/Footer'
 import { useSiteContent } from './hooks/useSiteContent'
 
-const routes = ['/', '/about', '/care', '/plants', '/gift', '/visit'] as const
+const routes = ['/', '/about', '/care', '/plants', '/fragrance', '/gift', '/visit'] as const
 type Route = (typeof routes)[number]
 const siteUrl = 'https://keepthemoment-one.vercel.app'
 const onlineStorePreparingMessage = '현재 온라인은 준비중입니다.'
@@ -34,6 +35,11 @@ const pageSeo: Record<Route, { title: string; description: string }> = {
     title: '수원 수경식물 컬렉션 | KEEP THE MOMENT',
     description:
       '몬스테라, 스킨답서스, 아글라오네마 등 수원 행궁동에서 만나는 수경식물과 희귀식물 컬렉션.',
+  },
+  '/fragrance': {
+    title: '프래그런스 입점 브랜드 | KEEP THE MOMENT',
+    description:
+      'NUDARA, SEAMUS, TEABLESS, LISOUÉ, The Other Mood, VINOIR 등 KEEP THE MOMENT에서 만나는 프래그런스 브랜드.',
   },
   '/gift': {
     title: '식물 선물 패키지 | KEEP THE MOMENT',
@@ -190,6 +196,7 @@ function App() {
       {route === '/about' && <AboutPage />}
       {route === '/care' && <CarePage />}
       {route === '/plants' && <PlantsPage />}
+      {route === '/fragrance' && <FragrancePage />}
       {route === '/gift' && <GiftPage />}
       {route === '/visit' && <VisitPage />}
       <Footer />
@@ -254,6 +261,14 @@ function PlantsPage() {
   return (
     <main id="main" className="page-main">
       <PlantItems />
+    </main>
+  )
+}
+
+function FragrancePage() {
+  return (
+    <main id="main" className="page-main">
+      <Fragrance />
     </main>
   )
 }

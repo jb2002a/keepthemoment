@@ -1,4 +1,4 @@
-import { useEffect, useEffectEvent, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 
 const AUTO_ADVANCE_MS = 5500
@@ -10,18 +10,20 @@ export function Hero() {
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef<number | null>(null)
 
-  const goTo = useEffectEvent((index: number) => {
+  const goTo = useCallback((index: number) => {
     if (images.length === 0) return
     setActiveIndex((index + images.length) % images.length)
-  })
+  }, [images.length])
 
-  const goNext = useEffectEvent(() => {
-    goTo(activeIndex + 1)
-  })
+  const goNext = useCallback(() => {
+    if (images.length === 0) return
+    setActiveIndex((index) => (index + 1) % images.length)
+  }, [images.length])
 
-  const goPrev = useEffectEvent(() => {
-    goTo(activeIndex - 1)
-  })
+  const goPrev = useCallback(() => {
+    if (images.length === 0) return
+    setActiveIndex((index) => (index - 1 + images.length) % images.length)
+  }, [images.length])
 
   useEffect(() => {
     if (images.length <= 1 || isPaused) return
@@ -34,7 +36,7 @@ export function Hero() {
     }, AUTO_ADVANCE_MS)
 
     return () => window.clearInterval(timer)
-  }, [images.length, isPaused])
+  }, [images.length, isPaused, goNext])
 
   if (images.length === 0) return null
 

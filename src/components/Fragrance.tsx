@@ -1,0 +1,58 @@
+import { fragranceBrands } from '../data/siteData'
+import { Reveal } from './Reveal'
+
+export function Fragrance() {
+  return (
+    <section className="section fragrance-page" aria-labelledby="fragrance-heading">
+      <div className="section__inner">
+        <Reveal className="section__intro section__intro--split fragrance-page__intro">
+          <div>
+            <p className="section__eyebrow">Fragrance</p>
+            <h1 id="fragrance-heading" className="section__title">
+              Scented Moments.
+            </h1>
+          </div>
+          <p className="fragrance-page__lead">
+            KEEP THE MOMENT에서 만날 수 있는 프래그런스 브랜드입니다. 식물과 함께
+            공간에 남는 향을 매장에서 직접 경험해보세요.
+          </p>
+        </Reveal>
+
+        <ul className="fragrance-page__grid" aria-label="입점 프래그런스 브랜드">
+          {fragranceBrands.map((brand, index) => (
+            <Reveal as="li" key={brand.id} delay={index * 70}>
+              <a
+                href={brand.href}
+                className="fragrance-brand-card"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${brand.name} 공식 사이트로 이동`}
+              >
+                <div className="fragrance-brand-card__media">
+                  <img
+                    src={brand.image}
+                    alt={brand.alt}
+                    width="700"
+                    height="460"
+                    loading="lazy"
+                  />
+                </div>
+                <h2 className="fragrance-brand-card__name">{brand.name}</h2>
+              </a>
+            </Reveal>
+          ))}
+        </ul>
+
+        <Reveal className="fragrance-page__note">
+          <p>
+            브랜드별 입고 상품과 재고는 시즌과 매장 상황에 따라 달라질 수 있습니다.
+            원하는 브랜드가 있다면 방문 전에 문의해주세요.
+          </p>
+          <a href="/#visit" className="text-link">
+            Visit Store
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  )
+}

@@ -433,6 +433,7 @@ button {
 .page-main .brand-story,
 .page-main .plant-care,
 .page-main .gift-page,
+.page-main .fragrance-page,
 .page-main .store {
   display: flex;
   align-items: center;
@@ -441,6 +442,7 @@ button {
 }
 .page-main .brand-story,
 .page-main .gift-page,
+.page-main .fragrance-page,
 .page-main .store {
   padding-top: clamp(5rem, 9vw, 8rem);
   padding-bottom: clamp(2rem, 4vw, 3.5rem);
@@ -528,7 +530,13 @@ button {
 .gift-page {
   background: var(--color-surface);
 }
+.fragrance-page {
+  background: var(--color-surface);
+}
 .gift-page__intro {
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+.fragrance-page__intro {
   margin-bottom: clamp(2rem, 5vw, 4rem);
 }
 .gift-page__lead {
@@ -538,9 +546,58 @@ button {
   letter-spacing: -0.025em;
   color: var(--color-muted-strong);
 }
+.fragrance-page__lead {
+  max-width: 31rem;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.8;
+  letter-spacing: -0.025em;
+  color: var(--color-muted-strong);
+}
 .gift-page__grid {
   display: grid;
   gap: clamp(1rem, 2.5vw, 2rem);
+}
+.fragrance-page__grid {
+  display: grid;
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+}
+.fragrance-brand-card {
+  display: grid;
+  height: 100%;
+  min-height: clamp(12rem, 21vw, 18rem);
+  padding: clamp(1rem, 2.4vw, 2rem);
+  color: inherit;
+  background: var(--color-surface);
+  text-decoration: none;
+  transition: background-color 0.35s var(--ease-slow);
+}
+.fragrance-brand-card:hover,
+.fragrance-brand-card:focus-visible {
+  color: inherit;
+  background: var(--color-bg-soft);
+}
+.fragrance-brand-card__media {
+  display: grid;
+  place-items: center;
+  min-height: 8rem;
+}
+.fragrance-brand-card__media img {
+  width: min(100%, 18rem);
+  max-height: 9rem;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+.fragrance-brand-card__name {
+  align-self: end;
+  padding-top: 1rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-muted-strong);
+  border-top: 1px solid var(--color-border);
 }
 .gift-card {
   display: grid;
@@ -590,7 +647,24 @@ button {
   padding: clamp(1.25rem, 3vw, 2rem);
   background: var(--color-bg-soft);
 }
+.fragrance-page__note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--color-bg-soft);
+}
 .gift-page__note p {
+  max-width: 40rem;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  line-height: 1.75;
+  letter-spacing: -0.025em;
+  color: var(--color-muted-strong);
+}
+.fragrance-page__note p {
   max-width: 40rem;
   font-size: clamp(0.9rem, 1.2vw, 1rem);
   line-height: 1.75;
@@ -957,6 +1031,7 @@ button {
   }
   .collections__grid > li:nth-child(2) { margin-top: clamp(3rem, 7vw, 7rem); }
   .gift-page__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fragrance-page__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .plant-items__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-links__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .site-footer__top {
@@ -981,6 +1056,7 @@ button {
   }
   .plant-items__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .gift-page__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .fragrance-page__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .plant-modal__panel {
     grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
   }
@@ -991,7 +1067,8 @@ button {
 
 @media (max-width: 699px) {
   .plant-items .section__intro--split,
-  .gift-page .section__intro--split { align-items: flex-start; }
+  .gift-page .section__intro--split,
+  .fragrance-page .section__intro--split { align-items: flex-start; }
   .collection-card__caption { align-items: flex-start; }
   .story-gallery {
     grid-template-columns: minmax(0, 1fr) minmax(5rem, 0.34fr);

@@ -13,7 +13,12 @@ export function Collections() {
       <div className="section__inner">
         <ul className="collections__grid">
           {collections.map((item, index) => {
-            const href = item.id === 'gift' ? '/gift' : item.href
+            const href =
+              item.id === 'gift'
+                ? '/gift'
+                : item.id === 'fragrance'
+                  ? '/fragrance'
+                  : item.href
 
             return (
               <Reveal as="li" key={item.id} delay={index * 90}>

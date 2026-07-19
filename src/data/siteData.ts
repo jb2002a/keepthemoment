@@ -29,6 +29,14 @@ export type PlantItem = {
   }
 }
 
+export type FragranceBrand = {
+  id: string
+  name: string
+  image: string
+  alt: string
+  href: string
+}
+
 export type StoryBlock = {
   id: string
   image: string
@@ -85,7 +93,7 @@ export const collections: Collection[] = [
     image: '/images/collections/fragrance.webp',
     alt: '실버 트레이 위에 놓인 미니멀한 향기 제품',
     aspectRatio: '3 / 4',
-    href: '#visit',
+    href: '/fragrance',
   },
   {
     id: 'gift',
@@ -95,6 +103,51 @@ export const collections: Collection[] = [
     alt: '반투명 파우치에 담긴 작은 식물 선물',
     aspectRatio: '3 / 4',
     href: '/gift',
+  },
+]
+
+export const fragranceBrands: FragranceBrand[] = [
+  {
+    id: 'nudara',
+    name: 'NUDARA',
+    image: '/images/fragrance/nudara.png',
+    alt: 'NUDARA fragrance brand logo',
+    href: 'https://nudara.co.kr/',
+  },
+  {
+    id: 'seamus',
+    name: 'SEAMUS',
+    image: '/images/fragrance/seamus.png',
+    alt: 'SEAMUS fragrance brand logo',
+    href: 'https://seamus.co.kr/',
+  },
+  {
+    id: 'teabless',
+    name: 'TEABLESS',
+    image: '/images/fragrance/teabless.png',
+    alt: 'TEABLESS fragrance brand logo',
+    href: 'https://teabless.co.kr/',
+  },
+  {
+    id: 'lisoue',
+    name: 'LISOUÉ',
+    image: '/images/fragrance/lisoue.png',
+    alt: 'LISOUE fragrance brand logo',
+    href: 'https://www.instagram.com/lisoue_official/',
+  },
+  {
+    id: 'the-other-mood',
+    name: 'The Other Mood',
+    image: '/images/fragrance/the-other-mood.png',
+    alt: 'The Other Mood fragrance brand logo',
+    href: 'https://theothermood.co.kr/',
+  },
+  {
+    id: 'vinoir',
+    name: 'VINOIR',
+    image: '/images/fragrance/vinoir.png',
+    alt: 'VINOIR fragrance brand logo',
+    href: 'https://vinoir.kr/',
   },
 ]
 
