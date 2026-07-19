@@ -446,11 +446,15 @@ button {
   color: inherit;
 }
 .plant-card__media {
+  position: relative;
   display: grid;
+  width: 100%;
   aspect-ratio: 3 / 4;
   place-items: center;
   overflow: hidden;
+  color: inherit;
   background: var(--color-bg-soft);
+  text-align: left;
 }
 .plant-card__media img {
   width: 100%;
@@ -458,8 +462,44 @@ button {
   object-fit: cover;
   transition: transform 1.1s var(--ease-slow);
 }
-.plant-card:hover .plant-card__media img {
+.plant-card__media:hover img,
+.plant-card__media:focus-visible img {
   transform: scale(1.025);
+}
+.plant-card__media::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 36%;
+  background: linear-gradient(0deg, rgba(23, 24, 22, 0.34), transparent);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-slow);
+}
+.plant-card__media:hover::after,
+.plant-card__media:focus-visible::after {
+  opacity: 1;
+}
+.plant-card__media-label {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 1;
+  padding-bottom: 0.15rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-surface);
+  border-bottom: 1px solid currentColor;
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition: opacity 0.35s var(--ease-slow),
+    transform 0.35s var(--ease-slow);
+}
+.plant-card__media:hover .plant-card__media-label,
+.plant-card__media:focus-visible .plant-card__media-label {
+  opacity: 1;
+  transform: none;
 }
 .plant-card__body {
   padding-top: 0.9rem;
@@ -479,12 +519,6 @@ button {
   letter-spacing: -0.035em;
   color: var(--color-muted-strong);
 }
-.plant-card__tagline {
-  margin-top: 0.85rem;
-  font-size: 0.82rem;
-  line-height: 1.65;
-  letter-spacing: -0.025em;
-}
 .plant-card__care {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -496,16 +530,29 @@ button {
 }
 .plant-card__care div {
   min-width: 0;
-  padding: 0.65rem 0.55rem;
+  padding: 0.85rem 0.65rem;
   background: var(--color-surface);
 }
 .plant-card__care dt {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
   margin-bottom: 0.25rem;
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-muted-strong);
+}
+.plant-care-icon {
+  width: 1.65rem;
+  height: 1.65rem;
+  color: var(--color-text);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .plant-card__care dd {
   margin: 0;
@@ -536,6 +583,101 @@ button {
   height: 0.25rem;
   background: currentColor;
   border-radius: 50%;
+}
+.plant-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 3rem);
+  background: rgba(23, 24, 22, 0.58);
+  backdrop-filter: blur(10px);
+  animation: modal-backdrop-in 0.35s var(--ease-slow) both;
+}
+.plant-modal__panel {
+  position: relative;
+  display: grid;
+  width: min(100%, 68rem);
+  max-height: min(44rem, calc(100svh - 2rem));
+  overflow: hidden;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: 0 2rem 5rem rgba(23, 24, 22, 0.22);
+  animation: modal-panel-in 0.45s var(--ease-slow) both;
+}
+.plant-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+  padding-bottom: 0.2rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid currentColor;
+}
+.plant-modal__media {
+  aspect-ratio: 4 / 5;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--color-bg-soft);
+}
+.plant-modal__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.plant-modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  padding: clamp(2rem, 4vw, 4rem);
+  overflow-y: auto;
+}
+.plant-modal__eyebrow {
+  margin-bottom: 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.plant-modal__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+}
+.plant-modal__tagline {
+  max-width: 28rem;
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+  font-size: clamp(0.95rem, 1.3vw, 1.12rem);
+  line-height: 1.75;
+  letter-spacing: -0.025em;
+}
+.plant-modal__care {
+  width: 100%;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+.plant-modal__care div {
+  background: var(--color-surface);
+}
+.plant-modal__features {
+  gap: 0.65rem;
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+.plant-modal__features li {
+  font-size: 0.88rem;
+}
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: translateY(0.35rem); }
+  to { opacity: 1; transform: none; }
 }
 .hydroponic__layout,
 .store__layout {
@@ -677,6 +819,12 @@ button {
     grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
   }
   .plant-items__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .plant-modal__panel {
+    grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.95fr);
+  }
+  .plant-modal__media {
+    aspect-ratio: auto;
+  }
 }
 
 @media (max-width: 699px) {
