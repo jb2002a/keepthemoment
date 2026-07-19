@@ -67,13 +67,18 @@ button {
 .site-header.is-solid:not(.is-menu-open) {
   backdrop-filter: blur(12px);
 }
+.site-header__topbar {
+  height: var(--top-bar-height);
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid rgba(23, 24, 22, 0.06);
+}
 .site-header__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   max-width: var(--max-width);
-  height: 100%;
+  height: var(--nav-height);
   margin: 0 auto;
   padding-inline: clamp(1.25rem, 3vw, 3rem);
 }
@@ -152,7 +157,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--header-height);
+  height: var(--nav-height);
 }
 .mobile-menu__list {
   display: flex;
@@ -173,10 +178,9 @@ button {
 .hero {
   position: relative;
   display: grid;
-  min-height: 92vh;
-  min-height: 92svh;
-  padding: var(--header-height) clamp(0.75rem, 1.5vw, 1.5rem)
-    clamp(0.75rem, 1.5vw, 1.5rem);
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: var(--header-height) 0 0;
   overflow: hidden;
 }
 .hero__track {
@@ -184,7 +188,7 @@ button {
   position: relative;
   overflow: hidden;
   background: var(--color-bg-soft);
-  min-height: calc(92svh - var(--header-height) - 1.5rem);
+  min-height: calc(100svh - var(--header-height));
 }
 .hero__slide {
   position: absolute;

@@ -52,6 +52,7 @@ export function Header() {
           menuOpen ? 'is-menu-open' : ''
         }`.trim()}
       >
+        <div className="site-header__topbar" aria-hidden="true" />
         <div className="site-header__inner">
           <a href="/" className="site-logo">
             {brand.name}

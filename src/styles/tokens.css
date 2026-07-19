@@ -24,7 +24,9 @@
   --space-2xl: 7rem;
   --space-3xl: 10rem;
 
-  --header-height: 4rem;
+  --top-bar-height: 1.35rem;
+  --nav-height: 4.75rem;
+  --header-height: calc(var(--top-bar-height) + var(--nav-height));
   --max-width: 1440px;
   --ease-slow: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-reveal: 1.1s;
