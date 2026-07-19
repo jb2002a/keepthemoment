@@ -1,7 +1,10 @@
-import { storyBlocks } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
 export function BrandStory() {
+  const { content } = useSiteContent()
+  const { storyBlocks } = content
+
   return (
     <section
       className="section brand-story"

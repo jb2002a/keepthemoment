@@ -1,6 +1,9 @@
-import { brand, footerLinks, privacyPolicyUrl } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 
 export function Footer() {
+  const { content } = useSiteContent()
+  const { brand, footerLinks, privacyPolicyUrl } = content
+
   return (
     <footer className="site-footer" id="contact">
       <div className="site-footer__inner">

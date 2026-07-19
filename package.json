@@ -7,9 +7,16 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "studio": "npm run dev --prefix sanity",
+    "studio:build": "npm run build --prefix sanity",
+    "seed:sanity": "tsx --env-file=.env scripts/seed-sanity.ts",
+    "seed:sanity:dry-run": "tsx --env-file=.env scripts/seed-sanity.ts --dry-run",
+    "verify:cms": "tsx --env-file=.env scripts/verify-cms.ts"
   },
   "dependencies": {
+    "@sanity/client": "^7.23.2",
+    "@sanity/image-url": "^2.1.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },
@@ -19,6 +26,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
+    "tsx": "^4.23.1",
     "typescript": "~6.0.2",
     "vite": "^8.1.1"
   }

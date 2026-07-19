@@ -1,7 +1,10 @@
-import { hydroponic } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
 export function PlantCare() {
+  const { content } = useSiteContent()
+  const { hydroponic } = content
+
   return (
     <section
       className="section plant-care"

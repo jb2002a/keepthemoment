@@ -1,6 +1,9 @@
-import { hero } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 
 export function Hero() {
+  const { content } = useSiteContent()
+  const { hero } = content
+
   return (
     <section className="hero" id="top" aria-label="KEEP THE MOMENT main hero">
       <figure className="hero__media">

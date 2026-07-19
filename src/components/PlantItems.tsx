@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { plantItems, rarePlantItems, type PlantItem } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
+import type { PlantItem } from '../data/siteData'
 import { Reveal } from './Reveal'
 
 type CareIconCategory = 'light' | 'water' | 'temperature'
@@ -131,6 +132,8 @@ function PlantGrid({
 }
 
 export function PlantItems() {
+  const { content } = useSiteContent()
+  const { plantItems, rarePlantItems } = content
   const [selectedPlantId, setSelectedPlantId] = useState<string | null>(null)
   const allPlantItems = [...rarePlantItems, ...plantItems]
   const selectedPlant = allPlantItems.find((item) => item.id === selectedPlantId)

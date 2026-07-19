@@ -1,7 +1,10 @@
-import { storeInfo } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
 export function Store() {
+  const { content } = useSiteContent()
+  const { storeInfo } = content
+
   return (
     <section
       className="section store"

@@ -1,7 +1,9 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { brand, navItems } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 
 export function Header() {
+  const { content } = useSiteContent()
+  const { brand, navItems } = content
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()

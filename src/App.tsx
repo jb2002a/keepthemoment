@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Collections } from './components/Collections'
@@ -7,13 +7,12 @@ import { PlantCare } from './components/PlantCare'
 import { PlantItems } from './components/PlantItems'
 import { Store } from './components/Store'
 import { Footer } from './components/Footer'
-import { naverStoreUrl } from './data/siteData'
+import { useSiteContent } from './hooks/useSiteContent'
 
 const routes = ['/', '/about', '/care', '/plants', '/visit'] as const
 type Route = (typeof routes)[number]
 const siteUrl = 'https://keepthemoment-one.vercel.app'
 const onlineStorePreparingMessage = '현재 온라인은 준비중입니다.'
-const naverStoreHost = new URL(naverStoreUrl).hostname
 const pageSeo: Record<Route, { title: string; description: string }> = {
   '/': {
     title: 'KEEP THE MOMENT | 수원 행궁동 수경식물·식물 선물 브랜드',
@@ -47,7 +46,8 @@ function getRoute(): Route {
   return routes.includes(path as Route) ? (path as Route) : '/'
 }
 
-function isNaverStoreLink(href: string): boolean {
+function isNaverStoreLink(href: string, naverStoreHost: string | null): boolean {
+  if (!naverStoreHost) return false
   try {
     return new URL(href, window.location.href).hostname === naverStoreHost
   } catch {
@@ -94,9 +94,17 @@ function updateCanonical(href: string) {
 }
 
 function App() {
+  const { content } = useSiteContent()
   const [route, setRoute] = useState(getRoute)
   const [hash, setHash] = useState(window.location.hash)
   const [navigationVersion, setNavigationVersion] = useState(0)
+  const naverStoreHost = useMemo(() => {
+    try {
+      return new URL(content.naverStoreUrl).hostname
+    } catch {
+      return null
+    }
+  }, [content.naverStoreUrl])
 
   useEffect(() => {
     const onPopState = () => {
@@ -117,7 +125,7 @@ function App() {
       const link = target?.closest<HTMLAnchorElement>('a[href]')
       if (!link) return
 
-      if (isNaverStoreLink(link.href)) {
+      if (isNaverStoreLink(link.href, naverStoreHost)) {
         event.preventDefault()
         window.alert(onlineStorePreparingMessage)
         return
@@ -140,7 +148,7 @@ function App() {
 
     document.addEventListener('click', onClick)
     return () => document.removeEventListener('click', onClick)
-  }, [])
+  }, [naverStoreHost])
 
   useEffect(() => {
     window.requestAnimationFrame(() => {

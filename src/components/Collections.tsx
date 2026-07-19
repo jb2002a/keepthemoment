@@ -1,7 +1,10 @@
-import { collections } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
 export function Collections() {
+  const { content } = useSiteContent()
+  const { collections } = content
+
   return (
     <section
       className="section collections"
