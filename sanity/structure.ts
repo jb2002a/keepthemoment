@@ -10,16 +10,31 @@ const SINGLETONS = [
 
 export const structure: StructureResolver = (S) =>
   S.list()
+    .id('root')
     .title('콘텐츠')
     .items([
       ...SINGLETONS.map((item) =>
         S.listItem()
-          .title(item.title)
           .id(item.type)
-          .child(S.document().schemaType(item.type).documentId(item.type)),
+          .title(item.title)
+          .child(
+            S.document()
+              .id(item.type)
+              .schemaType(item.type)
+              .documentId(item.type),
+          ),
       ),
       S.divider(),
-      S.documentTypeListItem('collection').title('컬렉션'),
-      S.documentTypeListItem('plantItem').title('식물'),
-      S.documentTypeListItem('storyBlock').title('브랜드 스토리 이미지'),
+      S.listItem()
+        .id('collections')
+        .title('컬렉션')
+        .child(S.documentTypeList('collection').id('collection').title('컬렉션')),
+      S.listItem()
+        .id('plants')
+        .title('식물')
+        .child(S.documentTypeList('plantItem').id('plantItem').title('식물')),
+      S.listItem()
+        .id('story-blocks')
+        .title('브랜드 스토리 이미지')
+        .child(S.documentTypeList('storyBlock').id('storyBlock').title('브랜드 스토리 이미지')),
     ])

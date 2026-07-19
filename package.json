@@ -8,8 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "studio": "npm run dev --prefix sanity",
-    "studio:build": "npm run build --prefix sanity",
+    "studio": "XDG_CONFIG_HOME=\"$HOME/.sanity-config\" npm run dev --prefix sanity",
+    "studio:build": "XDG_CONFIG_HOME=\"$HOME/.sanity-config\" npm run build --prefix sanity",
     "seed:sanity": "tsx --env-file=.env scripts/seed-sanity.ts",
     "seed:sanity:dry-run": "tsx --env-file=.env scripts/seed-sanity.ts --dry-run",
     "verify:cms": "tsx --env-file=.env scripts/verify-cms.ts"
