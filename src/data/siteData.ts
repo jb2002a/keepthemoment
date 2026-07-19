@@ -96,6 +96,49 @@ export const collections: Collection[] = [
   },
 ]
 
+export const rarePlantItems: PlantItem[] = [
+  {
+    id: 'monstera-albo',
+    name: 'Monstera Albo',
+    koreanName: '몬스테라 알보',
+    image: '/images/items/speical/monstera-albo.png',
+    alt: 'Monstera Albo hydroponic plant',
+    tagline: '흰색 무늬가 불규칙하게 발현되는 몬스테라 보르시지아나 무늬종.',
+    features: ['희소성이 높은 무늬 관엽식물', '무늬 보존을 위해 밝은 간접광 필요'],
+    care: { light: '밝은 반양지', water: '겉흙 마르면 흠뻑', temperature: '18~27℃' },
+  },
+  {
+    id: 'begonia',
+    name: 'Begonia',
+    koreanName: '베고니아',
+    image: '/images/items/speical/begonia.png',
+    alt: 'Begonia hydroponic plant',
+    tagline: '잎의 색감과 무늬, 질감이 다양하게 나타나는 관엽 베고니아.',
+    features: ['잎의 관상가치가 높음', '과습과 잎 젖음에 민감'],
+    care: { light: '밝은 반음지', water: '겉흙 마르면 소량', temperature: '18~25℃' },
+  },
+  {
+    id: 'anthurium',
+    name: 'Anthurium',
+    koreanName: '안스리움',
+    image: '/images/items/speical/anthurium.png',
+    alt: 'Anthurium hydroponic plant',
+    tagline: '광택 있는 잎과 독특한 불염포가 특징인 천남성과 열대 관엽식물.',
+    features: ['공중습도 높은 환경 선호', '뿌리 통기성과 과습 관리가 중요'],
+    care: { light: '반양지', water: '겉흙 마르면 흠뻑', temperature: '18~28℃' },
+  },
+  {
+    id: 'caladium',
+    name: 'Caladium',
+    koreanName: '칼라디움',
+    image: '/images/items/speical/caladium.png',
+    alt: 'Caladium hydroponic plant',
+    tagline: '얇고 넓은 잎에 선명한 색과 잎맥 무늬가 나타나는 구근성 관엽식물.',
+    features: ['강한 직사광선에 잎 손상 가능', '저온기에는 생육이 둔화되거나 휴면 가능'],
+    care: { light: '밝은 반음지', water: '겉흙 마르면 흠뻑', temperature: '20~28℃' },
+  },
+]
+
 export const plantItems: PlantItem[] = [
   {
     id: 'alocasia-cucullata',

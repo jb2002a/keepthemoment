@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { plantItems } from '../data/siteData'
+import { plantItems, rarePlantItems, type PlantItem } from '../data/siteData'
 import { Reveal } from './Reveal'
 
 type CareIconCategory = 'light' | 'water' | 'temperature'
@@ -92,9 +92,48 @@ function CareIcon({
   )
 }
 
+function PlantGrid({
+  items,
+  onSelectPlant,
+}: {
+  items: PlantItem[]
+  onSelectPlant: (id: string) => void
+}) {
+  return (
+    <ul className="plant-items__grid">
+      {items.map((item, index) => (
+        <Reveal as="li" key={item.id} delay={(index % 4) * 70}>
+          <article className="plant-card">
+            <button
+              className="plant-card__media"
+              type="button"
+              aria-haspopup="dialog"
+              onClick={() => onSelectPlant(item.id)}
+            >
+              <img
+                src={item.image}
+                alt={item.alt}
+                width="900"
+                height="1200"
+                loading="lazy"
+              />
+              <span className="plant-card__media-label">View details</span>
+            </button>
+            <div className="plant-card__body">
+              <p className="plant-card__korean-name">{item.koreanName}</p>
+              <h2 className="plant-card__name">{item.name}</h2>
+            </div>
+          </article>
+        </Reveal>
+      ))}
+    </ul>
+  )
+}
+
 export function PlantItems() {
   const [selectedPlantId, setSelectedPlantId] = useState<string | null>(null)
-  const selectedPlant = plantItems.find((item) => item.id === selectedPlantId)
+  const allPlantItems = [...rarePlantItems, ...plantItems]
+  const selectedPlant = allPlantItems.find((item) => item.id === selectedPlantId)
 
   useEffect(() => {
     if (!selectedPlant) return
@@ -132,33 +171,33 @@ export function PlantItems() {
           </p>
         </Reveal>
 
-        <ul className="plant-items__grid">
-          {plantItems.map((item, index) => (
-            <Reveal as="li" key={item.id} delay={(index % 4) * 70}>
-              <article className="plant-card">
-                <button
-                  className="plant-card__media"
-                  type="button"
-                  aria-haspopup="dialog"
-                  onClick={() => setSelectedPlantId(item.id)}
-                >
-                  <img
-                    src={item.image}
-                    alt={item.alt}
-                    width="900"
-                    height="1200"
-                    loading="lazy"
-                  />
-                  <span className="plant-card__media-label">View details</span>
-                </button>
-                <div className="plant-card__body">
-                  <p className="plant-card__korean-name">{item.koreanName}</p>
-                  <h2 className="plant-card__name">{item.name}</h2>
-                </div>
-              </article>
+        <div className="plant-items__sections">
+          <section
+            className="plant-items__section plant-items__section--rare"
+            aria-labelledby="rare-plants-heading"
+          >
+            <Reveal className="plant-items__section-header">
+              <p className="plant-items__section-eyebrow">Rare Foliage</p>
+              <h2 id="rare-plants-heading" className="plant-items__section-title">
+                Curated Rare Plants.
+              </h2>
+              <p className="plant-items__section-copy">
+                무늬, 엽색, 형태가 뚜렷한 희귀 관엽을 따로 모은 셀렉션입니다.
+              </p>
             </Reveal>
-          ))}
-        </ul>
+            <PlantGrid items={rarePlantItems} onSelectPlant={setSelectedPlantId} />
+          </section>
+
+          <section className="plant-items__section" aria-labelledby="plant-collection-heading">
+            <Reveal className="plant-items__section-header">
+              <p className="plant-items__section-eyebrow">Plant Collection</p>
+              <h2 id="plant-collection-heading" className="plant-items__section-title">
+                Everyday Greens.
+              </h2>
+            </Reveal>
+            <PlantGrid items={plantItems} onSelectPlant={setSelectedPlantId} />
+          </section>
+        </div>
       </div>
 
       {selectedPlant && (

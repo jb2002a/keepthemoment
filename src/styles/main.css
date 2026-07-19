@@ -437,6 +437,45 @@ button {
   font-size: clamp(0.9rem, 1.2vw, 1rem);
   color: var(--color-muted-strong);
 }
+.plant-items__sections {
+  display: grid;
+  gap: clamp(4rem, 8vw, 7rem);
+}
+.plant-items__section {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.plant-items__section--rare {
+  margin-inline: calc(clamp(1.25rem, 3vw, 3rem) * -1);
+  padding: clamp(1.25rem, 3vw, 3rem);
+  background: var(--color-bg-soft);
+}
+.plant-items__section-header {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 36rem;
+}
+.plant-items__section-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-muted-strong);
+}
+.plant-items__section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 4.2rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+.plant-items__section-copy {
+  max-width: 28rem;
+  font-size: clamp(0.88rem, 1.1vw, 1rem);
+  line-height: 1.75;
+  letter-spacing: -0.025em;
+  color: var(--color-muted-strong);
+}
 .plant-items__grid {
   display: grid;
   gap: clamp(1.25rem, 2.5vw, 2.5rem);
