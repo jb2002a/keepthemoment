@@ -33,7 +33,30 @@ export function PlantItems() {
                     loading="lazy"
                   />
                 </div>
-                <h2 className="plant-card__name">{item.name}</h2>
+                <div className="plant-card__body">
+                  <p className="plant-card__korean-name">{item.koreanName}</p>
+                  <h2 className="plant-card__name">{item.name}</h2>
+                  <p className="plant-card__tagline">{item.tagline}</p>
+                  <dl className="plant-card__care" aria-label={`${item.koreanName} 관리 요약`}>
+                    <div>
+                      <dt>Light</dt>
+                      <dd>{item.care.light}</dd>
+                    </div>
+                    <div>
+                      <dt>Water</dt>
+                      <dd>{item.care.water}</dd>
+                    </div>
+                    <div>
+                      <dt>Temp</dt>
+                      <dd>{item.care.temperature}</dd>
+                    </div>
+                  </dl>
+                  <ul className="plant-card__features">
+                    {item.features.map((feature) => (
+                      <li key={feature}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             </Reveal>
           ))}
