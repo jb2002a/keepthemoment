@@ -147,10 +147,13 @@ export function mapSanityPayload(payload: SanityPayload): SiteContent {
     },
     navItems: settings?.navItems?.length ? settings.navItems : fallback.navItems,
     hero: {
-      image: {
-        src: resolveImageUrl(payload.hero, fallback.hero.image.src),
-        alt: payload.hero?.alt || fallback.hero.image.alt,
-      },
+      images: [
+        {
+          src: resolveImageUrl(payload.hero, fallback.hero.images[0].src),
+          alt: payload.hero?.alt || fallback.hero.images[0].alt,
+        },
+        ...fallback.hero.images.slice(1),
+      ],
     },
     collections: payload.collections?.length
       ? payload.collections.map((item, index) =>

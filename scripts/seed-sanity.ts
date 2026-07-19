@@ -124,8 +124,8 @@ async function seed() {
   await createOrReplace({
     _id: 'hero',
     _type: 'hero',
-    alt: hero.image.alt,
-    image: await uploadImage(hero.image.src),
+    alt: hero.images[0].alt,
+    image: await uploadImage(hero.images[0].src),
   })
 
   for (const [index, item] of collections.entries()) {

@@ -28,10 +28,10 @@ export type SiteContent = {
   }
   navItems: NavItem[]
   hero: {
-    image: {
+    images: {
       src: string
       alt: string
-    }
+    }[]
   }
   collections: Collection[]
   rarePlantItems: PlantItem[]

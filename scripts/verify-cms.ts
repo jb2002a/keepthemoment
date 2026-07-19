@@ -6,7 +6,7 @@ import { isSanityConfigured } from '../src/lib/sanity'
 async function main() {
   const fallback = getFallbackSiteContent()
   assert.equal(fallback.source, 'fallback')
-  assert.ok(fallback.hero.image.src)
+  assert.ok(fallback.hero.images[0]?.src)
   assert.ok(fallback.plantItems.length > 0)
   assert.ok(fallback.rarePlantItems.length > 0)
   assert.ok(fallback.collections.length > 0)
@@ -75,14 +75,14 @@ async function main() {
 
   assert.equal(mapped.source, 'sanity')
   assert.equal(mapped.brand.name, 'CMS BRAND')
-  assert.equal(mapped.hero.image.src, 'https://cdn.example.com/hero.jpg')
+  assert.equal(mapped.hero.images[0]?.src, 'https://cdn.example.com/hero.jpg')
   assert.equal(mapped.collections[0]?.name, 'Plants CMS')
   assert.equal(mapped.rarePlantItems[0]?.name, 'Monstera Albo CMS')
   assert.equal(mapped.plantItems[0]?.name, 'Monstera CMS')
   assert.equal(mapped.storeInfo.name, 'CMS STORE')
 
   const loaded = await loadSiteContent()
-  assert.ok(loaded.hero.image.src)
+  assert.ok(loaded.hero.images[0]?.src)
   assert.ok(loaded.brand.name)
 
   if (!isSanityConfigured) {

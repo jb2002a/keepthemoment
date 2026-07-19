@@ -56,10 +56,16 @@ export const navItems: NavItem[] = [
 ]
 
 export const hero = {
-  image: {
-    src: '/images/hero/main.jpeg',
-    alt: '식물이 가득한 KEEP THE MOMENT 쇼룸 전경',
-  },
+  images: [
+    {
+      src: '/images/hero/main.jpeg',
+      alt: '식물이 가득한 KEEP THE MOMENT 쇼룸 전경',
+    },
+    {
+      src: '/images/hero/main2.jpeg',
+      alt: '제품 선반과 창가 디스플레이가 보이는 KEEP THE MOMENT 인테리어',
+    },
+  ],
 }
 
 export const collections: Collection[] = [
@@ -85,8 +91,8 @@ export const collections: Collection[] = [
     id: 'gift',
     name: 'Gift',
     tagline: 'Package and wrapping available.',
-    image: '/images/gift/gift1.png',
-    alt: '선물 패키지 형태로 준비된 KEEP THE MOMENT 식물',
+    image: '/images/story/gift-pouch.png',
+    alt: '반투명 파우치에 담긴 작은 식물 선물',
     aspectRatio: '3 / 4',
     href: '/gift',
   },
