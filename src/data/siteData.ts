@@ -11,6 +11,14 @@ export type Collection = {
   image: string
   alt: string
   aspectRatio: string
+  href: string
+}
+
+export type PlantItem = {
+  id: string
+  name: string
+  image: string
+  alt: string
 }
 
 export type StoryBlock = {
@@ -58,6 +66,7 @@ export const collections: Collection[] = [
     image: '/images/keep-moment-plants-upscaled.png',
     alt: '투명한 유리 화병에서 자라는 몬스테라 수경식물',
     aspectRatio: '3 / 4',
+    href: '/plants',
   },
   {
     id: 'fragrance',
@@ -66,6 +75,7 @@ export const collections: Collection[] = [
     image: '/images/keep-moment-fragrance.webp',
     alt: '실버 트레이 위에 놓인 미니멀한 향기 제품',
     aspectRatio: '3 / 4',
+    href: '#visit',
   },
   {
     id: 'gift',
@@ -74,6 +84,142 @@ export const collections: Collection[] = [
     image: '/images/keep-moment-gift-pouch.png',
     alt: '반투명 파우치에 담긴 작은 식물 선물',
     aspectRatio: '3 / 4',
+    href: '#visit',
+  },
+]
+
+export const plantItems: PlantItem[] = [
+  {
+    id: 'alocasia-cucullata',
+    name: 'Alocasia Cucullata',
+    image: '/images/items/alocasia-cucullata.png',
+    alt: 'Alocasia Cucullata hydroponic plant',
+  },
+  {
+    id: 'dieffenbachia-marianne',
+    name: 'Dieffenbachia Marianne',
+    image: '/images/items/dieffenbachia-marianne.png',
+    alt: 'Dieffenbachia Marianne hydroponic plant',
+  },
+  {
+    id: 'monstera',
+    name: 'Monstera',
+    image: '/images/items/monstera.png',
+    alt: 'Monstera hydroponic plant',
+  },
+  {
+    id: 'monstera-adansonii',
+    name: 'Monstera Adansonii',
+    image: '/images/items/monstera-adansonii.png',
+    alt: 'Monstera Adansonii hydroponic plant',
+  },
+  {
+    id: 'staghorn-fern',
+    name: 'Staghorn Fern',
+    image: '/images/items/staghorn-fern.png',
+    alt: 'Staghorn Fern hydroponic plant',
+  },
+  {
+    id: 'boston-fern',
+    name: 'Boston Fern',
+    image: '/images/items/boston-fern.png',
+    alt: 'Boston Fern hydroponic plant',
+  },
+  {
+    id: 'scindapsus-marble',
+    name: 'Scindapsus Marble',
+    image: '/images/items/scindapsus-marble.png',
+    alt: 'Scindapsus Marble hydroponic plant',
+  },
+  {
+    id: 'scindapsus-white-angel',
+    name: 'Scindapsus White Angel',
+    image: '/images/items/scindapsus-white-angel.png',
+    alt: 'Scindapsus White Angel hydroponic plant',
+  },
+  {
+    id: 'scindapsus-exotica',
+    name: 'Scindapsus Exotica',
+    image: '/images/items/scindapsus-exotica.png',
+    alt: 'Scindapsus Exotica hydroponic plant',
+  },
+  {
+    id: 'syngonium',
+    name: 'Syngonium',
+    image: '/images/items/syngonium.png',
+    alt: 'Syngonium hydroponic plant',
+  },
+  {
+    id: 'aglaonema-siam-aurora',
+    name: 'Aglaonema Siam Aurora',
+    image: '/images/items/aglaonema-siam-aurora.png',
+    alt: 'Aglaonema Siam Aurora hydroponic plant',
+  },
+  {
+    id: 'aglaonema-snow-sapphire',
+    name: 'Aglaonema Snow Sapphire',
+    image: '/images/items/aglaonema-snow-sapphire.png',
+    alt: 'Aglaonema Snow Sapphire hydroponic plant',
+  },
+  {
+    id: 'aglaonema-angel',
+    name: 'Aglaonema Angel',
+    image: '/images/items/aglaonema-angel.png',
+    alt: 'Aglaonema Angel hydroponic plant',
+  },
+  {
+    id: 'maidenhair-fern',
+    name: 'Maidenhair Fern',
+    image: '/images/items/maidenhair-fern.png',
+    alt: 'Maidenhair Fern hydroponic plant',
+  },
+  {
+    id: 'areca-palm',
+    name: 'Areca Palm',
+    image: '/images/items/areca-palm.png',
+    alt: 'Areca Palm hydroponic plant',
+  },
+  {
+    id: 'asparagus-nanus',
+    name: 'Asparagus Nanus',
+    image: '/images/items/asparagus-nanus.png',
+    alt: 'Asparagus Nanus hydroponic plant',
+  },
+  {
+    id: 'asparagus-meyeri',
+    name: 'Asparagus Meyeri',
+    image: '/images/items/asparagus-meyeri.png',
+    alt: 'Asparagus Meyeri hydroponic plant',
+  },
+  {
+    id: 'alocasia-green-velvet',
+    name: 'Alocasia Green Velvet',
+    image: '/images/items/alocasia-green-velvet.png',
+    alt: 'Alocasia Green Velvet hydroponic plant',
+  },
+  {
+    id: 'epipremnum-njoy',
+    name: "Epipremnum N'Joy",
+    image: '/images/items/epipremnum-njoy.png',
+    alt: "Epipremnum N'Joy hydroponic plant",
+  },
+  {
+    id: 'calathea-orbifolia',
+    name: 'Calathea Orbifolia',
+    image: '/images/items/calathea-orbifolia.png',
+    alt: 'Calathea Orbifolia hydroponic plant',
+  },
+  {
+    id: 'humata-fern',
+    name: 'Humata Fern',
+    image: '/images/items/humata-fern.png',
+    alt: 'Humata Fern hydroponic plant',
+  },
+  {
+    id: 'rhaphidophora-tetrasperma',
+    name: 'Rhaphidophora Tetrasperma',
+    image: '/images/items/rhaphidophora-tetrasperma.png',
+    alt: 'Rhaphidophora Tetrasperma hydroponic plant',
   },
 ]
 

@@ -428,6 +428,48 @@ button {
 .story-gallery__item--portrait { aspect-ratio: 3 / 4; }
 
 .plant-care { background: var(--color-bg-soft); }
+.plant-items {
+  min-height: calc(100svh - var(--header-height));
+  background: var(--color-surface);
+}
+.plant-items__lead {
+  max-width: 24rem;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  color: var(--color-muted-strong);
+}
+.plant-items__grid {
+  display: grid;
+  gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+.plant-card {
+  height: 100%;
+  color: inherit;
+}
+.plant-card__media {
+  display: grid;
+  aspect-ratio: 3 / 4;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-bg-soft);
+}
+.plant-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s var(--ease-slow);
+}
+.plant-card:hover .plant-card__media img {
+  transform: scale(1.025);
+}
+.plant-card__name {
+  padding-top: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  border-top: 1px solid var(--color-border);
+}
 .hydroponic__layout,
 .store__layout {
   display: grid;
@@ -545,6 +587,7 @@ button {
     gap: clamp(1rem, 2vw, 2rem);
   }
   .collections__grid > li:nth-child(2) { margin-top: clamp(3rem, 7vw, 7rem); }
+  .plant-items__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .home-links__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .site-footer__top {
     flex-direction: row;
@@ -566,6 +609,7 @@ button {
   .store__layout {
     grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
   }
+  .plant-items__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (max-width: 699px) {
@@ -573,6 +617,7 @@ button {
     background: linear-gradient(90deg, rgba(247,246,242,.72), rgba(247,246,242,.18) 80%);
   }
   .hero__title { font-size: clamp(3.6rem, 19vw, 5.4rem); }
+  .plant-items .section__intro--split { align-items: flex-start; }
   .collection-card__caption { align-items: flex-start; }
   .story-gallery {
     grid-template-columns: minmax(0, 1fr) minmax(5rem, 0.34fr);

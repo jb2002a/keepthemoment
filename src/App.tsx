@@ -4,11 +4,12 @@ import { Hero } from './components/Hero'
 import { Collections } from './components/Collections'
 import { BrandStory } from './components/BrandStory'
 import { PlantCare } from './components/PlantCare'
+import { PlantItems } from './components/PlantItems'
 import { Store } from './components/Store'
 import { Footer } from './components/Footer'
 import { naverStoreUrl } from './data/siteData'
 
-const routes = ['/', '/about', '/care', '/visit'] as const
+const routes = ['/', '/about', '/care', '/plants', '/visit'] as const
 type Route = (typeof routes)[number]
 const onlineStorePreparingMessage = '현재 온라인은 준비중입니다.'
 const naverStoreHost = new URL(naverStoreUrl).hostname
@@ -95,6 +96,7 @@ function App() {
       {route === '/' && <HomePage />}
       {route === '/about' && <AboutPage />}
       {route === '/care' && <CarePage />}
+      {route === '/plants' && <PlantsPage />}
       {route === '/visit' && <VisitPage />}
       <Footer />
     </>
@@ -150,6 +152,14 @@ function CarePage() {
   return (
     <main id="main" className="page-main">
       <PlantCare />
+    </main>
+  )
+}
+
+function PlantsPage() {
+  return (
+    <main id="main" className="page-main">
+      <PlantItems />
     </main>
   )
 }
