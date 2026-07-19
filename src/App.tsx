@@ -11,6 +11,7 @@ import { naverStoreUrl } from './data/siteData'
 
 const routes = ['/', '/about', '/care', '/plants', '/visit'] as const
 type Route = (typeof routes)[number]
+const siteUrl = 'https://keepthemoment-one.vercel.app'
 const onlineStorePreparingMessage = '현재 온라인은 준비중입니다.'
 const naverStoreHost = new URL(naverStoreUrl).hostname
 const pageSeo: Record<Route, { title: string; description: string }> = {
@@ -80,6 +81,18 @@ function updatePropertyMeta(property: string, content: string) {
   meta.content = content
 }
 
+function updateCanonical(href: string) {
+  let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+
+  if (!link) {
+    link = document.createElement('link')
+    link.rel = 'canonical'
+    document.head.appendChild(link)
+  }
+
+  link.href = href
+}
+
 function App() {
   const [route, setRoute] = useState(getRoute)
   const [hash, setHash] = useState(window.location.hash)
@@ -142,12 +155,15 @@ function App() {
 
   useEffect(() => {
     const seo = pageSeo[route]
+    const canonicalUrl = `${siteUrl}${route === '/' ? '/' : route}`
     document.title = seo.title
     updateMeta('description', seo.description)
     updateMeta('twitter:title', seo.title)
     updateMeta('twitter:description', seo.description)
     updatePropertyMeta('og:title', seo.title)
     updatePropertyMeta('og:description', seo.description)
+    updatePropertyMeta('og:url', canonicalUrl)
+    updateCanonical(canonicalUrl)
   }, [route])
 
   return (
