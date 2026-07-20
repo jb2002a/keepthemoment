@@ -170,7 +170,12 @@ export function PlantItems() {
             </h1>
           </div>
           <p className="plant-items__lead">
-            Explore hydroponic plants prepared for keeping the moment close.
+            <span className="plant-items__lead-default">
+              Explore hydroponic plants prepared for keeping the moment close.
+            </span>
+            <span className="plant-items__lead-mobile">
+              물과 흙 모두에 자연스럽게 어울리는 식물을 천천히 살펴보세요.
+            </span>
           </p>
         </Reveal>
 

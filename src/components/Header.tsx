@@ -1,6 +1,14 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 
+const mobileMenuItems = [
+  { id: 'plants', label: 'PLANTS', href: '/plants' },
+  { id: 'fragrance', label: 'FRAGRANCE', href: '/fragrance' },
+  { id: 'gift', label: 'GIFT', href: '/gift' },
+  { id: 'about', label: 'ABOUT', href: '/about' },
+  { id: 'care', label: 'CARE', href: '/care' },
+]
+
 export function Header() {
   const { content } = useSiteContent()
   const { brand, navItems } = content
@@ -86,40 +94,58 @@ export function Header() {
       </header>
 
       <div
-        id={menuId}
         className={`mobile-menu ${menuOpen ? 'is-open' : ''}`.trim()}
         hidden={!menuOpen}
-        role="dialog"
-        aria-modal="true"
-        aria-label="전체 메뉴"
       >
-        <div className="mobile-menu__top">
-          <a href="/" className="site-logo" onClick={handleNavClick}>
-            {brand.name}
-          </a>
-          <button
-            ref={closeButtonRef}
-            type="button"
-            className="menu-toggle"
-            aria-label="메뉴 닫기"
-            onClick={() => setMenuOpen(false)}
+        <button
+          type="button"
+          className="mobile-menu__backdrop"
+          aria-label="메뉴 닫기"
+          onClick={() => setMenuOpen(false)}
+        />
+        <div
+          id={menuId}
+          className="mobile-menu__panel"
+          role="dialog"
+          aria-modal="true"
+          aria-label="전체 메뉴"
+        >
+          <div className="mobile-menu__top">
+            <a href="/" className="site-logo" onClick={handleNavClick}>
+              {brand.name}
+            </a>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className="menu-toggle"
+              aria-label="메뉴 닫기"
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="menu-toggle__label">Close</span>
+              <span className="menu-toggle__close" aria-hidden="true">
+                ×
+              </span>
+            </button>
+          </div>
+          <nav aria-label="모바일 메뉴">
+            <ul className="mobile-menu__list">
+              {mobileMenuItems.map((item) => (
+                <li key={item.id}>
+                  <a href={item.href} onClick={handleNavClick}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <a
+            className="mobile-menu__visit"
+            href="/#visit"
+            onClick={handleNavClick}
           >
-            <span className="menu-toggle__close" aria-hidden="true">
-              ×
-            </span>
-          </button>
+            Visit Store
+          </a>
         </div>
-        <nav aria-label="모바일 메뉴">
-          <ul className="mobile-menu__list">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a href={item.href} onClick={handleNavClick}>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
     </>
   )

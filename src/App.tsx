@@ -9,6 +9,7 @@ import { Gift } from './components/Gift'
 import { Fragrance } from './components/Fragrance'
 import { Store } from './components/Store'
 import { Footer } from './components/Footer'
+import { Reveal } from './components/Reveal'
 import { useSiteContent } from './hooks/useSiteContent'
 
 const routes = ['/', '/about', '/care', '/plants', '/fragrance', '/gift', '/visit'] as const
@@ -206,12 +207,36 @@ function App() {
 
 function HomePage() {
   return (
-    <main id="main">
+    <main id="main" className="home-main">
       <Hero />
+      <HomeIntro />
       <Collections />
       <Store />
       <HomeLinks />
     </main>
+  )
+}
+
+function HomeIntro() {
+  return (
+    <section className="home-intro" aria-labelledby="home-intro-heading">
+      <div className="section__inner home-intro__inner">
+        <Reveal className="home-intro__copy">
+          <p className="section__eyebrow">KEEP THE MOMENT</p>
+          <h1 id="home-intro-heading" className="home-intro__title">
+            식물과 향이 머무는 자리, 오늘의 순간을 천천히 간직하는 행궁동의 작은 공간.
+          </h1>
+        </Reveal>
+        <Reveal className="home-intro__actions" delay={120}>
+          <a href="/plants" className="text-link">
+            Plants
+          </a>
+          <a href="/#visit" className="text-link">
+            Visit Store
+          </a>
+        </Reveal>
+      </div>
+    </section>
   )
 }
 

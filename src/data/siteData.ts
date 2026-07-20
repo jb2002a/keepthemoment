@@ -447,7 +447,7 @@ export const storeInfo = {
     { day: 'Sat – Sun', time: '11:00 – 18:00' },
   ],
   phone: '02-0000-0000',
-  mapUrl: 'https://map.naver.com/',
+  mapUrl: 'https://map.naver.com/p/entry/place/2000545659?c=15.00,0,0,0,dh',
   placeUrl: 'https://naver.me/',
   instagramUrl: 'https://www.instagram.com/',
   image: '/images/story/store-retouched.png',

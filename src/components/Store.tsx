@@ -1,6 +1,8 @@
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
+const directionsUrl = 'https://map.naver.com/p/entry/place/2000545659?c=15.00,0,0,0,dh'
+
 export function Store() {
   const { content } = useSiteContent()
   const { storeInfo } = content
@@ -44,7 +46,7 @@ export function Store() {
 
             <div className="store__actions">
               <a
-                href={storeInfo.mapUrl}
+                href={directionsUrl}
                 className="btn btn--outline"
                 target="_blank"
                 rel="noopener noreferrer"
