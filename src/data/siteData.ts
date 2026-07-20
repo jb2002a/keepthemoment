@@ -460,8 +460,8 @@ export const storeInfo = {
   mapUrl: 'https://map.naver.com/p/entry/place/2000545659?c=15.00,0,0,0,dh',
   placeUrl: 'https://naver.me/',
   instagramUrl: 'https://www.instagram.com/',
-  image: '/images/story/store-retouched.png',
-  alt: '우드와 실버 소재로 완성된 밝은 KEEP THE MOMENT 매장',
+  image: '/images/story/store-visit.png',
+  alt: '자연광이 가득한 KEEP THE MOMENT 행궁 매장 인테리어',
 }
 
 export const footerLinks: SocialLink[] = [
