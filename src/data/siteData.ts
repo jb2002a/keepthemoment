@@ -74,6 +74,7 @@ export const hero = {
       src: '/images/hero/shelf-mobile.png',
       mobileSrc: '/images/hero/shelf-mobile.png',
       alt: '우드 선반에 진열된 KEEP THE MOMENT 향기·기프트 제품',
+      mobileOnly: true,
     },
   ],
 }
