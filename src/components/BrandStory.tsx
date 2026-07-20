@@ -19,8 +19,7 @@ export function BrandStory() {
           </h2>
           <p className="section__lead">
             식물과 향, 그리고 작은 선물은 오늘의 분위기를 조용히 머금습니다.
-            KEEP THE MOMENT는 제품을 판매하기보다, 그 순간을 집으로 가져갈 수 있는
-            경험을 드리고 싶습니다.
+            그리고 그 순간을 집으로 가져갈 수 있는 경험을 드리고 싶습니다.
           </p>
         </Reveal>
 
