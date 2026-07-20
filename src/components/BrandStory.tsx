@@ -18,7 +18,9 @@ export function BrandStory() {
             Nature & Memory.
           </h2>
           <p className="section__lead">
-            우리는 식물을 단순한 장식이 아니라, 공간과 일상에 조용히 머무는 생명으로 바라봅니다.
+            식물과 향, 그리고 작은 선물은 오늘의 분위기를 조용히 머금습니다.
+            KEEP THE MOMENT는 제품을 판매하기보다, 그 순간을 집으로 가져갈 수 있는
+            경험을 드리고 싶습니다.
           </p>
         </Reveal>
 
