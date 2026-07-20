@@ -14,7 +14,7 @@ import { useSiteContent } from './hooks/useSiteContent'
 
 const routes = ['/', '/about', '/care', '/plants', '/fragrance', '/gift', '/visit'] as const
 type Route = (typeof routes)[number]
-const siteUrl = 'https://keepthemoment-one.vercel.app'
+const siteUrl = 'https://www.keepthemoment.kr'
 const onlineStorePreparingMessage = '현재 온라인은 준비중입니다.'
 const pageSeo: Record<Route, { title: string; description: string }> = {
   '/': {
