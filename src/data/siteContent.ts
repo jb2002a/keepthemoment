@@ -30,6 +30,7 @@ export type SiteContent = {
   hero: {
     images: {
       src: string
+      mobileSrc?: string
       alt: string
     }[]
   }

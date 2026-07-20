@@ -75,15 +75,23 @@ export function Hero() {
             className={`hero__slide${index === activeIndex ? ' is-active' : ''}`}
             aria-hidden={index !== activeIndex}
           >
-            <img
-              className="hero__image"
-              src={image.src}
-              alt={image.alt}
-              width="1024"
-              height="682"
-              loading={index === 0 ? 'eager' : 'lazy'}
-              fetchPriority={index === 0 ? 'high' : 'auto'}
-            />
+            <picture>
+              {image.mobileSrc ? (
+                <source
+                  media="(max-width: 720px)"
+                  srcSet={image.mobileSrc}
+                />
+              ) : null}
+              <img
+                className="hero__image"
+                src={image.src}
+                alt={image.alt}
+                width="1024"
+                height="682"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' : 'auto'}
+              />
+            </picture>
           </figure>
         ))}
       </div>

@@ -150,6 +150,7 @@ export function mapSanityPayload(payload: SanityPayload): SiteContent {
       images: [
         {
           src: resolveImageUrl(payload.hero, fallback.hero.images[0].src),
+          mobileSrc: fallback.hero.images[0].mobileSrc,
           alt: payload.hero?.alt || fallback.hero.images[0].alt,
         },
         ...fallback.hero.images.slice(1),

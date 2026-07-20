@@ -67,7 +67,8 @@ export const hero = {
   images: [
     {
       src: '/images/hero/main.jpeg',
-      alt: '식물이 가득한 KEEP THE MOMENT 쇼룸 전경',
+      mobileSrc: '/images/hero/main-mobile.png',
+      alt: '화이트 테이블 위 리프 파우치가 진열된 KEEP THE MOMENT 쇼룸',
     },
   ],
 }
