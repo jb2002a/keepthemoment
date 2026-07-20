@@ -1193,7 +1193,8 @@ button {
 @media (max-width: 699px) {
   .home-intro {
     display: block;
-    padding-block: clamp(2.5rem, 12vw, 4rem);
+    padding-top: clamp(2.5rem, 12vw, 4rem);
+    padding-bottom: clamp(1.5rem, 7vw, 2.5rem);
   }
   .home-intro__inner {
     gap: 1.25rem;
@@ -1215,10 +1216,10 @@ button {
     word-break: keep-all;
   }
   .home-intro__actions {
-    gap: 1rem;
+    display: none;
   }
   .collections {
-    padding-top: 1.25rem;
+    padding-top: 0;
   }
   .section {
     padding-block: clamp(2.75rem, 12vw, 4.5rem);
@@ -1241,11 +1242,11 @@ button {
     margin-top: 0.9rem;
   }
   .collection-card__media img {
-    height: clamp(12rem, 58vw, 18rem);
+    height: clamp(14rem, 64vw, 20rem);
     object-fit: cover;
   }
   .collections__grid > li:first-child .collection-card__media img {
-    height: clamp(15rem, 72vw, 23rem);
+    height: clamp(16rem, 76vw, 24rem);
   }
   .gift-card__media,
   .plant-card__media {
@@ -1345,6 +1346,7 @@ button {
   .collection-card__caption {
     flex-direction: column;
     gap: 0.35rem;
+    border-top: 0;
   }
   .collection-card__caption { align-items: flex-start; }
   .collection-card__desc {
