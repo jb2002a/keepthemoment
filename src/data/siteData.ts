@@ -70,6 +70,11 @@ export const hero = {
       mobileSrc: '/images/hero/main-mobile.png',
       alt: '화이트 테이블 위 리프 파우치가 진열된 KEEP THE MOMENT 쇼룸',
     },
+    {
+      src: '/images/hero/shelf-mobile.png',
+      mobileSrc: '/images/hero/shelf-mobile.png',
+      alt: '우드 선반에 진열된 KEEP THE MOMENT 향기·기프트 제품',
+    },
   ],
 }
 
