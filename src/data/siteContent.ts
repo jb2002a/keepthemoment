@@ -32,6 +32,7 @@ export type SiteContent = {
       src: string
       mobileSrc?: string
       alt: string
+      mobileOnly?: boolean
     }[]
   }
   collections: Collection[]

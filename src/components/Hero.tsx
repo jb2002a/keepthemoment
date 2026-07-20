@@ -2,31 +2,58 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 
 const AUTO_ADVANCE_MS = 5500
+const MOBILE_MQ = '(max-width: 720px)'
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(MOBILE_MQ).matches : false,
+  )
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(MOBILE_MQ)
+    const onChange = () => setIsMobile(mediaQuery.matches)
+    onChange()
+    mediaQuery.addEventListener('change', onChange)
+    return () => mediaQuery.removeEventListener('change', onChange)
+  }, [])
+
+  return isMobile
+}
 
 export function Hero() {
   const { content } = useSiteContent()
-  const { images } = content.hero
+  const isMobile = useIsMobile()
+  const slides = content.hero.images.filter(
+    (image) => isMobile || !image.mobileOnly,
+  )
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef<number | null>(null)
 
-  const goTo = useCallback((index: number) => {
-    if (images.length === 0) return
-    setActiveIndex((index + images.length) % images.length)
-  }, [images.length])
+  useEffect(() => {
+    setActiveIndex((index) => (index >= slides.length ? 0 : index))
+  }, [slides.length])
+
+  const goTo = useCallback(
+    (index: number) => {
+      if (slides.length === 0) return
+      setActiveIndex((index + slides.length) % slides.length)
+    },
+    [slides.length],
+  )
 
   const goNext = useCallback(() => {
-    if (images.length === 0) return
-    setActiveIndex((index) => (index + 1) % images.length)
-  }, [images.length])
+    if (slides.length === 0) return
+    setActiveIndex((index) => (index + 1) % slides.length)
+  }, [slides.length])
 
   const goPrev = useCallback(() => {
-    if (images.length === 0) return
-    setActiveIndex((index) => (index - 1 + images.length) % images.length)
-  }, [images.length])
+    if (slides.length === 0) return
+    setActiveIndex((index) => (index - 1 + slides.length) % slides.length)
+  }, [slides.length])
 
   useEffect(() => {
-    if (images.length <= 1 || isPaused) return
+    if (slides.length <= 1 || isPaused) return
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mediaQuery.matches) return
@@ -36,16 +63,16 @@ export function Hero() {
     }, AUTO_ADVANCE_MS)
 
     return () => window.clearInterval(timer)
-  }, [images.length, isPaused, goNext])
+  }, [slides.length, isPaused, goNext])
 
-  if (images.length === 0) return null
+  if (slides.length === 0) return null
 
   return (
     <section
       className="hero"
       id="top"
       aria-label="KEEP THE MOMENT main hero"
-      aria-roledescription="carousel"
+      aria-roledescription={slides.length > 1 ? 'carousel' : undefined}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -58,7 +85,7 @@ export function Hero() {
         touchStartX.current = event.changedTouches[0]?.clientX ?? null
       }}
       onTouchEnd={(event) => {
-        if (touchStartX.current === null) return
+        if (touchStartX.current === null || slides.length <= 1) return
         const deltaX =
           (event.changedTouches[0]?.clientX ?? touchStartX.current) -
           touchStartX.current
@@ -69,9 +96,9 @@ export function Hero() {
       }}
     >
       <div className="hero__track">
-        {images.map((image, index) => (
+        {slides.map((image, index) => (
           <figure
-            key={image.src}
+            key={image.mobileSrc ?? image.src}
             className={`hero__slide${index === activeIndex ? ' is-active' : ''}`}
             aria-hidden={index !== activeIndex}
           >
@@ -96,7 +123,7 @@ export function Hero() {
         ))}
       </div>
 
-      {images.length > 1 ? (
+      {slides.length > 1 ? (
         <>
           <div className="hero__controls">
             <button
@@ -118,9 +145,9 @@ export function Hero() {
           </div>
 
           <div className="hero__dots" role="tablist" aria-label="히어로 슬라이드">
-            {images.map((image, index) => (
+            {slides.map((image, index) => (
               <button
-                key={image.src}
+                key={image.mobileSrc ?? image.src}
                 type="button"
                 role="tab"
                 className={`hero__dot${index === activeIndex ? ' is-active' : ''}`}
