@@ -1247,6 +1247,10 @@ button {
   }
   .collections__grid > li:first-child .collection-card__media img {
     height: clamp(16rem, 76vw, 24rem);
+    object-position: center 28%;
+  }
+  .collections__grid > li:nth-child(2) .collection-card__media img {
+    object-position: center 68%;
   }
   .gift-card__media,
   .plant-card__media {
