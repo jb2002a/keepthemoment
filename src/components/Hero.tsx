@@ -99,7 +99,13 @@ export function Hero() {
         {slides.map((image, index) => (
           <figure
             key={image.mobileSrc ?? image.src}
-            className={`hero__slide${index === activeIndex ? ' is-active' : ''}`}
+            className={[
+              'hero__slide',
+              index === activeIndex ? 'is-active' : '',
+              image.mobileOnly ? 'hero__slide--focus-bottom' : '',
+            ]
+              .filter(Boolean)
+              .join(' ')}
             aria-hidden={index !== activeIndex}
           >
             <picture>
@@ -117,6 +123,11 @@ export function Hero() {
                 height="682"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 fetchPriority={index === 0 ? 'high' : 'auto'}
+                style={
+                  image.objectPosition && (isMobile || image.mobileOnly)
+                    ? { objectPosition: image.objectPosition }
+                    : undefined
+                }
               />
             </picture>
           </figure>

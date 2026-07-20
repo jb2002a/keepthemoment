@@ -381,8 +381,12 @@ button {
     width: 2.25rem;
     height: 2.25rem;
   }
-  .hero__image {
-    object-position: center 38%;
+}
+
+/* iPhone SE 등 짧은 화면: 선반 슬라이드는 하단이 더 보이도록 */
+@media (max-width: 720px) and (max-height: 720px) {
+  .hero__slide--focus-bottom .hero__image {
+    object-position: center bottom;
   }
 }
 @media (prefers-reduced-motion: reduce) {
