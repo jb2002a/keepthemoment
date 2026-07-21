@@ -233,9 +233,7 @@ function HomeIntro() {
             <br />
             향기는 지나간 오늘을 다시 불러옵니다.
             <br />
-            스쳐가는 일상 속에
-            <br />
-            오래 머무는 순간을 선물합니다.
+            스쳐가는 일상 속에 오래 머무는 순간을 선물합니다.
           </p>
         </Reveal>
         <Reveal className="home-intro__actions" delay={120}>
@@ -243,7 +241,7 @@ function HomeIntro() {
             Plants
           </a>
           <a href="/#visit" className="text-link">
-            Visit Store
+            Visit
           </a>
         </Reveal>
       </div>
