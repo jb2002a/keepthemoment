@@ -229,13 +229,13 @@ function HomeIntro() {
             and Moments.
           </h1>
           <p className="home-intro__description">
-            식물과 향, 그리고 작은 선물은
+            식물은 곁에서 시간과 함께 자라나고,
             <br />
-            오늘의 분위기를 조용히 머금습니다.
+            향기는 지나간 오늘을 다시 불러옵니다.
             <br />
-            우리는 제품을 판매하기보다,
+            스쳐가는 일상 속에
             <br />
-            그 순간을 집으로 가져갈 수 있는 경험을 드리고 싶습니다.
+            오래 머무는 순간을 선물합니다.
           </p>
         </Reveal>
         <Reveal className="home-intro__actions" delay={120}>
