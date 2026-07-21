@@ -222,7 +222,6 @@ function HomeIntro() {
     <section className="home-intro" aria-labelledby="home-intro-heading">
       <div className="section__inner home-intro__inner">
         <Reveal className="home-intro__copy">
-          <p className="section__eyebrow">KEEP THE MOMENT</p>
           <h1 id="home-intro-heading" className="home-intro__title">
             Plants, Scent,
             <br />
