@@ -453,8 +453,8 @@ export const storeInfo = {
   address: '경기 수원시 팔달구 신풍로63번길 14 2층',
   addressDetail: '2F, 14, Sinpung-ro 63beon-gil, Paldal-gu, Suwon-si, Gyeonggi-do',
   hours: [
-    { day: 'Tue – Fri', time: '11:00 – 19:00' },
-    { day: 'Sat – Sun', time: '11:00 – 18:00' },
+    { day: 'Mon – Fri', time: '12:00 – 20:00' },
+    { day: 'Sat – Sun', time: '12:00 – 20:00' },
   ],
   phone: '02-0000-0000',
   mapUrl: 'https://map.naver.com/p/entry/place/2000545659?c=15.00,0,0,0,dh',
