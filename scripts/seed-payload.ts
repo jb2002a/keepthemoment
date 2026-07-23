@@ -160,16 +160,32 @@ async function seed() {
     slug: 'hero',
     data: {
       slides: await Promise.all(
-        hero.images.map(async (slide) => ({
-          alt: slide.alt,
-          mobileOnly: slide.mobileOnly ?? false,
-          objectPosition: slide.objectPosition,
-          desktopImage: await uploadImageFromDisk(slide.src, slide.alt),
-          mobileImage:
-            slide.mobileSrc && slide.mobileSrc !== slide.src
-              ? await uploadImageFromDisk(slide.mobileSrc, slide.alt)
-              : undefined,
-        })),
+        hero.images.map(async (slide) => {
+          const mobileOnly = slide.mobileOnly ?? false
+
+          if (mobileOnly) {
+            return {
+              alt: slide.alt,
+              mobileOnly: true,
+              objectPosition: slide.objectPosition,
+              mobileImage: await uploadImageFromDisk(
+                slide.mobileSrc || slide.src,
+                slide.alt,
+              ),
+            }
+          }
+
+          return {
+            alt: slide.alt,
+            mobileOnly: false,
+            objectPosition: slide.objectPosition,
+            desktopImage: await uploadImageFromDisk(slide.src, slide.alt),
+            mobileImage:
+              slide.mobileSrc && slide.mobileSrc !== slide.src
+                ? await uploadImageFromDisk(slide.mobileSrc, slide.alt)
+                : undefined,
+          }
+        }),
       ),
     },
   })

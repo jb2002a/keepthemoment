@@ -274,15 +274,31 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       images: hero?.slides?.length
         ? hero.slides.map((slide, index) => {
             const fallbackSlide = fallback.hero.images[index] ?? fallback.hero.images[0]
+            const mobileOnly = slide.mobileOnly ?? fallbackSlide.mobileOnly ?? false
+
+            if (mobileOnly) {
+              const mobileSrc = resolveMediaUrl(
+                slide.mobileImage || slide.desktopImage,
+                fallbackSlide.mobileSrc || fallbackSlide.src,
+              )
+              return {
+                src: mobileSrc,
+                mobileSrc,
+                alt: slide.alt || fallbackSlide.alt,
+                mobileOnly: true,
+                objectPosition: slide.objectPosition || fallbackSlide.objectPosition,
+              }
+            }
+
             const desktopSrc = resolveMediaUrl(slide.desktopImage, fallbackSlide.src)
             const mobileSrc = slide.mobileImage
-              ? resolveMediaUrl(slide.mobileImage, desktopSrc)
-              : undefined
+              ? resolveMediaUrl(slide.mobileImage, fallbackSlide.mobileSrc || desktopSrc)
+              : fallbackSlide.mobileSrc
             return {
               src: desktopSrc,
               mobileSrc,
               alt: slide.alt || fallbackSlide.alt,
-              mobileOnly: slide.mobileOnly ?? fallbackSlide.mobileOnly,
+              mobileOnly: false,
               objectPosition: slide.objectPosition || fallbackSlide.objectPosition,
             }
           })
