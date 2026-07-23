@@ -698,20 +698,13 @@ button {
   min-height: 8rem;
 }
 .fragrance-brand-card__media img {
-  width: min(100%, 18rem);
-  max-height: 9rem;
+  width: min(100%, var(--logo-width, 9rem));
+  height: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
 }
-.fragrance-brand-card__name {
-  align-self: end;
-  padding-top: 1rem;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  color: var(--color-muted-strong);
-  border-top: 1px solid var(--color-border);
+.fragrance-brand-card--dark-logo .fragrance-brand-card__media img {
+  mix-blend-mode: normal;
 }
 .gift-card {
   display: grid;

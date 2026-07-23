@@ -35,6 +35,8 @@ export type FragranceBrand = {
   image: string
   alt: string
   href: string
+  /** Display width so wordmark letter size matches VINOIR */
+  logoWidth: string
 }
 
 export type StoryBlock = {
@@ -142,6 +144,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/nudara.png',
     alt: 'NUDARA fragrance brand logo',
     href: 'https://nudara.co.kr/',
+    logoWidth: '8.5rem',
   },
   {
     id: 'seamus',
@@ -149,6 +152,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/seamus.png',
     alt: 'SEAMUS fragrance brand logo',
     href: 'https://seamus.co.kr/',
+    logoWidth: '8.4rem',
   },
   {
     id: 'teabless',
@@ -156,6 +160,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/teabless.png',
     alt: 'TEABLESS fragrance brand logo',
     href: 'https://teabless.co.kr/',
+    logoWidth: '12rem',
   },
   {
     id: 'lisoue',
@@ -163,6 +168,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/lisoue.png',
     alt: 'LISOUE fragrance brand logo',
     href: 'https://www.instagram.com/lisoue_official/',
+    logoWidth: '8.9rem',
   },
   {
     id: 'the-other-mood',
@@ -170,6 +176,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/the-other-mood.png',
     alt: 'The Other Mood fragrance brand logo',
     href: 'https://theothermood.co.kr/',
+    logoWidth: '14.5rem',
   },
   {
     id: 'vinoir',
@@ -177,6 +184,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/vinoir.png',
     alt: 'VINOIR fragrance brand logo',
     href: 'https://vinoir.kr/',
+    logoWidth: '9rem',
   },
 ]
 

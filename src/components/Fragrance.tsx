@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { fragranceBrands } from '../data/siteData'
 import { Reveal } from './Reveal'
 
@@ -23,7 +24,12 @@ export function Fragrance() {
             <Reveal as="li" key={brand.id} delay={index * 70}>
               <a
                 href={brand.href}
-                className="fragrance-brand-card"
+                className={
+                  brand.id === 'the-other-mood'
+                    ? 'fragrance-brand-card fragrance-brand-card--dark-logo'
+                    : 'fragrance-brand-card'
+                }
+                style={{ '--logo-width': brand.logoWidth } as CSSProperties}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${brand.name} 공식 사이트로 이동`}
@@ -37,7 +43,6 @@ export function Fragrance() {
                     loading="lazy"
                   />
                 </div>
-                <h2 className="fragrance-brand-card__name">{brand.name}</h2>
               </a>
             </Reveal>
           ))}
