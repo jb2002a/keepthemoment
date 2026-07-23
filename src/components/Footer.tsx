@@ -9,7 +9,6 @@ export function Footer() {
       <div className="site-footer__inner">
         <div className="site-footer__top">
           <div className="site-footer__brand">
-            <p className="site-footer__tagline">{brand.tagline}</p>
             <a href="/" className="site-logo site-logo--footer">
               {brand.name}
             </a>
