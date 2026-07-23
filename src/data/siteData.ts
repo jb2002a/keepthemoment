@@ -76,8 +76,31 @@ export const hero = {
       mobileSrc: '/images/hero/shelf-mobile.png',
       alt: '우드 선반에 진열된 KEEP THE MOMENT 향기·기프트 제품',
       mobileOnly: true,
-      // 짧은 화면에서 하단 서랍·선반이 잘리지 않도록 초점 아래로
       objectPosition: 'center bottom',
+    },
+    {
+      src: '/images/hero/shelf-begonia.png',
+      alt: '화이트 선반에 진열된 베고니아와 양치식물',
+      mobileOnly: true,
+      objectPosition: 'center center',
+    },
+    {
+      src: '/images/hero/plants-sunlight.png',
+      alt: '햇살이 드는 화이트 선반 위 어린 관엽식물들',
+      mobileOnly: true,
+      objectPosition: 'center 40%',
+    },
+    {
+      src: '/images/hero/monstera-wall.png',
+      alt: '텍스처 벽 앞에 자리한 몬스테라와 안스리움',
+      mobileOnly: true,
+      objectPosition: 'center center',
+    },
+    {
+      src: '/images/hero/caladium-triostar.png',
+      alt: '칼라디움과 스트로만테 트리오스타가 있는 식물 디스플레이',
+      mobileOnly: true,
+      objectPosition: 'center 45%',
     },
   ],
 }

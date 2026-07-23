@@ -337,7 +337,7 @@ button {
   gap: 0.55rem;
   align-self: end;
   justify-self: center;
-  margin-bottom: calc(3rem + clamp(0.9rem, 2vw, 1.4rem));
+  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
 }
 .hero__dot {
   width: 0.45rem;
@@ -353,28 +353,6 @@ button {
   width: 1.5rem;
   background: rgba(247, 246, 242, 0.92);
   border-color: rgba(23, 24, 22, 0.28);
-}
-.hero__notice {
-  grid-area: 1 / 1;
-  z-index: 3;
-  align-self: end;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 3rem;
-  padding-inline: 1rem;
-  color: var(--color-text);
-  background: var(--color-surface);
-  border-bottom: 1px solid rgba(23, 24, 22, 0.08);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-  backdrop-filter: blur(10px);
-}
-.hero__notice:hover {
-  color: var(--color-text);
-  background: var(--color-surface);
 }
 @media (max-width: 720px) {
   .hero__arrow {

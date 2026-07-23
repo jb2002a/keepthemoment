@@ -170,9 +170,6 @@ export function Hero() {
           </div>
         </>
       ) : null}
-      <a className="hero__notice" href="/#visit">
-        Haenggung Store Open
-      </a>
     </section>
   )
 }
