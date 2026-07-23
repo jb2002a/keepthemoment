@@ -37,6 +37,15 @@ export type FragranceBrand = {
   href: string
   /** Display width so wordmark letter size matches VINOIR */
   logoWidth: string
+  darkLogo?: boolean
+}
+
+export type GiftOption = {
+  id: string
+  title: string
+  image: string
+  alt: string
+  copy: string
 }
 
 export type StoryBlock = {
@@ -137,6 +146,20 @@ export const collections: Collection[] = [
   },
 ]
 
+export const fragrancePageContent = {
+  eyebrow: 'Fragrance',
+  title: 'Scented Moments.',
+  lead: 'KEEP THE MOMENT에서 만날 수 있는 프래그런스 브랜드입니다. 식물과 함께 공간에 남는 향을 매장에서 직접 경험해보세요.',
+  note: '브랜드별 입고 상품과 재고는 시즌과 매장 상황에 따라 달라질 수 있는 점 참고부탁드립니다.',
+}
+
+export const giftPageContent = {
+  eyebrow: 'Gift',
+  title: 'Plants, ready to gift.',
+  lead: 'KEEP THE MOMENT의 식물은 패키지 형식과 포장 형식으로 선물 준비가 가능합니다. 받는 분의 취향, 식물 크기, 전달 상황에 맞춰 매장에서 어울리는 구성을 안내해드립니다.',
+  note: '선물 포장은 식물 상태와 재고에 따라 가능한 구성이 달라질 수 있어요. 방문 전 원하는 분위기나 예산을 알려주시면 더 알맞게 준비해드립니다.',
+}
+
 export const fragranceBrands: FragranceBrand[] = [
   {
     id: 'nudara',
@@ -177,6 +200,7 @@ export const fragranceBrands: FragranceBrand[] = [
     alt: 'The Other Mood fragrance brand logo',
     href: 'https://theothermood.co.kr/',
     logoWidth: '14.5rem',
+    darkLogo: true,
   },
   {
     id: 'vinoir',
@@ -185,6 +209,37 @@ export const fragranceBrands: FragranceBrand[] = [
     alt: 'VINOIR fragrance brand logo',
     href: 'https://vinoir.kr/',
     logoWidth: '9rem',
+  },
+]
+
+export const giftOptions: GiftOption[] = [
+  {
+    id: 'package',
+    title: 'Package Gift',
+    image: '/images/gift/gift1.png',
+    alt: 'KEEP THE MOMENT 선물 패키지로 준비된 식물',
+    copy: '식물의 크기와 분위기에 맞춰 패키지 형태로 정돈해 선물하실 수 있습니다.',
+  },
+  {
+    id: 'wrapping',
+    title: 'Wrapping',
+    image: '/images/gift/gift2.png',
+    alt: '포장된 식물 선물 클로즈업',
+    copy: '가볍게 건네기 좋은 포장부터 특별한 날을 위한 구성까지 상담 후 준비합니다.',
+  },
+  {
+    id: 'message',
+    title: 'Message',
+    image: '/images/gift/gift3.png',
+    alt: '메시지와 함께 준비된 식물 선물',
+    copy: '마음을 전할 수 있도록 카드와 작은 메시지 연출을 함께 도와드립니다.',
+  },
+  {
+    id: 'pickup',
+    title: 'Pick-up Ready',
+    image: '/images/gift/gift4.png',
+    alt: '매장에서 픽업할 수 있게 준비된 식물 선물',
+    copy: '매장에서 바로 픽업하거나 방문 일정에 맞춰 선물용으로 준비해드립니다.',
   },
 ]
 

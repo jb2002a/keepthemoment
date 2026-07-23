@@ -1,6 +1,13 @@
 import type { StructureResolver } from 'sanity/structure'
 
-type SingletonType = 'brand' | 'hero' | 'hydroponic' | 'storeInfo' | 'siteSettings'
+type SingletonType =
+  | 'brand'
+  | 'hero'
+  | 'fragrancePage'
+  | 'giftPage'
+  | 'hydroponic'
+  | 'storeInfo'
+  | 'siteSettings'
 
 type SingletonItem = {
   type: SingletonType
@@ -130,7 +137,13 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .id('page-fragrance-list')
             .title('향기 페이지에서 수정할 내용')
-            .items([collectionItem(S, 'fragrance', '홈에 보이는 향기 카드')]),
+            .items([
+              collectionItem(S, 'fragrance', '홈에 보이는 향기 카드'),
+              singletonItem(S, {
+                type: 'fragrancePage',
+                title: '향기 페이지 내용 (브랜드 목록)',
+              }),
+            ]),
         ),
       S.listItem()
         .id('page-gift')
@@ -139,7 +152,10 @@ export const structure: StructureResolver = (S) =>
           S.list()
             .id('page-gift-list')
             .title('선물 페이지에서 수정할 내용')
-            .items([collectionItem(S, 'gift', '홈에 보이는 선물 카드')]),
+            .items([
+              collectionItem(S, 'gift', '홈에 보이는 선물 카드'),
+              singletonItem(S, { type: 'giftPage', title: '선물 페이지 내용 (옵션 카드)' }),
+            ]),
         ),
       S.listItem()
         .id('page-visit')

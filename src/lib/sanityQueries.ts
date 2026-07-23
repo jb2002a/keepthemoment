@@ -5,9 +5,15 @@ export const siteContentQuery = `{
     shortDescription
   },
   "hero": *[_type == "hero" && _id == "hero"][0]{
-    alt,
-    "imageUrl": image.asset->url,
-    image
+    slides[]{
+      alt,
+      mobileOnly,
+      objectPosition,
+      "desktopImageUrl": desktopImage.asset->url,
+      desktopImage,
+      "mobileImageUrl": mobileImage.asset->url,
+      mobileImage
+    }
   },
   "collections": *[_type == "collection"] | order(order asc){
     "id": slug.current,
@@ -37,6 +43,34 @@ export const siteContentQuery = `{
     size,
     "imageUrl": image.asset->url,
     image
+  },
+  "fragrancePage": *[_type == "fragrancePage" && _id == "fragrancePage"][0]{
+    eyebrow,
+    title,
+    lead,
+    note,
+    brands[]{
+      name,
+      alt,
+      href,
+      logoWidth,
+      darkLogo,
+      "imageUrl": image.asset->url,
+      image
+    }
+  },
+  "giftPage": *[_type == "giftPage" && _id == "giftPage"][0]{
+    eyebrow,
+    title,
+    lead,
+    note,
+    options[]{
+      title,
+      alt,
+      copy,
+      "imageUrl": image.asset->url,
+      image
+    }
   },
   "hydroponic": *[_type == "hydroponic" && _id == "hydroponic"][0]{
     title,

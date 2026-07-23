@@ -1,5 +1,7 @@
 import type {
   Collection,
+  FragranceBrand,
+  GiftOption,
   NavItem,
   PlantItem,
   SocialLink,
@@ -9,6 +11,10 @@ import {
   brand as fallbackBrand,
   collections as fallbackCollections,
   footerLinks as fallbackFooterLinks,
+  fragranceBrands as fallbackFragranceBrands,
+  fragrancePageContent as fallbackFragrancePageContent,
+  giftOptions as fallbackGiftOptions,
+  giftPageContent as fallbackGiftPageContent,
   hero as fallbackHero,
   hydroponic as fallbackHydroponic,
   navItems as fallbackNavItems,
@@ -40,6 +46,20 @@ export type SiteContent = {
   rarePlantItems: PlantItem[]
   plantItems: PlantItem[]
   storyBlocks: StoryBlock[]
+  fragrancePage: {
+    eyebrow: string
+    title: string
+    lead: string
+    note: string
+    brands: FragranceBrand[]
+  }
+  giftPage: {
+    eyebrow: string
+    title: string
+    lead: string
+    note: string
+    options: GiftOption[]
+  }
   hydroponic: {
     title: string
     description: string
@@ -73,6 +93,14 @@ export function getFallbackSiteContent(): SiteContent {
     rarePlantItems: fallbackRarePlantItems,
     plantItems: fallbackPlantItems,
     storyBlocks: fallbackStoryBlocks,
+    fragrancePage: {
+      ...fallbackFragrancePageContent,
+      brands: fallbackFragranceBrands,
+    },
+    giftPage: {
+      ...fallbackGiftPageContent,
+      options: fallbackGiftOptions,
+    },
     hydroponic: fallbackHydroponic,
     storeInfo: fallbackStoreInfo,
     footerLinks: fallbackFooterLinks,

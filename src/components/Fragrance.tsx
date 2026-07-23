@@ -1,30 +1,30 @@
 import type { CSSProperties } from 'react'
-import { fragranceBrands } from '../data/siteData'
+import { useSiteContent } from '../hooks/useSiteContent'
 
 export function Fragrance() {
+  const { content } = useSiteContent()
+  const { fragrancePage } = content
+
   return (
     <section className="section fragrance-page" aria-labelledby="fragrance-heading">
       <div className="section__inner">
         <div className="section__intro section__intro--split fragrance-page__intro">
           <div>
-            <p className="section__eyebrow">Fragrance</p>
+            <p className="section__eyebrow">{fragrancePage.eyebrow}</p>
             <h1 id="fragrance-heading" className="section__title">
-              Scented Moments.
+              {fragrancePage.title}
             </h1>
           </div>
-          <p className="fragrance-page__lead">
-            KEEP THE MOMENT에서 만날 수 있는 프래그런스 브랜드입니다. 식물과 함께
-            공간에 남는 향을 매장에서 직접 경험해보세요.
-          </p>
+          <p className="fragrance-page__lead">{fragrancePage.lead}</p>
         </div>
 
         <ul className="fragrance-page__grid" aria-label="입점 프래그런스 브랜드">
-          {fragranceBrands.map((brand) => (
+          {fragrancePage.brands.map((brand) => (
             <li key={brand.id}>
               <a
                 href={brand.href}
                 className={
-                  brand.id === 'the-other-mood'
+                  brand.darkLogo
                     ? 'fragrance-brand-card fragrance-brand-card--dark-logo'
                     : 'fragrance-brand-card'
                 }
@@ -48,10 +48,7 @@ export function Fragrance() {
         </ul>
 
         <div className="fragrance-page__note">
-          <p>
-            브랜드별 입고 상품과 재고는 시즌과 매장 상황에 따라 달라질 수 있는 점
-            참고부탁드립니다.
-          </p>
+          <p>{fragrancePage.note}</p>
           <a href="/#visit" className="text-link">
             Visit Store
           </a>

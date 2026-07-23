@@ -6,6 +6,10 @@ import {
   brand,
   collections,
   footerLinks,
+  fragranceBrands,
+  fragrancePageContent,
+  giftOptions,
+  giftPageContent,
   hero,
   hydroponic,
   navItems,
@@ -124,8 +128,20 @@ async function seed() {
   await createOrReplace({
     _id: 'hero',
     _type: 'hero',
-    alt: hero.images[0].alt,
-    image: await uploadImage(hero.images[0].src),
+    slides: await Promise.all(
+      hero.images.map(async (slide, index) => ({
+        _type: 'heroSlide',
+        _key: `slide-${index}`,
+        alt: slide.alt,
+        mobileOnly: slide.mobileOnly ?? false,
+        objectPosition: slide.objectPosition,
+        desktopImage: await uploadImage(slide.src),
+        mobileImage:
+          slide.mobileSrc && slide.mobileSrc !== slide.src
+            ? await uploadImage(slide.mobileSrc)
+            : undefined,
+      })),
+    ),
   })
 
   for (const [index, item] of collections.entries()) {
@@ -182,6 +198,40 @@ async function seed() {
   }
 
   await createOrReplace({
+    _id: 'fragrancePage',
+    _type: 'fragrancePage',
+    ...fragrancePageContent,
+    brands: await Promise.all(
+      fragranceBrands.map(async (item, index) => ({
+        _type: 'fragranceBrand',
+        _key: item.id || `brand-${index}`,
+        name: item.name,
+        alt: item.alt,
+        href: item.href,
+        logoWidth: item.logoWidth,
+        darkLogo: item.darkLogo ?? false,
+        image: await uploadImage(item.image),
+      })),
+    ),
+  })
+
+  await createOrReplace({
+    _id: 'giftPage',
+    _type: 'giftPage',
+    ...giftPageContent,
+    options: await Promise.all(
+      giftOptions.map(async (item, index) => ({
+        _type: 'giftOption',
+        _key: item.id || `option-${index}`,
+        title: item.title,
+        alt: item.alt,
+        copy: item.copy,
+        image: await uploadImage(item.image),
+      })),
+    ),
+  })
+
+  await createOrReplace({
     _id: 'hydroponic',
     _type: 'hydroponic',
     title: hydroponic.title,
@@ -229,7 +279,7 @@ async function seed() {
 
   console.log(
     dryRun
-      ? `Dry-run complete. Documents: brand/hero/hydroponic/store/settings + ${collections.length} collections + ${allPlants.length} plants + ${storyBlocks.length} story blocks.`
+      ? `Dry-run complete. Documents: brand/hero/fragrancePage/giftPage/hydroponic/store/settings + ${collections.length} collections + ${allPlants.length} plants + ${storyBlocks.length} story blocks.`
       : 'Seed complete.',
   )
 }

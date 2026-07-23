@@ -11,12 +11,19 @@ async function main() {
   assert.ok(fallback.rarePlantItems.length > 0)
   assert.ok(fallback.collections.length > 0)
   assert.ok(fallback.storeInfo.address)
+  assert.ok(fallback.fragrancePage.brands.length > 0)
+  assert.ok(fallback.giftPage.options.length > 0)
 
   const mapped = mapSanityPayload({
     brand: { name: 'CMS BRAND', tagline: 'CMS tagline', shortDescription: 'CMS desc' },
     hero: {
-      alt: 'CMS hero alt',
-      imageUrl: 'https://cdn.example.com/hero.jpg',
+      slides: [
+        {
+          alt: 'CMS hero alt',
+          desktopImageUrl: 'https://cdn.example.com/hero.jpg',
+          mobileImageUrl: 'https://cdn.example.com/hero-mobile.jpg',
+        },
+      ],
     },
     collections: [
       {
@@ -53,6 +60,36 @@ async function main() {
         imageUrl: 'https://cdn.example.com/monstera.jpg',
       },
     ],
+    fragrancePage: {
+      eyebrow: 'Fragrance',
+      title: 'CMS Scented Moments',
+      lead: 'cms lead',
+      note: 'cms note',
+      brands: [
+        {
+          name: 'CMS BRAND FRAGRANCE',
+          alt: 'brand logo',
+          href: 'https://example.com',
+          logoWidth: '10rem',
+          darkLogo: true,
+          imageUrl: 'https://cdn.example.com/fragrance-brand.jpg',
+        },
+      ],
+    },
+    giftPage: {
+      eyebrow: 'Gift',
+      title: 'CMS Gift Title',
+      lead: 'cms gift lead',
+      note: 'cms gift note',
+      options: [
+        {
+          title: 'CMS Gift Option',
+          alt: 'gift option',
+          copy: 'gift copy',
+          imageUrl: 'https://cdn.example.com/gift-option.jpg',
+        },
+      ],
+    },
     storeInfo: {
       name: 'CMS STORE',
       address: '테스트 주소',
@@ -76,10 +113,16 @@ async function main() {
   assert.equal(mapped.source, 'sanity')
   assert.equal(mapped.brand.name, 'CMS BRAND')
   assert.equal(mapped.hero.images[0]?.src, 'https://cdn.example.com/hero.jpg')
+  assert.equal(mapped.hero.images[0]?.mobileSrc, 'https://cdn.example.com/hero-mobile.jpg')
   assert.equal(mapped.collections[0]?.name, 'Plants CMS')
   assert.equal(mapped.rarePlantItems[0]?.name, 'Monstera Albo CMS')
   assert.equal(mapped.plantItems[0]?.name, 'Monstera CMS')
   assert.equal(mapped.storeInfo.name, 'CMS STORE')
+  assert.equal(mapped.fragrancePage.title, 'CMS Scented Moments')
+  assert.equal(mapped.fragrancePage.brands[0]?.name, 'CMS BRAND FRAGRANCE')
+  assert.equal(mapped.fragrancePage.brands[0]?.darkLogo, true)
+  assert.equal(mapped.giftPage.title, 'CMS Gift Title')
+  assert.equal(mapped.giftPage.options[0]?.title, 'CMS Gift Option')
 
   const loaded = await loadSiteContent()
   assert.ok(loaded.hero.images[0]?.src)
