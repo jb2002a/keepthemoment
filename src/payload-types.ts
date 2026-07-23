@@ -490,11 +490,23 @@ export interface Brand {
  */
 export interface Hero {
   id: number;
+  /**
+   * PC+모바일 공통 슬라이드는 PC용/모바일용을 나눠 넣고, 모바일 전용 슬라이드는 "모바일에서만 보이기"를 켠 뒤 모바일용 이미지에만 넣으세요.
+   */
   slides: {
-    desktopImage: number | Media;
+    /**
+     * 켜면 PC에서는 숨기고, 아래 모바일용 이미지만 사용합니다.
+     */
+    mobileOnly?: boolean | null;
+    /**
+     * 데스크톱(넓은 화면)에서 보이는 이미지입니다.
+     */
+    desktopImage?: (number | null) | Media;
+    /**
+     * 휴대폰 화면용 이미지입니다. 모바일 전용 슬라이드면 여기에 넣고, 공통 슬라이드면 선택 사항입니다.
+     */
     mobileImage?: (number | null) | Media;
     alt: string;
-    mobileOnly?: boolean | null;
     objectPosition?: string | null;
     id?: string | null;
   }[];
@@ -626,10 +638,10 @@ export interface HeroSelect<T extends boolean = true> {
   slides?:
     | T
     | {
+        mobileOnly?: T;
         desktopImage?: T;
         mobileImage?: T;
         alt?: T;
-        mobileOnly?: T;
         objectPosition?: T;
         id?: T;
       };
