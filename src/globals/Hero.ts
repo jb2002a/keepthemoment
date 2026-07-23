@@ -40,9 +40,9 @@ export const Hero: GlobalConfig = {
             condition: (_, siblingData) => !siblingData?.mobileOnly,
             description: '데스크톱(넓은 화면)에서 보이는 이미지입니다.',
           },
-          validate: (value, { siblingData }) => {
-            if (!siblingData?.mobileOnly && !value) {
-              return 'PC용 이미지를 업로드해주세요.'
+          validate: (value: unknown, options: { siblingData?: { mobileOnly?: boolean } }) => {
+            if (!options.siblingData?.mobileOnly && !value) {
+              return 'Please upload a desktop image.'
             }
             return true
           },
@@ -56,9 +56,9 @@ export const Hero: GlobalConfig = {
             description:
               '휴대폰 화면용 이미지입니다. 모바일 전용 슬라이드면 여기에 넣고, 공통 슬라이드면 선택 사항입니다.',
           },
-          validate: (value, { siblingData }) => {
-            if (siblingData?.mobileOnly && !value) {
-              return '모바일 전용 슬라이드는 모바일용 이미지가 필요합니다.'
+          validate: (value: unknown, options: { siblingData?: { mobileOnly?: boolean } }) => {
+            if (options.siblingData?.mobileOnly && !value) {
+              return 'Mobile-only slides require a mobile image.'
             }
             return true
           },
