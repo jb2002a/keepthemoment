@@ -483,10 +483,7 @@ export const storeInfo = {
   name: 'KEEP THE MOMENT',
   address: '경기 수원시 팔달구 신풍로63번길 14 2층',
   addressDetail: '2F, 14, Sinpung-ro 63beon-gil, Paldal-gu, Suwon-si, Gyeonggi-do',
-  hours: [
-    { day: 'Mon – Fri', time: '12:00 – 20:00' },
-    { day: 'Sat – Sun', time: '12:00 – 20:00' },
-  ],
+  hours: [{ day: 'EVERYDAY', time: '12:00 – 20:00' }],
   phone: '02-0000-0000',
   mapUrl:
     'https://map.naver.com/p/entry/place/2000545659?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0128809&lat=37.2866978',
