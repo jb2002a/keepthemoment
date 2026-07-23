@@ -167,7 +167,7 @@ export const fragranceBrands: FragranceBrand[] = [
     name: 'LISOUÉ',
     image: '/images/fragrance/lisoue.png',
     alt: 'LISOUE fragrance brand logo',
-    href: 'https://www.instagram.com/lisoue_official/',
+    href: 'https://lisoue.co.kr/',
     logoWidth: '8.9rem',
   },
   {
