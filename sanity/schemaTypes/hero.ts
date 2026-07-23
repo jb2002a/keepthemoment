@@ -13,12 +13,5 @@ export const hero = defineType({
       options: { hotspot: true },
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'alt',
-      title: '이미지 대체 텍스트',
-      description: '이미지가 보이지 않을 때 대신 읽히는 설명입니다. 사진 내용을 짧게 적어주세요.',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
   ],
 })

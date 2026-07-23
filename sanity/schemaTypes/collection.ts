@@ -43,12 +43,6 @@ export const collection = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'alt',
-      title: '이미지 대체 텍스트',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'aspectRatio',
       title: '비율',
       description: '사진 표시 비율입니다. 특별한 요청이 없으면 그대로 두세요.',

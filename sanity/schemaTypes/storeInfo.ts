@@ -75,12 +75,5 @@ export const storeInfo = defineType({
       options: { hotspot: true },
       validation: (rule) => rule.required(),
     }),
-    defineField({
-      name: 'alt',
-      title: '이미지 대체 텍스트',
-      description: '사진 내용을 짧게 설명해주세요.',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
   ],
 })

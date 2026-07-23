@@ -58,13 +58,6 @@ export const plantItem = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'alt',
-      title: '이미지 대체 텍스트',
-      description: '사진 내용을 짧게 설명해주세요. 예: 유리 화병에 담긴 몬스테라',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'tagline',
       title: '한 줄 설명',
       description: '식물 이름 아래에 보이는 소개 문장입니다.',

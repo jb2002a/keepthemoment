@@ -28,13 +28,6 @@ export const storyBlock = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'alt',
-      title: '이미지 대체 텍스트',
-      description: '사진 내용을 짧게 설명해주세요.',
-      type: 'string',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'size',
       title: '레이아웃 크기',
       description: '사진을 크게 보여줄지, 세로 카드처럼 보여줄지 선택합니다.',
@@ -59,9 +52,14 @@ export const storyBlock = defineType({
   ],
   preview: {
     select: {
-      title: 'alt',
-      subtitle: 'size',
+      title: 'size',
       media: 'image',
+    },
+    prepare({ title, media }) {
+      return {
+        title: title === 'portrait' ? '세로 이미지' : '와이드 이미지',
+        media,
+      }
     },
   },
 })

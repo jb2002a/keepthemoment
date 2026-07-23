@@ -187,23 +187,15 @@ export function mapSanityPayload(payload: SanityPayload): SiteContent {
       name: store?.name || fallback.storeInfo.name,
       address: store?.address || fallback.storeInfo.address,
       addressDetail: store?.addressDetail || fallback.storeInfo.addressDetail,
-      hours:
-        store?.hours
-          ?.filter((row): row is { day: string; time: string } =>
-            Boolean(row.day && row.time),
-          )
-          .map((row) => ({ day: row.day, time: row.time })) ||
-        fallback.storeInfo.hours,
+      hours: fallback.storeInfo.hours,
       phone: store?.phone || fallback.storeInfo.phone,
-      mapUrl: store?.mapUrl || fallback.storeInfo.mapUrl,
+      mapUrl: fallback.storeInfo.mapUrl,
       placeUrl: store?.placeUrl || fallback.storeInfo.placeUrl,
-      instagramUrl: store?.instagramUrl || fallback.storeInfo.instagramUrl,
+      instagramUrl: fallback.storeInfo.instagramUrl,
       image: resolveImageUrl(store, fallback.storeInfo.image),
       alt: store?.alt || fallback.storeInfo.alt,
     },
-    footerLinks: settings?.footerLinks?.length
-      ? settings.footerLinks
-      : fallback.footerLinks,
+    footerLinks: fallback.footerLinks,
     naverStoreUrl: settings?.naverStoreUrl || fallback.naverStoreUrl,
     privacyPolicyUrl: settings?.privacyPolicyUrl || fallback.privacyPolicyUrl,
     source: 'sanity',
