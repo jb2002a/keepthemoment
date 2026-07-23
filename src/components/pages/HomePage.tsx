@@ -28,11 +28,11 @@ function HomeIntro() {
             and Moments.
           </h1>
           <p className="home-intro__description">
-            ??? ??? ??? ?? ????,
+            식물은 곁에서 시간과 함께 자라나고,
             <br />
-            ??? ??? ??? ?? ?????.
+            향기는 지나간 오늘을 다시 불러옵니다.
             <br />
-            ???? ?? ?? ?? ??? ??? ?????.
+            스쳐가는 일상 속에 오래 머무는 순간을 선물합니다.
           </p>
         </Reveal>
         <Reveal className="home-intro__actions" delay={120}>
@@ -56,17 +56,17 @@ function HomeLinks() {
           <a href="/about" className="home-link-card">
             <span className="section__eyebrow">Brand Story</span>
             <strong>Nature & Memory.</strong>
-            <span>??? ???? ??? ??.</span>
+            <span>일상에 스며드는 식물의 철학.</span>
           </a>
           <a href="/care" className="home-link-card">
             <span className="section__eyebrow">Care Guide</span>
             <strong>Water & Soil.</strong>
-            <span>?? ? ??? ? ???? ??.</span>
+            <span>물과 흙 모두에 잘 적응하는 식물.</span>
           </a>
           <a href="/#visit" className="home-link-card">
             <span className="section__eyebrow">Visit</span>
             <strong>Haenggung Store.</strong>
-            <span>??? ?? ??? ?????.</span>
+            <span>공간과 운영 정보를 확인하세요.</span>
           </a>
         </div>
       </div>

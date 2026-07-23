@@ -33,7 +33,16 @@ type PayloadSeedLike = {
 
 function resolveMediaUrl(media: MediaLike, fallback: string): string {
   if (!media || typeof media === 'number') return fallback
-  return media.url || fallback
+  const url = media.url || ''
+  if (!url) return fallback
+
+  // Local Payload uploads live on disk and are not available on Vercel serverless.
+  // Prefer public fallback assets until Vercel Blob (or another durable store) is configured.
+  if (url.startsWith('/api/media/file/') && fallback.startsWith('/')) {
+    return fallback
+  }
+
+  return url
 }
 
 function resolveAlt(
