@@ -49,8 +49,8 @@ export function Fragrance() {
 
         <div className="fragrance-page__note">
           <p>
-            브랜드별 입고 상품과 재고는 시즌과 매장 상황에 따라 달라질 수 있습니다.
-            원하는 브랜드가 있다면 방문 전에 문의해주세요.
+            브랜드별 입고 상품과 재고는 시즌과 매장 상황에 따라 달라질 수 있는 점
+            참고부탁드립니다.
           </p>
           <a href="/#visit" className="text-link">
             Visit Store
