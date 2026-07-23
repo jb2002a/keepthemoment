@@ -1,137 +1,78 @@
-import { getSanityClient, isSanityConfigured, urlFor } from '../lib/sanity'
-import { siteContentQuery } from '../lib/sanityQueries'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 import { getFallbackSiteContent, type SiteContent } from './siteContent'
-import type { Collection, FragranceBrand, GiftOption, PlantItem, StoryBlock } from './siteData'
+import type {
+  Collection,
+  FragranceBrand,
+  GiftOption,
+  PlantItem,
+  StoryBlock,
+} from './siteData'
 
-type SanityImageFields = {
-  imageUrl?: string | null
-  image?: {
-    asset?: {
-      _ref?: string
-      _type?: string
-      url?: string
+type MediaLike =
+  | {
+      url?: string | null
+      alt?: string | null
     }
-  } | null
+  | number
+  | null
+  | undefined
+
+type PayloadSeedLike = {
+  brand: Record<string, unknown> | null
+  hero: Record<string, unknown> | null
+  fragrancePage: Record<string, unknown> | null
+  giftPage: Record<string, unknown> | null
+  hydroponic: Record<string, unknown> | null
+  storeInfo: Record<string, unknown> | null
+  siteSettings: Record<string, unknown> | null
+  collections: Array<Record<string, unknown>>
+  plants: Array<Record<string, unknown>>
+  storyBlocks: Array<Record<string, unknown>>
 }
 
-function resolveImageUrl(fields: SanityImageFields | null | undefined, fallback: string): string {
-  if (!fields) return fallback
-
-  const built = fields.image ? urlFor(fields.image)?.width(1600).auto('format').url() : null
-  return built || fields.imageUrl || fields.image?.asset?.url || fallback
+function resolveMediaUrl(media: MediaLike, fallback: string): string {
+  if (!media || typeof media === 'number') return fallback
+  return media.url || fallback
 }
 
-type SanityPlant = SanityImageFields & {
-  id?: string
-  name?: string
-  koreanName?: string
-  category?: 'rare' | 'everyday'
-  alt?: string
-  tagline?: string
-  features?: string[]
-  care?: {
-    light?: string
-    water?: string
-    temperature?: string
-  }
+function resolveAlt(
+  media: MediaLike,
+  explicitAlt: string | null | undefined,
+  fallback: string,
+): string {
+  if (explicitAlt) return explicitAlt
+  if (media && typeof media !== 'number' && media.alt) return media.alt
+  return fallback
 }
 
-type SanityCollection = SanityImageFields & {
-  id?: string
-  name?: string
-  tagline?: string
-  alt?: string
-  aspectRatio?: string
-  href?: string
-}
-
-type SanityStoryBlock = SanityImageFields & {
-  id?: string
-  alt?: string
-  size?: 'wide' | 'portrait'
-}
-
-type SanityFragranceBrand = SanityImageFields & {
-  name?: string
-  alt?: string
-  href?: string
-  logoWidth?: string
-  darkLogo?: boolean
-}
-
-type SanityGiftOption = SanityImageFields & {
-  title?: string
-  alt?: string
-  copy?: string
-}
-
-type SanityHeroSlide = {
-  alt?: string
-  mobileOnly?: boolean
-  objectPosition?: string
-  desktopImageUrl?: string | null
-  desktopImage?: SanityImageFields['image']
-  mobileImageUrl?: string | null
-  mobileImage?: SanityImageFields['image']
-}
-
-type SanityPayload = {
-  brand?: {
-    name?: string
-    tagline?: string
-    shortDescription?: string
-  } | null
-  hero?: (SanityImageFields & { alt?: string; slides?: SanityHeroSlide[] | null }) | null
-  collections?: SanityCollection[] | null
-  plants?: SanityPlant[] | null
-  storyBlocks?: SanityStoryBlock[] | null
-  fragrancePage?: {
-    eyebrow?: string
-    title?: string
-    lead?: string
-    note?: string
-    brands?: SanityFragranceBrand[] | null
-  } | null
-  giftPage?: {
-    eyebrow?: string
-    title?: string
-    lead?: string
-    note?: string
-    options?: SanityGiftOption[] | null
-  } | null
-  hydroponic?: (SanityImageFields & {
-    title?: string
-    description?: string
-    alt?: string
-  }) | null
-  storeInfo?: (SanityImageFields & {
-    name?: string
-    address?: string
-    addressDetail?: string
-    hours?: { day?: string; time?: string }[]
-    phone?: string
-    mapUrl?: string
-    placeUrl?: string
-    instagramUrl?: string
-    alt?: string
-  }) | null
-  siteSettings?: {
-    navItems?: SiteContent['navItems']
-    footerLinks?: SiteContent['footerLinks']
-    naverStoreUrl?: string
-    privacyPolicyUrl?: string
-  } | null
-}
-
-function mapPlant(item: SanityPlant, fallback: PlantItem): PlantItem {
+function mapPlant(
+  item: {
+    slug?: string | null
+    name?: string | null
+    koreanName?: string | null
+    image?: MediaLike
+    alt?: string | null
+    tagline?: string | null
+    features?: { value?: string | null }[] | null
+    care?: {
+      light?: string | null
+      water?: string | null
+      temperature?: string | null
+    } | null
+  },
+  fallback: PlantItem,
+): PlantItem {
   return {
-    id: item.id || fallback.id,
+    id: item.slug || fallback.id,
     name: item.name || fallback.name,
     koreanName: item.koreanName || fallback.koreanName,
-    image: resolveImageUrl(item, fallback.image),
-    alt: item.alt || fallback.alt,
+    image: resolveMediaUrl(item.image, fallback.image),
+    alt: resolveAlt(item.image, item.alt, fallback.alt),
     tagline: item.tagline || fallback.tagline,
-    features: item.features?.length ? item.features : fallback.features,
+    features: item.features?.length
+      ? item.features.map((feature) => feature.value || '').filter(Boolean)
+      : fallback.features,
     care: {
       light: item.care?.light || fallback.care.light,
       water: item.care?.water || fallback.care.water,
@@ -140,62 +81,69 @@ function mapPlant(item: SanityPlant, fallback: PlantItem): PlantItem {
   }
 }
 
-function mapCollection(item: SanityCollection, index: number, fallbackList: Collection[]): Collection {
+function mapCollection(
+  item: {
+    slug?: string | null
+    name?: string | null
+    tagline?: string | null
+    image?: MediaLike
+    alt?: string | null
+    aspectRatio?: string | null
+    href?: string | null
+  },
+  index: number,
+  fallbackList: Collection[],
+): Collection {
   const fallback = fallbackList[index] ?? fallbackList[0]
   return {
-    id: item.id || fallback.id,
+    id: item.slug || fallback.id,
     name: item.name || fallback.name,
     tagline: item.tagline || fallback.tagline,
-    image: resolveImageUrl(item, fallback.image),
-    alt: item.alt || fallback.alt,
+    image: resolveMediaUrl(item.image, fallback.image),
+    alt: resolveAlt(item.image, item.alt, fallback.alt),
     aspectRatio: item.aspectRatio || fallback.aspectRatio,
     href: item.href || fallback.href,
   }
 }
 
-function mapHeroSlide(slide: SanityHeroSlide, fallback: SiteContent['hero']['images'][number]) {
-  const desktopSrc = resolveImageUrl(
-    { imageUrl: slide.desktopImageUrl, image: slide.desktopImage },
-    fallback.src,
-  )
-  const mobileSrc = slide.mobileImage || slide.mobileImageUrl
-    ? resolveImageUrl({ imageUrl: slide.mobileImageUrl, image: slide.mobileImage }, desktopSrc)
-    : undefined
-
-  return {
-    src: desktopSrc,
-    mobileSrc,
-    alt: slide.alt || fallback.alt,
-    mobileOnly: slide.mobileOnly ?? fallback.mobileOnly,
-    objectPosition: slide.objectPosition || fallback.objectPosition,
-  }
-}
-
 function mapStoryBlock(
-  item: SanityStoryBlock,
+  item: {
+    slug?: string | null
+    image?: MediaLike
+    alt?: string | null
+    size?: 'wide' | 'portrait' | null
+  },
   index: number,
   fallbackList: StoryBlock[],
 ): StoryBlock {
   const fallback = fallbackList[index] ?? fallbackList[0]
   return {
-    id: item.id || fallback.id,
-    image: resolveImageUrl(item, fallback.image),
-    alt: item.alt || fallback.alt,
+    id: item.slug || fallback.id,
+    image: resolveMediaUrl(item.image, fallback.image),
+    alt: resolveAlt(item.image, item.alt, fallback.alt),
     size: item.size || fallback.size,
   }
 }
 
 function mapFragranceBrand(
-  item: SanityFragranceBrand,
+  item: {
+    id?: string | null
+    name?: string | null
+    image?: MediaLike
+    alt?: string | null
+    href?: string | null
+    logoWidth?: string | null
+    darkLogo?: boolean | null
+  },
   index: number,
   fallbackList: FragranceBrand[],
 ): FragranceBrand {
   const fallback = fallbackList[index] ?? fallbackList[0]
   return {
-    id: fallback.id,
+    id: item.id || fallback.id,
     name: item.name || fallback.name,
-    image: resolveImageUrl(item, fallback.image),
-    alt: item.alt || fallback.alt,
+    image: resolveMediaUrl(item.image, fallback.image),
+    alt: resolveAlt(item.image, item.alt, fallback.alt),
     href: item.href || fallback.href,
     logoWidth: item.logoWidth || fallback.logoWidth,
     darkLogo: item.darkLogo ?? fallback.darkLogo,
@@ -203,67 +151,131 @@ function mapFragranceBrand(
 }
 
 function mapGiftOption(
-  item: SanityGiftOption,
+  item: {
+    id?: string | null
+    title?: string | null
+    image?: MediaLike
+    alt?: string | null
+    copy?: string | null
+  },
   index: number,
   fallbackList: GiftOption[],
 ): GiftOption {
   const fallback = fallbackList[index] ?? fallbackList[0]
   return {
-    id: fallback.id,
+    id: item.id || fallback.id,
     title: item.title || fallback.title,
-    image: resolveImageUrl(item, fallback.image),
-    alt: item.alt || fallback.alt,
+    image: resolveMediaUrl(item.image, fallback.image),
+    alt: resolveAlt(item.image, item.alt, fallback.alt),
     copy: item.copy || fallback.copy,
   }
 }
 
-function mapHero(payloadHero: SanityPayload['hero'], fallback: SiteContent): SiteContent['hero'] {
-  if (payloadHero?.slides?.length) {
-    return {
-      images: payloadHero.slides.map((slide, index) =>
-        mapHeroSlide(slide, fallback.hero.images[index] ?? fallback.hero.images[0]),
-      ),
-    }
-  }
-
-  if (payloadHero?.image || payloadHero?.imageUrl) {
-    return {
-      images: [
-        {
-          src: resolveImageUrl(payloadHero, fallback.hero.images[0].src),
-          mobileSrc: fallback.hero.images[0].mobileSrc,
-          alt: payloadHero.alt || fallback.hero.images[0].alt,
-          objectPosition: fallback.hero.images[0].objectPosition,
-        },
-        ...fallback.hero.images.slice(1),
-      ],
-    }
-  }
-
-  return fallback.hero
-}
-
-export function mapSanityPayload(payload: SanityPayload): SiteContent {
+export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
   const fallback = getFallbackSiteContent()
-  const plants = payload.plants ?? []
+
+  const brand = input.brand as {
+    name?: string
+    tagline?: string
+    shortDescription?: string
+  } | null
+
+  const hero = input.hero as {
+    slides?: Array<{
+      desktopImage?: MediaLike
+      mobileImage?: MediaLike
+      alt?: string
+      mobileOnly?: boolean
+      objectPosition?: string
+    }>
+  } | null
+
+  const fragrancePage = input.fragrancePage as {
+    eyebrow?: string
+    title?: string
+    lead?: string
+    note?: string
+    brands?: Array<Record<string, unknown>>
+  } | null
+
+  const giftPage = input.giftPage as {
+    eyebrow?: string
+    title?: string
+    lead?: string
+    note?: string
+    options?: Array<Record<string, unknown>>
+  } | null
+
+  const hydroponic = input.hydroponic as {
+    title?: string
+    description?: string
+    image?: MediaLike
+    alt?: string
+  } | null
+
+  const store = input.storeInfo as {
+    name?: string
+    address?: string
+    addressDetail?: string
+    hours?: Array<{ day?: string; time?: string }>
+    phone?: string
+    mapUrl?: string
+    placeUrl?: string
+    instagramUrl?: string
+    image?: MediaLike
+    alt?: string
+  } | null
+
+  const settings = input.siteSettings as {
+    navItems?: SiteContent['navItems']
+    footerLinks?: SiteContent['footerLinks']
+    naverStoreUrl?: string
+    privacyPolicyUrl?: string
+  } | null
+
+  const plants = input.plants as Array<{
+    slug?: string
+    name?: string
+    koreanName?: string
+    category?: 'rare' | 'everyday'
+    image?: MediaLike
+    alt?: string
+    tagline?: string
+    features?: { value?: string }[]
+    care?: { light?: string; water?: string; temperature?: string }
+  }>
+
   const rareFromCms = plants.filter((plant) => plant.category === 'rare')
   const everydayFromCms = plants.filter((plant) => plant.category !== 'rare')
 
-  const store = payload.storeInfo
-  const settings = payload.siteSettings
-
   return {
     brand: {
-      name: payload.brand?.name || fallback.brand.name,
-      tagline: payload.brand?.tagline || fallback.brand.tagline,
-      shortDescription:
-        payload.brand?.shortDescription || fallback.brand.shortDescription,
+      name: brand?.name || fallback.brand.name,
+      tagline: brand?.tagline || fallback.brand.tagline,
+      shortDescription: brand?.shortDescription || fallback.brand.shortDescription,
     },
     navItems: settings?.navItems?.length ? settings.navItems : fallback.navItems,
-    hero: mapHero(payload.hero, fallback),
-    collections: payload.collections?.length
-      ? payload.collections.map((item, index) =>
-          mapCollection(item, index, fallback.collections),
+    hero: {
+      images: hero?.slides?.length
+        ? hero.slides.map((slide, index) => {
+            const fallbackSlide = fallback.hero.images[index] ?? fallback.hero.images[0]
+            const desktopSrc = resolveMediaUrl(slide.desktopImage, fallbackSlide.src)
+            const mobileSrc = slide.mobileImage
+              ? resolveMediaUrl(slide.mobileImage, desktopSrc)
+              : undefined
+            return {
+              src: desktopSrc,
+              mobileSrc,
+              alt: slide.alt || fallbackSlide.alt,
+              mobileOnly: slide.mobileOnly ?? fallbackSlide.mobileOnly,
+              objectPosition: slide.objectPosition || fallbackSlide.objectPosition,
+            }
+          })
+        : fallback.hero.images,
+    },
+    collections: input.collections.length
+      ? input.collections.map((item, index) =>
+          mapCollection(item as Parameters<typeof mapCollection>[0], index, fallback.collections),
         )
       : fallback.collections,
     rarePlantItems: rareFromCms.length
@@ -276,79 +288,146 @@ export function mapSanityPayload(payload: SanityPayload): SiteContent {
           mapPlant(item, fallback.plantItems[index] ?? fallback.plantItems[0]),
         )
       : fallback.plantItems,
-    storyBlocks: payload.storyBlocks?.length
-      ? payload.storyBlocks.map((item, index) =>
-          mapStoryBlock(item, index, fallback.storyBlocks),
+    storyBlocks: input.storyBlocks.length
+      ? input.storyBlocks.map((item, index) =>
+          mapStoryBlock(
+            item as Parameters<typeof mapStoryBlock>[0],
+            index,
+            fallback.storyBlocks,
+          ),
         )
       : fallback.storyBlocks,
     fragrancePage: {
-      eyebrow: payload.fragrancePage?.eyebrow || fallback.fragrancePage.eyebrow,
-      title: payload.fragrancePage?.title || fallback.fragrancePage.title,
-      lead: payload.fragrancePage?.lead || fallback.fragrancePage.lead,
-      note: payload.fragrancePage?.note || fallback.fragrancePage.note,
-      brands: payload.fragrancePage?.brands?.length
-        ? payload.fragrancePage.brands.map((item, index) =>
-            mapFragranceBrand(item, index, fallback.fragrancePage.brands),
+      eyebrow: fragrancePage?.eyebrow || fallback.fragrancePage.eyebrow,
+      title: fragrancePage?.title || fallback.fragrancePage.title,
+      lead: fragrancePage?.lead || fallback.fragrancePage.lead,
+      note: fragrancePage?.note || fallback.fragrancePage.note,
+      brands: fragrancePage?.brands?.length
+        ? fragrancePage.brands.map((item, index) =>
+            mapFragranceBrand(
+              item as Parameters<typeof mapFragranceBrand>[0],
+              index,
+              fallback.fragrancePage.brands,
+            ),
           )
         : fallback.fragrancePage.brands,
     },
     giftPage: {
-      eyebrow: payload.giftPage?.eyebrow || fallback.giftPage.eyebrow,
-      title: payload.giftPage?.title || fallback.giftPage.title,
-      lead: payload.giftPage?.lead || fallback.giftPage.lead,
-      note: payload.giftPage?.note || fallback.giftPage.note,
-      options: payload.giftPage?.options?.length
-        ? payload.giftPage.options.map((item, index) =>
-            mapGiftOption(item, index, fallback.giftPage.options),
+      eyebrow: giftPage?.eyebrow || fallback.giftPage.eyebrow,
+      title: giftPage?.title || fallback.giftPage.title,
+      lead: giftPage?.lead || fallback.giftPage.lead,
+      note: giftPage?.note || fallback.giftPage.note,
+      options: giftPage?.options?.length
+        ? giftPage.options.map((item, index) =>
+            mapGiftOption(
+              item as Parameters<typeof mapGiftOption>[0],
+              index,
+              fallback.giftPage.options,
+            ),
           )
         : fallback.giftPage.options,
     },
     hydroponic: {
-      title: payload.hydroponic?.title || fallback.hydroponic.title,
-      description:
-        payload.hydroponic?.description || fallback.hydroponic.description,
-      image: resolveImageUrl(payload.hydroponic, fallback.hydroponic.image),
-      alt: payload.hydroponic?.alt || fallback.hydroponic.alt,
+      title: hydroponic?.title || fallback.hydroponic.title,
+      description: hydroponic?.description || fallback.hydroponic.description,
+      image: resolveMediaUrl(hydroponic?.image, fallback.hydroponic.image),
+      alt: resolveAlt(hydroponic?.image, hydroponic?.alt, fallback.hydroponic.alt),
     },
     storeInfo: {
       name: store?.name || fallback.storeInfo.name,
       address: store?.address || fallback.storeInfo.address,
       addressDetail: store?.addressDetail || fallback.storeInfo.addressDetail,
-      hours: fallback.storeInfo.hours,
+      hours: store?.hours?.length
+        ? store.hours.map((row) => ({
+            day: row.day || '',
+            time: row.time || '',
+          }))
+        : fallback.storeInfo.hours,
       phone: store?.phone || fallback.storeInfo.phone,
-      mapUrl: fallback.storeInfo.mapUrl,
+      mapUrl: store?.mapUrl || fallback.storeInfo.mapUrl,
       placeUrl: store?.placeUrl || fallback.storeInfo.placeUrl,
-      instagramUrl: fallback.storeInfo.instagramUrl,
-      image: resolveImageUrl(store, fallback.storeInfo.image),
-      alt: store?.alt || fallback.storeInfo.alt,
+      instagramUrl: store?.instagramUrl || fallback.storeInfo.instagramUrl,
+      image: resolveMediaUrl(store?.image, fallback.storeInfo.image),
+      alt: resolveAlt(store?.image, store?.alt, fallback.storeInfo.alt),
     },
-    footerLinks: fallback.footerLinks,
+    footerLinks: settings?.footerLinks?.length ? settings.footerLinks : fallback.footerLinks,
     naverStoreUrl: settings?.naverStoreUrl || fallback.naverStoreUrl,
     privacyPolicyUrl: settings?.privacyPolicyUrl || fallback.privacyPolicyUrl,
-    source: 'sanity',
+    source: 'payload',
   }
 }
 
 export async function loadSiteContent(): Promise<SiteContent> {
   const fallback = getFallbackSiteContent()
 
-  if (!isSanityConfigured) {
+  if (!process.env.DATABASE_URI) {
     return fallback
   }
 
-  const client = getSanityClient()
-  if (!client) return fallback
-
   try {
-    const payload = await client.fetch<SanityPayload>(siteContentQuery)
+    const payload = await getPayload({ config })
 
-    if (!payload?.brand && !payload?.hero?.slides?.length && !payload?.plants?.length) {
+    const [
+      brand,
+      hero,
+      fragrancePage,
+      giftPage,
+      hydroponic,
+      storeInfo,
+      siteSettings,
+      collectionsResult,
+      plantsResult,
+      storyBlocksResult,
+    ] = await Promise.all([
+      payload.findGlobal({ slug: 'brand', depth: 1 }),
+      payload.findGlobal({ slug: 'hero', depth: 2 }),
+      payload.findGlobal({ slug: 'fragrance-page', depth: 2 }),
+      payload.findGlobal({ slug: 'gift-page', depth: 2 }),
+      payload.findGlobal({ slug: 'hydroponic', depth: 1 }),
+      payload.findGlobal({ slug: 'store-info', depth: 1 }),
+      payload.findGlobal({ slug: 'site-settings', depth: 0 }),
+      payload.find({
+        collection: 'collections',
+        depth: 1,
+        limit: 100,
+        sort: 'order',
+      }),
+      payload.find({
+        collection: 'plants',
+        depth: 1,
+        limit: 200,
+        sort: 'order',
+      }),
+      payload.find({
+        collection: 'story-blocks',
+        depth: 1,
+        limit: 100,
+        sort: 'order',
+      }),
+    ])
+
+    if (
+      !collectionsResult.docs.length &&
+      !plantsResult.docs.length &&
+      !(hero as { slides?: unknown[] | null }).slides?.length
+    ) {
       return fallback
     }
 
-    return mapSanityPayload(payload)
+    return mapPayloadContent({
+      brand: brand as Record<string, unknown>,
+      hero: hero as Record<string, unknown>,
+      fragrancePage: fragrancePage as Record<string, unknown>,
+      giftPage: giftPage as Record<string, unknown>,
+      hydroponic: hydroponic as Record<string, unknown>,
+      storeInfo: storeInfo as Record<string, unknown>,
+      siteSettings: siteSettings as Record<string, unknown>,
+      collections: collectionsResult.docs as Array<Record<string, unknown>>,
+      plants: plantsResult.docs as Array<Record<string, unknown>>,
+      storyBlocks: storyBlocksResult.docs as Array<Record<string, unknown>>,
+    })
   } catch (error) {
-    console.warn('[cms] Failed to load Sanity content. Using local fallback.', error)
+    console.warn('[cms] Failed to load Payload content. Using local fallback.', error)
     return fallback
   }
 }

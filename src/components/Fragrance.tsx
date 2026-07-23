@@ -1,3 +1,5 @@
+'use client'
+
 import type { CSSProperties } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 

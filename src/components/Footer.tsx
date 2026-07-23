@@ -1,3 +1,5 @@
+'use client'
+
 import { useSiteContent } from '../hooks/useSiteContent'
 
 export function Footer() {

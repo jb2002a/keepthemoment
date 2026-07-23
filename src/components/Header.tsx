@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useId, useRef, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 

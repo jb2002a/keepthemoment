@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 import type { PlantItem } from '../data/siteData'

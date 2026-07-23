@@ -81,7 +81,7 @@ export type SiteContent = {
   footerLinks: SocialLink[]
   naverStoreUrl: string
   privacyPolicyUrl: string
-  source: 'sanity' | 'fallback'
+  source: 'payload' | 'fallback'
 }
 
 export function getFallbackSiteContent(): SiteContent {
