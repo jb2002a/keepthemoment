@@ -132,22 +132,22 @@ async function seed() {
     return id
   }
 
-  const adminEmail = process.env.SEED_ADMIN_EMAIL || 'admin@keepthemoment.local'
-  const adminPassword = process.env.SEED_ADMIN_PASSWORD || 'changeme123'
+  const adminUsername = process.env.SEED_ADMIN_USERNAME || 'keepthemoment'
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD || 'keepthemoment'
   const users = await payload.find({
     collection: 'users',
-    where: { email: { equals: adminEmail } },
+    where: { username: { equals: adminUsername } },
     limit: 1,
   })
   if (!users.docs.length) {
     await payload.create({
       collection: 'users',
       data: {
-        email: adminEmail,
+        username: adminUsername,
         password: adminPassword,
       },
     })
-    console.log(`  created admin user ${adminEmail}`)
+    console.log(`  created admin user ${adminUsername}`)
   }
 
   await payload.updateGlobal({

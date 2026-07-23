@@ -21,7 +21,7 @@ npm run dev
 ```
 
 4. [http://localhost:3000/admin](http://localhost:3000/admin) 에서 첫 관리자 계정을 만들거나, 시드가 만든 계정을 사용합니다.
-   - 기본 시드 계정: `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` (없으면 `admin@keepthemoment.local` / `changeme123`)
+   - 기본 시드 계정: `SEED_ADMIN_USERNAME` / `SEED_ADMIN_PASSWORD` (없으면 `keepthemoment` / `keepthemoment`)
 
 ## 2. 사장님 사용법
 
