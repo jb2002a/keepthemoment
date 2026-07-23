@@ -31,15 +31,21 @@ type PayloadSeedLike = {
   storyBlocks: Array<Record<string, unknown>>
 }
 
+const blobPublicBase =
+  process.env.BLOB_PUBLIC_BASE_URL ||
+  'https://dm47gnxsefhqkqgd.public.blob.vercel-storage.com'
+
 function resolveMediaUrl(media: MediaLike, fallback: string): string {
   if (!media || typeof media === 'number') return fallback
   const url = media.url || ''
   if (!url) return fallback
 
-  // Local Payload uploads live on disk and are not available on Vercel serverless.
-  // Prefer public fallback assets until Vercel Blob (or another durable store) is configured.
-  if (url.startsWith('/api/media/file/') && fallback.startsWith('/')) {
-    return fallback
+  // Payload may keep API-relative media URLs even when files live in Vercel Blob.
+  // Rewrite those to the public Blob CDN URL so images work on Vercel.
+  if (url.startsWith('/api/media/file/')) {
+    const filename = url.split('/').pop()
+    if (filename) return `${blobPublicBase}/${filename}`
+    if (fallback.startsWith('/')) return fallback
   }
 
   return url
