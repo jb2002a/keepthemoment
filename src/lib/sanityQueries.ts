@@ -5,6 +5,9 @@ export const siteContentQuery = `{
     shortDescription
   },
   "hero": *[_type == "hero" && _id == "hero"][0]{
+    alt,
+    "imageUrl": image.asset->url,
+    image,
     slides[]{
       alt,
       mobileOnly,

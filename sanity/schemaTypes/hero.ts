@@ -73,5 +73,24 @@ export const hero = defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'image',
+      title: '이전 버전 이미지',
+      description:
+        '이전 CMS 구조에서 사용하던 필드입니다. 새 수정은 위 슬라이드 목록에서 해주세요.',
+      type: 'image',
+      options: { hotspot: true },
+      hidden: true,
+      readOnly: true,
+    }),
+    defineField({
+      name: 'alt',
+      title: '이전 버전 이미지 설명',
+      description:
+        '이전 CMS 구조에서 사용하던 필드입니다. 새 수정은 위 슬라이드 목록에서 해주세요.',
+      type: 'string',
+      hidden: true,
+      readOnly: true,
+    }),
   ],
 })

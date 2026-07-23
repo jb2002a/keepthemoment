@@ -81,7 +81,7 @@ type SanityPayload = {
     tagline?: string
     shortDescription?: string
   } | null
-  hero?: { slides?: SanityHeroSlide[] | null } | null
+  hero?: (SanityImageFields & { alt?: string; slides?: SanityHeroSlide[] | null }) | null
   collections?: SanityCollection[] | null
   plants?: SanityPlant[] | null
   storyBlocks?: SanityStoryBlock[] | null
@@ -217,6 +217,32 @@ function mapGiftOption(
   }
 }
 
+function mapHero(payloadHero: SanityPayload['hero'], fallback: SiteContent): SiteContent['hero'] {
+  if (payloadHero?.slides?.length) {
+    return {
+      images: payloadHero.slides.map((slide, index) =>
+        mapHeroSlide(slide, fallback.hero.images[index] ?? fallback.hero.images[0]),
+      ),
+    }
+  }
+
+  if (payloadHero?.image || payloadHero?.imageUrl) {
+    return {
+      images: [
+        {
+          src: resolveImageUrl(payloadHero, fallback.hero.images[0].src),
+          mobileSrc: fallback.hero.images[0].mobileSrc,
+          alt: payloadHero.alt || fallback.hero.images[0].alt,
+          objectPosition: fallback.hero.images[0].objectPosition,
+        },
+        ...fallback.hero.images.slice(1),
+      ],
+    }
+  }
+
+  return fallback.hero
+}
+
 export function mapSanityPayload(payload: SanityPayload): SiteContent {
   const fallback = getFallbackSiteContent()
   const plants = payload.plants ?? []
@@ -234,13 +260,7 @@ export function mapSanityPayload(payload: SanityPayload): SiteContent {
         payload.brand?.shortDescription || fallback.brand.shortDescription,
     },
     navItems: settings?.navItems?.length ? settings.navItems : fallback.navItems,
-    hero: {
-      images: payload.hero?.slides?.length
-        ? payload.hero.slides.map((slide, index) =>
-            mapHeroSlide(slide, fallback.hero.images[index] ?? fallback.hero.images[0]),
-          )
-        : fallback.hero.images,
-    },
+    hero: mapHero(payload.hero, fallback),
     collections: payload.collections?.length
       ? payload.collections.map((item, index) =>
           mapCollection(item, index, fallback.collections),
