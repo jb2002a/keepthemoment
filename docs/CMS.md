@@ -9,7 +9,7 @@
    - `DATABASE_URI` — Postgres 연결 문자열
    - `PAYLOAD_SECRET` — 긴 랜덤 문자열
    - `NEXT_PUBLIC_SITE_URL` — 로컬은 `http://localhost:3000`
-   - (선택) `BLOB_READ_WRITE_TOKEN` — Vercel Blob (프로덕션 미디어 저장용)
+   - `BLOB_READ_WRITE_TOKEN` — Vercel Blob (배포/Admin 이미지 업로드용, 필수에 가깝음)
 3. 의존성 설치 후 시드와 개발 서버를 실행합니다.
 
 ```bash

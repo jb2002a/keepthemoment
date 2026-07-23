@@ -78,6 +78,8 @@ async function seed() {
   const payload = await getPayload({ config })
   const mediaCache = new Map<string, number>()
 
+  const useBlob = Boolean(process.env.BLOB_READ_WRITE_TOKEN)
+
   async function uploadImageFromDisk(src: string, alt = ''): Promise<number> {
     const cached = mediaCache.get(src)
     if (cached !== undefined) return cached
@@ -96,8 +98,25 @@ async function seed() {
 
     if (existing.docs[0]) {
       const id = Number(existing.docs[0].id)
+      const existingUrl = typeof existing.docs[0].url === 'string' ? existing.docs[0].url : ''
+      const needsBlobMigration =
+        useBlob && (!existingUrl || existingUrl.startsWith('/api/media/file/'))
+
+      if (!needsBlobMigration) {
+        mediaCache.set(src, id)
+        console.log(`  reused media ${src}`)
+        return id
+      }
+
+      await payload.update({
+        collection: 'media',
+        id,
+        data: { alt },
+        filePath: absolute,
+        overwriteExistingFiles: true,
+      })
       mediaCache.set(src, id)
-      console.log(`  reused media ${src}`)
+      console.log(`  migrated media to blob ${src}`)
       return id
     }
 
