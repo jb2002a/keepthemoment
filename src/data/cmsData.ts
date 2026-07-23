@@ -415,16 +415,16 @@ export async function loadSiteContent(): Promise<SiteContent> {
     }
 
     return mapPayloadContent({
-      brand: brand as Record<string, unknown>,
-      hero: hero as Record<string, unknown>,
-      fragrancePage: fragrancePage as Record<string, unknown>,
-      giftPage: giftPage as Record<string, unknown>,
-      hydroponic: hydroponic as Record<string, unknown>,
-      storeInfo: storeInfo as Record<string, unknown>,
-      siteSettings: siteSettings as Record<string, unknown>,
-      collections: collectionsResult.docs as Array<Record<string, unknown>>,
-      plants: plantsResult.docs as Array<Record<string, unknown>>,
-      storyBlocks: storyBlocksResult.docs as Array<Record<string, unknown>>,
+      brand: brand as unknown as Record<string, unknown>,
+      hero: hero as unknown as Record<string, unknown>,
+      fragrancePage: fragrancePage as unknown as Record<string, unknown>,
+      giftPage: giftPage as unknown as Record<string, unknown>,
+      hydroponic: hydroponic as unknown as Record<string, unknown>,
+      storeInfo: storeInfo as unknown as Record<string, unknown>,
+      siteSettings: siteSettings as unknown as Record<string, unknown>,
+      collections: collectionsResult.docs as unknown as Array<Record<string, unknown>>,
+      plants: plantsResult.docs as unknown as Array<Record<string, unknown>>,
+      storyBlocks: storyBlocksResult.docs as unknown as Array<Record<string, unknown>>,
     })
   } catch (error) {
     console.warn('[cms] Failed to load Payload content. Using local fallback.', error)

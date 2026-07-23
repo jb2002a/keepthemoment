@@ -76,10 +76,11 @@ async function seed() {
   }
 
   const payload = await getPayload({ config })
-  const mediaCache = new Map<string, number | string>()
+  const mediaCache = new Map<string, number>()
 
-  async function uploadImageFromDisk(src: string, alt = '') {
-    if (mediaCache.has(src)) return mediaCache.get(src)!
+  async function uploadImageFromDisk(src: string, alt = ''): Promise<number> {
+    const cached = mediaCache.get(src)
+    if (cached !== undefined) return cached
 
     const absolute = publicPathFromSrc(src)
     const filename = path.basename(absolute)
@@ -94,9 +95,10 @@ async function seed() {
     })
 
     if (existing.docs[0]) {
-      mediaCache.set(src, existing.docs[0].id)
+      const id = Number(existing.docs[0].id)
+      mediaCache.set(src, id)
       console.log(`  reused media ${src}`)
-      return existing.docs[0].id
+      return id
     }
 
     const created = await payload.create({
@@ -105,9 +107,10 @@ async function seed() {
       filePath: absolute,
     })
 
-    mediaCache.set(src, created.id)
+    const id = Number(created.id)
+    mediaCache.set(src, id)
     console.log(`  uploaded ${src}`)
-    return created.id
+    return id
   }
 
   const adminEmail = process.env.SEED_ADMIN_EMAIL || 'admin@keepthemoment.local'
