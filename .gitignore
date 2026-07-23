@@ -29,3 +29,4 @@ media
 *.sln
 *.sw?
 .vercel
+.env*
