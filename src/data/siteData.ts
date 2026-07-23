@@ -144,7 +144,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/nudara.png',
     alt: 'NUDARA fragrance brand logo',
     href: 'https://nudara.co.kr/',
-    logoWidth: '8.5rem',
+    logoWidth: '9rem',
   },
   {
     id: 'seamus',
@@ -152,7 +152,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/seamus.png',
     alt: 'SEAMUS fragrance brand logo',
     href: 'https://seamus.co.kr/',
-    logoWidth: '8.4rem',
+    logoWidth: '8.9rem',
   },
   {
     id: 'teabless',
@@ -160,7 +160,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/teabless.png',
     alt: 'TEABLESS fragrance brand logo',
     href: 'https://teabless.co.kr/',
-    logoWidth: '12rem',
+    logoWidth: '12.6rem',
   },
   {
     id: 'lisoue',
@@ -168,7 +168,7 @@ export const fragranceBrands: FragranceBrand[] = [
     image: '/images/fragrance/lisoue.png',
     alt: 'LISOUE fragrance brand logo',
     href: 'https://lisoue.co.kr/',
-    logoWidth: '8.9rem',
+    logoWidth: '9.4rem',
   },
   {
     id: 'the-other-mood',
