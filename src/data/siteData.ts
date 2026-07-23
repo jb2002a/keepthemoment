@@ -488,7 +488,8 @@ export const storeInfo = {
     { day: 'Sat – Sun', time: '12:00 – 20:00' },
   ],
   phone: '02-0000-0000',
-  mapUrl: 'https://map.naver.com/p/entry/place/2000545659?c=15.00,0,0,0,dh',
+  mapUrl:
+    'https://map.naver.com/p/entry/place/2000545659?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0128809&lat=37.2866978',
   placeUrl: 'https://naver.me/',
   instagramUrl: 'https://www.instagram.com/keepthemoment_official/',
   image: '/images/story/store-visit.png',
@@ -497,8 +498,7 @@ export const storeInfo = {
 
 export const footerLinks: SocialLink[] = [
   { id: 'instagram', label: 'Instagram', href: storeInfo.instagramUrl },
-  { id: 'blog', label: 'Naver Blog', href: 'https://blog.naver.com/' },
-  { id: 'store', label: 'Naver Store', href: naverStoreUrl },
+  { id: 'offline', label: 'Offline', href: storeInfo.mapUrl },
 ]
 
 export const privacyPolicyUrl = '#privacy'
