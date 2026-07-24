@@ -608,24 +608,15 @@ button {
   background: var(--color-surface);
 }
 .plant-care__intro {
-  margin-bottom: clamp(2rem, 5vw, 4rem);
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
 }
 .plant-care .section__title {
   max-width: 10ch;
   line-height: 1.15;
 }
-.plant-care__lead {
-  max-width: 18rem;
-  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
-  font-weight: 400;
-  line-height: 1.7;
-  letter-spacing: -0.025em;
-  color: var(--color-muted-strong);
-  word-break: keep-all;
-}
 .plant-care__stage {
   display: grid;
-  gap: clamp(2rem, 5vw, 4.5rem);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
   align-items: start;
 }
 .plant-care__media {
@@ -640,26 +631,107 @@ button {
 }
 .plant-care__copy {
   max-width: 36rem;
-  justify-self: end;
   width: 100%;
-}
-.plant-care__support {
-  max-width: 24rem;
-  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
-  line-height: 1.75;
-  letter-spacing: -0.025em;
-  color: var(--color-text);
-  word-break: keep-all;
-}
-.plant-care__detail {
-  max-width: 28rem;
-  margin-top: 0.9rem;
-  font-size: 0.88rem;
-  line-height: 1.85;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.8;
   letter-spacing: -0.02em;
   color: var(--color-muted-strong);
-  white-space: pre-line;
   word-break: keep-all;
+}
+.plant-care__copy strong {
+  font-size: inherit;
+  font-weight: 400;
+}
+.plant-care__lead {
+  max-width: none;
+  margin-bottom: 0.85rem;
+  color: inherit;
+}
+.plant-care__support {
+  max-width: none;
+  color: inherit;
+}
+.plant-care__detail {
+  max-width: none;
+  margin-top: 0.85rem;
+  white-space: pre-line;
+  color: inherit;
+}
+.hydroponic-accordion {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--color-border);
+}
+.hydroponic-accordion__item {
+  border-bottom: 1px solid var(--color-border);
+}
+.hydroponic-accordion__trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 3.25rem;
+  padding-block: 1rem;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-align: left;
+  transition: color 0.3s var(--ease-slow);
+}
+.hydroponic-accordion__trigger:hover,
+.hydroponic-accordion__item[data-open='true'] .hydroponic-accordion__trigger {
+  color: var(--color-accent);
+}
+.hydroponic-accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.45s var(--ease-slow),
+    opacity 0.35s var(--ease-slow);
+}
+.hydroponic-accordion__item[data-open='true'] .hydroponic-accordion__panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.hydroponic-accordion__content {
+  display: grid;
+  gap: 0.9rem;
+  min-height: 0;
+  overflow: hidden;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  word-break: keep-all;
+}
+.hydroponic-accordion__item[data-open='true'] .hydroponic-accordion__content {
+  padding-bottom: 1.4rem;
+}
+.hydroponic-accordion__content p,
+.hydroponic-accordion__content blockquote {
+  white-space: pre-line;
+}
+.hydroponic-accordion__content blockquote {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+.hydroponic-accordion__list {
+  display: grid;
+  gap: 1rem;
+}
+.hydroponic-accordion__list li {
+  display: grid;
+  gap: 0.25rem;
+}
+.hydroponic-accordion__list strong {
+  color: inherit;
+  font-weight: 400;
 }
 .plant-items {
   min-height: calc(100svh - var(--header-height));
@@ -1103,80 +1175,6 @@ button {
   height: 100%;
   object-fit: cover;
 }
-.hydroponic-accordion {
-  margin-top: clamp(2.25rem, 5vw, 3.5rem);
-  border-top: 1px solid var(--color-border);
-}
-.hydroponic-accordion__item {
-  border-bottom: 1px solid var(--color-border);
-}
-.hydroponic-accordion__trigger {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: 3.25rem;
-  padding-block: 1rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: -0.02em;
-  text-align: left;
-  transition: color 0.3s var(--ease-slow);
-}
-.hydroponic-accordion__trigger:hover,
-.hydroponic-accordion__item[data-open='true'] .hydroponic-accordion__trigger {
-  color: var(--color-accent);
-}
-.hydroponic-accordion__panel {
-  display: grid;
-  grid-template-rows: 0fr;
-  overflow: hidden;
-  opacity: 0;
-  transition:
-    grid-template-rows 0.45s var(--ease-slow),
-    opacity 0.35s var(--ease-slow);
-}
-.hydroponic-accordion__item[data-open='true'] .hydroponic-accordion__panel {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-.hydroponic-accordion__content {
-  display: grid;
-  gap: 0.9rem;
-  min-height: 0;
-  overflow: hidden;
-  font-size: 0.86rem;
-  line-height: 1.8;
-  color: var(--color-muted-strong);
-  word-break: keep-all;
-}
-.hydroponic-accordion__item[data-open='true'] .hydroponic-accordion__content {
-  padding-bottom: 1.4rem;
-}
-.hydroponic-accordion__content p,
-.hydroponic-accordion__content blockquote {
-  white-space: pre-line;
-}
-.hydroponic-accordion__content blockquote {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.7;
-  letter-spacing: -0.025em;
-  color: var(--color-text);
-}
-.hydroponic-accordion__list {
-  display: grid;
-  gap: 1rem;
-}
-.hydroponic-accordion__list li {
-  display: grid;
-  gap: 0.25rem;
-}
-.hydroponic-accordion__list strong {
-  color: var(--color-text);
-  font-weight: 500;
-}
 .store { background: var(--color-surface); }
 .store__info { max-width: 31rem; }
 .store__name {
@@ -1298,16 +1296,11 @@ button {
   .store__layout {
     grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
   }
-  .plant-care__stage {
-    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
-    gap: clamp(2.5rem, 5vw, 5rem);
-    align-items: start;
-  }
   .plant-care__media {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 16 / 9;
   }
   .plant-care__copy {
-    padding-top: 0.35rem;
+    max-width: 40rem;
   }
   .plant-items__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .gift-page__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -1321,12 +1314,8 @@ button {
 }
 
 @media (min-width: 700px) and (max-width: 899px) {
-  .plant-care__stage {
-    grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 1.05fr);
-    gap: clamp(1.75rem, 4vw, 2.75rem);
-  }
   .plant-care__media {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 16 / 10;
   }
   .plant-care__copy {
     max-width: none;
@@ -1412,7 +1401,7 @@ button {
   }
   .plant-care__lead {
     max-width: none;
-    margin-top: 0.35rem;
+    margin-bottom: 0.85rem;
   }
   .plant-care .section__title {
     max-width: 9ch;

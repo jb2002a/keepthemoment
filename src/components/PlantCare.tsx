@@ -19,14 +19,11 @@ export function PlantCare() {
       aria-labelledby="care-heading"
     >
       <div className="section__inner">
-        <Reveal className="section__intro section__intro--split plant-care__intro">
-          <div>
-            <p className="section__eyebrow">Care Guide</p>
-            <h1 id="care-heading" className="section__title">
-              {hydroponic.title}
-            </h1>
-          </div>
-            <p className="plant-care__lead">{headline}</p>
+        <Reveal className="plant-care__intro">
+          <p className="section__eyebrow">Care Guide</p>
+          <h1 id="care-heading" className="section__title">
+            {hydroponic.title}
+          </h1>
         </Reveal>
 
         <div className="plant-care__stage">
@@ -41,6 +38,7 @@ export function PlantCare() {
           </Reveal>
 
           <Reveal className="plant-care__copy" delay={100}>
+            {headline ? <p className="plant-care__lead">{headline}</p> : null}
             {support ? <p className="plant-care__support">{support}</p> : null}
             {detail ? <p className="plant-care__detail">{detail}</p> : null}
 
