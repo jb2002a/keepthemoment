@@ -40,11 +40,20 @@ export const StoreInfo: GlobalConfig = {
     {
       name: 'hours',
       type: 'array',
-      label: '영업시간',
+      label: '영업시간 / 주차',
+      admin: {
+        description: '예: EVERYDAY / 12:00 – 20:00, PARKING / 장안동공영주차장',
+      },
       fields: [
-        { name: 'day', type: 'text', required: true, label: '요일' },
-        { name: 'time', type: 'text', required: true, label: '시간' },
+        { name: 'day', type: 'text', required: true, label: '항목' },
+        { name: 'time', type: 'text', required: true, label: '내용' },
       ],
+    },
+    {
+      name: 'mapButtonLabel',
+      type: 'text',
+      defaultValue: 'Map',
+      label: '지도 버튼 문구',
     },
     {
       name: 'phone',

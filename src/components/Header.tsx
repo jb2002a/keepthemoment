@@ -7,7 +7,7 @@ export function Header() {
   const { content } = useSiteContent()
   const { brand, navItems, mobileNavItems, mobileVisitCta } = content
   const menuItems = mobileNavItems?.length ? mobileNavItems : navItems
-  const visitCta = mobileVisitCta ?? { label: 'Visit Store', href: '/visit' }
+  const visitCta = mobileVisitCta ?? { label: 'Visit Store', href: '/#visit' }
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()

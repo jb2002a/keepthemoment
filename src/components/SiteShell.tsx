@@ -50,12 +50,29 @@ export function SiteShell({ children }: { children: ReactNode }) {
     window.requestAnimationFrame(() => {
       const hash = window.location.hash
       if (hash) {
-        document.getElementById(hash.slice(1))?.scrollIntoView()
+        document.getElementById(hash.slice(1))?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
         return
       }
       window.scrollTo({ top: 0 })
     })
   }, [pathname])
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash
+      if (!hash) return
+      document.getElementById(hash.slice(1))?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   return (
     <>

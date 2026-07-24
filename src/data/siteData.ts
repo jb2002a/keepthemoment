@@ -114,7 +114,7 @@ export const mobileNavItems: NavItem[] = [
 
 export const mobileVisitCta = {
   label: 'Visit Store',
-  href: '/visit',
+  href: '/#visit',
 }
 
 export const homePageContent = {
@@ -123,7 +123,7 @@ export const homePageContent = {
     '식물은 곁에서 시간과 함께 자라나고,\n향기는 지나간 오늘을 다시 불러옵니다.\n스쳐가는 일상 속에 오래 머무는 순간을 선물합니다.',
   introActions: [
     { label: 'Plants', href: '/plants' },
-    { label: 'Visit', href: '/visit' },
+    { label: 'Visit', href: '/#visit' },
   ],
   linkCards: [
     {
@@ -145,7 +145,7 @@ export const homePageContent = {
       eyebrow: 'Visit',
       title: 'Haenggung Store.',
       description: '공간과 운영 정보를 확인하세요.',
-      href: '/visit',
+      href: '/#visit',
     },
   ],
 }
@@ -754,7 +754,11 @@ export const storeInfo = {
   name: 'KEEP THE MOMENT',
   address: '경기 수원시 팔달구 신풍로63번길 14 2층',
   addressDetail: '2F, 14, Sinpung-ro 63beon-gil, Paldal-gu, Suwon-si, Gyeonggi-do',
-  hours: [{ day: 'EVERYDAY', time: '12:00 – 20:00' }],
+  hours: [
+    { day: 'EVERYDAY', time: '12:00 – 20:00' },
+    { day: 'PARKING', time: '장안동공영주차장' },
+  ],
+  mapButtonLabel: 'Map',
   phone: '02-0000-0000',
   mapUrl:
     'https://map.naver.com/p/entry/place/2000545659?placePath=%252Fhome%253Fentry%253Dplt&searchType=place&lng=127.0128809&lat=37.2866978',

@@ -378,6 +378,7 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
     address?: string
     addressDetail?: string
     hours?: Array<{ day?: string; time?: string }>
+    mapButtonLabel?: string
     phone?: string
     mapUrl?: string
     placeUrl?: string
@@ -578,6 +579,7 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
             time: row.time || '',
           }))
         : fallback.storeInfo.hours,
+      mapButtonLabel: store?.mapButtonLabel || fallback.storeInfo.mapButtonLabel,
       phone: store?.phone || fallback.storeInfo.phone,
       mapUrl: store?.mapUrl || fallback.storeInfo.mapUrl,
       placeUrl: store?.placeUrl || fallback.storeInfo.placeUrl,

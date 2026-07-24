@@ -1421,11 +1421,31 @@ button {
     gap: 1rem;
     padding-top: 0.75rem;
   }
+  .home-main .store__info {
+    max-width: none;
+    width: 100%;
+  }
   .home-main .store .section__title {
     font-size: clamp(2.15rem, 12vw, 3.5rem);
   }
   .home-main .store__mobile-bottom {
-    display: none;
+    display: block;
+    max-width: none;
+    width: 100%;
+    margin-top: clamp(1.25rem, 4vw, 1.75rem);
+    margin-bottom: 0;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: var(--color-bg-soft);
+  }
+  .home-main .store__mobile-bottom img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+  }
+  .home-main .store__name {
+    margin-top: clamp(1.5rem, 5vw, 2.25rem);
   }
   .collection-card__caption,
   .gift-card__body,
@@ -1530,19 +1550,6 @@ button {
   .page-main .fragrance-page,
   .page-main .store {
     padding-block: clamp(2.5rem, 10vw, 4rem);
-  }
-  .store__mobile-bottom {
-    display: block;
-    margin-top: clamp(1.5rem, 5vw, 2.25rem);
-    overflow: hidden;
-    aspect-ratio: 1 / 1;
-    background: var(--color-bg-soft);
-  }
-  .store__mobile-bottom img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 32%;
   }
   .story-gallery {
     grid-template-columns: minmax(0, 1fr) minmax(5rem, 0.34fr);

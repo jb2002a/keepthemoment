@@ -398,6 +398,7 @@ async function seed() {
       address: storeInfo.address,
       addressDetail: storeInfo.addressDetail,
       hours: storeInfo.hours,
+      mapButtonLabel: storeInfo.mapButtonLabel,
       phone: storeInfo.phone,
       mapUrl: storeInfo.mapUrl,
       placeUrl: storeInfo.placeUrl,

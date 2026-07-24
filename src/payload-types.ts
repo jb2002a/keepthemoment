@@ -681,6 +681,9 @@ export interface StoreInfo {
   name: string;
   address: string;
   addressDetail?: string | null;
+  /**
+   * 예: EVERYDAY / 12:00 – 20:00, PARKING / 장안동공영주차장
+   */
   hours?:
     | {
         day: string;
@@ -688,6 +691,7 @@ export interface StoreInfo {
         id?: string | null;
       }[]
     | null;
+  mapButtonLabel?: string | null;
   phone?: string | null;
   mapUrl?: string | null;
   placeUrl?: string | null;
@@ -931,6 +935,7 @@ export interface StoreInfoSelect<T extends boolean = true> {
         time?: T;
         id?: T;
       };
+  mapButtonLabel?: T;
   phone?: T;
   mapUrl?: T;
   placeUrl?: T;

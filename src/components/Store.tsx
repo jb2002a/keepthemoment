@@ -1,11 +1,15 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
 export function Store() {
   const { content } = useSiteContent()
   const { storeInfo } = content
+  const pathname = usePathname()
+  const showMobileBottom =
+    pathname !== '/visit' && Boolean(storeInfo.mobileBottomImage)
 
   return (
     <section
@@ -30,6 +34,19 @@ export function Store() {
             <h2 id="store-heading" className="section__title">
               {storeInfo.title}
             </h2>
+
+            {showMobileBottom ? (
+              <div className="store__mobile-bottom">
+                <img
+                  src={storeInfo.mobileBottomImage}
+                  alt={storeInfo.mobileBottomAlt}
+                  width="1200"
+                  height="1200"
+                  loading="lazy"
+                />
+              </div>
+            ) : null}
+
             <h3 className="store__name">{storeInfo.name}</h3>
             <p className="store__address">
               {storeInfo.address}
@@ -51,23 +68,11 @@ export function Store() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Get directions
+                {storeInfo.mapButtonLabel}
               </a>
             </div>
           </Reveal>
         </div>
-
-        {storeInfo.mobileBottomImage ? (
-          <Reveal className="store__mobile-bottom">
-            <img
-              src={storeInfo.mobileBottomImage}
-              alt={storeInfo.mobileBottomAlt}
-              width="1200"
-              height="1200"
-              loading="lazy"
-            />
-          </Reveal>
-        ) : null}
       </div>
     </section>
   )

@@ -115,6 +115,7 @@ export type SiteContent = {
     address: string
     addressDetail: string
     hours: { day: string; time: string }[]
+    mapButtonLabel: string
     phone: string
     mapUrl: string
     placeUrl: string
