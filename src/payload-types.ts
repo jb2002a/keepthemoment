@@ -196,6 +196,10 @@ export interface Collection {
   slug: string;
   name: string;
   tagline: string;
+  /**
+   * 비워두면 PC용 한 줄 소개를 그대로 사용합니다.
+   */
+  mobileTagline?: string | null;
   image: number | Media;
   alt?: string | null;
   aspectRatio?: string | null;
@@ -384,6 +388,7 @@ export interface CollectionsSelect<T extends boolean = true> {
   slug?: T;
   name?: T;
   tagline?: T;
+  mobileTagline?: T;
   image?: T;
   alt?: T;
   aspectRatio?: T;
@@ -575,6 +580,7 @@ export interface StoryPage {
  */
 export interface Hydroponic {
   id: number;
+  eyebrow?: string | null;
   title: string;
   description: string;
   image: number | Media;
@@ -633,6 +639,11 @@ export interface StoreInfo {
   instagramUrl?: string | null;
   image: number | Media;
   alt?: string | null;
+  /**
+   * 모바일 Visit 페이지 하단에만 표시되는 이미지입니다.
+   */
+  mobileBottomImage?: (number | null) | Media;
+  mobileBottomAlt?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -649,6 +660,18 @@ export interface SiteSetting {
         href: string;
       }[]
     | null;
+  /**
+   * 햄버거 메뉴에 표시되는 목록입니다. 데스크톱 메뉴와 다르게 구성할 수 있습니다.
+   */
+  mobileNavItems?:
+    | {
+        id: string;
+        label: string;
+        href: string;
+      }[]
+    | null;
+  mobileVisitCtaLabel?: string | null;
+  mobileVisitCtaHref?: string | null;
   footerLinks?:
     | {
         id: string;
@@ -755,6 +778,7 @@ export interface StoryPageSelect<T extends boolean = true> {
  * via the `definition` "hydroponic_select".
  */
 export interface HydroponicSelect<T extends boolean = true> {
+  eyebrow?: T;
   title?: T;
   description?: T;
   image?: T;
@@ -813,6 +837,8 @@ export interface StoreInfoSelect<T extends boolean = true> {
   instagramUrl?: T;
   image?: T;
   alt?: T;
+  mobileBottomImage?: T;
+  mobileBottomAlt?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -829,6 +855,15 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         label?: T;
         href?: T;
       };
+  mobileNavItems?:
+    | T
+    | {
+        id?: T;
+        label?: T;
+        href?: T;
+      };
+  mobileVisitCtaLabel?: T;
+  mobileVisitCtaHref?: T;
   footerLinks?:
     | T
     | {

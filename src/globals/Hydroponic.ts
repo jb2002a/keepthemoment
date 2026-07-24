@@ -8,6 +8,12 @@ export const Hydroponic: GlobalConfig = {
   },
   fields: [
     {
+      name: 'eyebrow',
+      type: 'text',
+      defaultValue: 'Care Guide',
+      label: '작은 제목',
+    },
+    {
       name: 'title',
       type: 'text',
       required: true,

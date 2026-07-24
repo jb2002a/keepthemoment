@@ -68,6 +68,7 @@ export type SiteContent = {
     options: GiftOption[]
   }
   hydroponic: {
+    eyebrow: string
     title: string
     description: string
     image: string
@@ -88,6 +89,8 @@ export type SiteContent = {
     instagramUrl: string
     image: string
     alt: string
+    mobileBottomImage: string
+    mobileBottomAlt: string
   }
   footerLinks: SocialLink[]
   naverStoreUrl: string

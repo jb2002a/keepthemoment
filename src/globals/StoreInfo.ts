@@ -78,5 +78,19 @@ export const StoreInfo: GlobalConfig = {
       type: 'text',
       label: '이미지 설명',
     },
+    {
+      name: 'mobileBottomImage',
+      type: 'upload',
+      relationTo: 'media',
+      label: '모바일 하단 이미지',
+      admin: {
+        description: '모바일 Visit 페이지 하단에만 표시되는 이미지입니다.',
+      },
+    },
+    {
+      name: 'mobileBottomAlt',
+      type: 'text',
+      label: '모바일 하단 이미지 설명',
+    },
   ],
 }

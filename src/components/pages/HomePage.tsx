@@ -1,9 +1,25 @@
 'use client'
 
+import { Fragment } from 'react'
 import { Collections } from '@/components/Collections'
 import { Hero } from '@/components/Hero'
 import { Reveal } from '@/components/Reveal'
 import { Store } from '@/components/Store'
+import { useSiteContent } from '@/hooks/useSiteContent'
+
+function Multiline({ text }: { text: string }) {
+  const lines = text.split('\n')
+  return (
+    <>
+      {lines.map((line, index) => (
+        <Fragment key={`${index}-${line}`}>
+          {index > 0 ? <br /> : null}
+          {line}
+        </Fragment>
+      ))}
+    </>
+  )
+}
 
 export function HomePage() {
   return (
@@ -18,30 +34,26 @@ export function HomePage() {
 }
 
 function HomeIntro() {
+  const { content } = useSiteContent()
+  const { homePage } = content
+
   return (
     <section className="home-intro" aria-labelledby="home-intro-heading">
       <div className="section__inner home-intro__inner">
         <Reveal className="home-intro__copy">
           <h1 id="home-intro-heading" className="home-intro__title">
-            Plants, Scent,
-            <br />
-            and Moments.
+            <Multiline text={homePage.introTitle} />
           </h1>
           <p className="home-intro__description">
-            식물은 곁에서 시간과 함께 자라나고,
-            <br />
-            향기는 지나간 오늘을 다시 불러옵니다.
-            <br />
-            스쳐가는 일상 속에 오래 머무는 순간을 선물합니다.
+            <Multiline text={homePage.introDescription} />
           </p>
         </Reveal>
         <Reveal className="home-intro__actions" delay={120}>
-          <a href="/plants" className="text-link">
-            Plants
-          </a>
-          <a href="/#visit" className="text-link">
-            Visit
-          </a>
+          {homePage.introActions.map((action) => (
+            <a key={`${action.label}-${action.href}`} href={action.href} className="text-link">
+              {action.label}
+            </a>
+          ))}
         </Reveal>
       </div>
     </section>
@@ -49,25 +61,20 @@ function HomeIntro() {
 }
 
 function HomeLinks() {
+  const { content } = useSiteContent()
+  const { homePage } = content
+
   return (
     <section className="section home-links" aria-label="More about KEEP THE MOMENT">
       <div className="section__inner">
         <div className="home-links__grid">
-          <a href="/about" className="home-link-card">
-            <span className="section__eyebrow">Brand Story</span>
-            <strong>Nature & Memory.</strong>
-            <span>일상에 스며드는 식물의 철학.</span>
-          </a>
-          <a href="/care" className="home-link-card">
-            <span className="section__eyebrow">Care Guide</span>
-            <strong>Hydroponic Plants.</strong>
-            <span>수생식물에 대해서.</span>
-          </a>
-          <a href="/#visit" className="home-link-card">
-            <span className="section__eyebrow">Visit</span>
-            <strong>Haenggung Store.</strong>
-            <span>공간과 운영 정보를 확인하세요.</span>
-          </a>
+          {homePage.linkCards.map((card) => (
+            <a key={card.id} href={card.href} className="home-link-card">
+              <span className="section__eyebrow">{card.eyebrow}</span>
+              <strong>{card.title}</strong>
+              <span>{card.description}</span>
+            </a>
+          ))}
         </div>
       </div>
     </section>

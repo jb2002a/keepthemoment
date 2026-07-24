@@ -335,6 +335,7 @@ async function seed() {
   await payload.updateGlobal({
     slug: 'hydroponic',
     data: {
+      eyebrow: hydroponic.eyebrow,
       title: hydroponic.title,
       description: hydroponic.description,
       alt: hydroponic.alt,
@@ -379,6 +380,11 @@ async function seed() {
       instagramUrl: storeInfo.instagramUrl,
       alt: storeInfo.alt,
       image: await uploadImageFromDisk(storeInfo.image, storeInfo.alt),
+      mobileBottomAlt: storeInfo.mobileBottomAlt,
+      mobileBottomImage: await uploadImageFromDisk(
+        storeInfo.mobileBottomImage,
+        storeInfo.mobileBottomAlt,
+      ),
     },
   })
   console.log('  upserted store-info')

@@ -135,7 +135,7 @@ function PlantGrid({
 
 export function PlantItems() {
   const { content } = useSiteContent()
-  const { plantItems, rarePlantItems } = content
+  const { plantItems, rarePlantItems, plantsPage } = content
   const [selectedPlantId, setSelectedPlantId] = useState<string | null>(null)
   const allPlantItems = [...rarePlantItems, ...plantItems]
   const selectedPlant = allPlantItems.find((item) => item.id === selectedPlantId)
@@ -166,18 +166,14 @@ export function PlantItems() {
       <div className="section__inner">
         <Reveal className="section__intro section__intro--split">
           <div>
-            <p className="section__eyebrow">Plants</p>
+            <p className="section__eyebrow">{plantsPage.eyebrow}</p>
             <h1 id="plant-items-heading" className="section__title">
-              Living Objects.
+              {plantsPage.title}
             </h1>
           </div>
           <p className="plant-items__lead">
-            <span className="plant-items__lead-default">
-              Explore hydroponic plants prepared for keeping the moment close.
-            </span>
-            <span className="plant-items__lead-mobile">
-              물과 흙 모두에 자연스럽게 어울리는 식물을 천천히 살펴보세요.
-            </span>
+            <span className="plant-items__lead-default">{plantsPage.lead}</span>
+            <span className="plant-items__lead-mobile">{plantsPage.leadMobile}</span>
           </p>
         </Reveal>
 
@@ -187,22 +183,22 @@ export function PlantItems() {
             aria-labelledby="rare-plants-heading"
           >
             <Reveal className="plant-items__section-header">
-              <p className="plant-items__section-eyebrow">Rare Foliage</p>
+              <p className="plant-items__section-eyebrow">{plantsPage.rareEyebrow}</p>
               <h2 id="rare-plants-heading" className="plant-items__section-title">
-                Curated Rare Plants.
+                {plantsPage.rareTitle}
               </h2>
-              <p className="plant-items__section-copy">
-                무늬, 엽색, 형태가 뚜렷한 희귀 관엽을 따로 모은 셀렉션입니다.
-              </p>
+              {plantsPage.rareCopy ? (
+                <p className="plant-items__section-copy">{plantsPage.rareCopy}</p>
+              ) : null}
             </Reveal>
             <PlantGrid items={rarePlantItems} onSelectPlant={setSelectedPlantId} />
           </section>
 
           <section className="plant-items__section" aria-labelledby="plant-collection-heading">
             <Reveal className="plant-items__section-header">
-              <p className="plant-items__section-eyebrow">Plant Collection</p>
+              <p className="plant-items__section-eyebrow">{plantsPage.everydayEyebrow}</p>
               <h2 id="plant-collection-heading" className="plant-items__section-title">
-                Everyday Greens.
+                {plantsPage.everydayTitle}
               </h2>
             </Reveal>
             <PlantGrid items={plantItems} onSelectPlant={setSelectedPlantId} />

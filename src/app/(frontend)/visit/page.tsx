@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function VisitPage() {
   return (
-    <main id="main" className="page-main">
+    <main id="main" className="page-main visit-page">
       <Store />
     </main>
   )

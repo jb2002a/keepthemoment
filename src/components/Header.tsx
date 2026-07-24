@@ -3,17 +3,9 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 
-const mobileMenuItems = [
-  { id: 'plants', label: 'PLANTS', href: '/plants' },
-  { id: 'fragrance', label: 'FRAGRANCE', href: '/fragrance' },
-  { id: 'gift', label: 'GIFT', href: '/gift' },
-  { id: 'about', label: 'ABOUT', href: '/about' },
-  { id: 'care', label: 'CARE', href: '/care' },
-]
-
 export function Header() {
   const { content } = useSiteContent()
-  const { brand, navItems } = content
+  const { brand, navItems, mobileNavItems, mobileVisitCta } = content
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()
@@ -131,7 +123,7 @@ export function Header() {
           </div>
           <nav aria-label="모바일 메뉴">
             <ul className="mobile-menu__list">
-              {mobileMenuItems.map((item) => (
+              {mobileNavItems.map((item) => (
                 <li key={item.id}>
                   <a href={item.href} onClick={handleNavClick}>
                     {item.label}
@@ -142,10 +134,10 @@ export function Header() {
           </nav>
           <a
             className="mobile-menu__visit"
-            href="/#visit"
+            href={mobileVisitCta.href}
             onClick={handleNavClick}
           >
-            Visit Store
+            {mobileVisitCta.label}
           </a>
         </div>
       </div>

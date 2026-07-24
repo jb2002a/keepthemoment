@@ -56,6 +56,18 @@ export function Store() {
             </div>
           </Reveal>
         </div>
+
+        {storeInfo.mobileBottomImage ? (
+          <Reveal className="store__mobile-bottom">
+            <img
+              src={storeInfo.mobileBottomImage}
+              alt={storeInfo.mobileBottomAlt}
+              width="1536"
+              height="1024"
+              loading="lazy"
+            />
+          </Reveal>
+        ) : null}
       </div>
     </section>
   )

@@ -20,7 +20,7 @@ export function PlantCare() {
     >
       <div className="section__inner">
         <Reveal className="plant-care__intro">
-          <p className="section__eyebrow">Care Guide</p>
+          <p className="section__eyebrow">{hydroponic.eyebrow}</p>
           <h1 id="care-heading" className="section__title">
             {hydroponic.title}
           </h1>

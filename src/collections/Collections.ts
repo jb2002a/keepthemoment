@@ -34,7 +34,15 @@ export const Collections: CollectionConfig = {
       name: 'tagline',
       type: 'text',
       required: true,
-      label: '한 줄 소개',
+      label: '한 줄 소개 (PC)',
+    },
+    {
+      name: 'mobileTagline',
+      type: 'text',
+      label: '한 줄 소개 (모바일)',
+      admin: {
+        description: '비워두면 PC용 한 줄 소개를 그대로 사용합니다.',
+      },
     },
     {
       name: 'image',

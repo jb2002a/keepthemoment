@@ -3,12 +3,6 @@
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
-const mobileCollectionTaglines: Record<string, string> = {
-  plants: '공간의 분위기를 조용히 머금는 식물.',
-  fragrance: '오늘의 기분을 은은하게 남기는 향.',
-  gift: '그 순간을 마음에 담아 전하는 선물.',
-}
-
 export function Collections() {
   const { content } = useSiteContent()
   const { collections } = content
@@ -58,7 +52,7 @@ export function Collections() {
                     <p className="collection-card__desc">
                       <span className="collection-card__desc-default">{item.tagline}</span>
                       <span className="collection-card__desc-mobile">
-                        {mobileCollectionTaglines[item.id] ?? item.tagline}
+                        {item.mobileTagline || item.tagline}
                       </span>
                     </p>
                   </div>

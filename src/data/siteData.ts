@@ -81,6 +81,7 @@ export type HydroponicGuideSection = {
 }
 
 export type HydroponicContent = {
+  eyebrow: string
   title: string
   description: string
   image: string
@@ -562,6 +563,7 @@ export const storyBlocks: StoryBlock[] = [
 ]
 
 export const hydroponic: HydroponicContent = {
+  eyebrow: 'Care Guide',
   title: 'Hydroponic Plants.',
   description: '물만 채워주세요.',
   image: '/images/content/hydroponic.webp',
@@ -698,6 +700,8 @@ export const storeInfo = {
   instagramUrl: 'https://www.instagram.com/keepthemoment_official/',
   image: '/images/story/store-visit.png',
   alt: '자연광이 가득한 KEEP THE MOMENT 행궁 매장 인테리어',
+  mobileBottomImage: '/images/content/visit-mobile-bottom.png',
+  mobileBottomAlt: 'KEEP THE MOMENT 행궁 매장 외관과 테라스',
 }
 
 export const footerLinks: SocialLink[] = [
