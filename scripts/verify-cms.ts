@@ -11,6 +11,8 @@ async function main() {
   const mappedEmpty = mapPayloadContent({
     brand: null,
     hero: null,
+    homePage: null,
+    plantsPage: null,
     fragrancePage: null,
     giftPage: null,
     storyPage: null,
@@ -29,7 +31,7 @@ async function main() {
     `[verify] live counts plants=${live.plantItems.length} rare=${live.rarePlantItems.length} collections=${live.collections.length}`,
   )
   console.log(
-    `[verify] story="${live.storyPage.title}" visit="${live.storeInfo.title}" hours=${live.storeInfo.hours.length} footerLinks=${live.footerLinks.length}`,
+    `[verify] home="${live.homePage.introTitle.replace(/\n/g, ' ')}" plants="${live.plantsPage.title}" story="${live.storyPage.title}" visit="${live.storeInfo.title}"`,
   )
 }
 

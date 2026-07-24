@@ -6,6 +6,8 @@ import { useSiteContent } from '../hooks/useSiteContent'
 export function Header() {
   const { content } = useSiteContent()
   const { brand, navItems, mobileNavItems, mobileVisitCta } = content
+  const menuItems = mobileNavItems?.length ? mobileNavItems : navItems
+  const visitCta = mobileVisitCta ?? { label: 'Visit Store', href: '/visit' }
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuId = useId()
@@ -123,7 +125,7 @@ export function Header() {
           </div>
           <nav aria-label="모바일 메뉴">
             <ul className="mobile-menu__list">
-              {mobileNavItems.map((item) => (
+              {menuItems.map((item) => (
                 <li key={item.id}>
                   <a href={item.href} onClick={handleNavClick}>
                     {item.label}
@@ -134,10 +136,10 @@ export function Header() {
           </nav>
           <a
             className="mobile-menu__visit"
-            href={mobileVisitCta.href}
+            href={visitCta.href}
             onClick={handleNavClick}
           >
-            {mobileVisitCta.label}
+            {visitCta.label}
           </a>
         </div>
       </div>

@@ -31,6 +31,8 @@ npm run dev
    - **식물 (Plants)**: 이름, 설명, 관리법, 이미지, 희귀/일상 구분
    - **홈 카테고리 카드 (Collections)**: 홈 화면의 Plants / Fragrance / Gift 카드
      - 이 카드는 홈 화면에만 영향을 줍니다. `/fragrance`, `/gift` 페이지 내용은 아래 Fragrance/Gift 페이지 항목에서 따로 수정합니다.
+   - **홈 페이지 문구**: `/` 인트로 제목·소개·링크, 하단 카드
+   - **식물(Plants) 페이지 문구**: `/plants` 제목·소개·섹션 제목
    - **향기(Fragrance) 페이지**: `/fragrance` 제목, 소개, 입점 브랜드 로고 목록, 하단 안내
    - **선물(Gift) 페이지**: `/gift` 제목, 소개, 선물 옵션 카드, 하단 안내
    - **브랜드 스토리(Story) 페이지**: `/about` 제목, 소개 문구

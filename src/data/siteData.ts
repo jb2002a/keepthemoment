@@ -8,6 +8,7 @@ export type Collection = {
   id: string
   name: string
   tagline: string
+  mobileTagline?: string
   image: string
   alt: string
   aspectRatio: string
@@ -103,6 +104,64 @@ export const navItems: NavItem[] = [
   { id: 'visit', label: 'VISIT', href: '/#visit' },
 ]
 
+export const mobileNavItems: NavItem[] = [
+  { id: 'plants', label: 'PLANTS', href: '/plants' },
+  { id: 'fragrance', label: 'FRAGRANCE', href: '/fragrance' },
+  { id: 'gift', label: 'GIFT', href: '/gift' },
+  { id: 'about', label: 'ABOUT', href: '/about' },
+  { id: 'care', label: 'CARE', href: '/care' },
+]
+
+export const mobileVisitCta = {
+  label: 'Visit Store',
+  href: '/visit',
+}
+
+export const homePageContent = {
+  introTitle: 'Plants, Scent,\nand Moments.',
+  introDescription:
+    '식물은 곁에서 시간과 함께 자라나고,\n향기는 지나간 오늘을 다시 불러옵니다.\n스쳐가는 일상 속에 오래 머무는 순간을 선물합니다.',
+  introActions: [
+    { label: 'Plants', href: '/plants' },
+    { label: 'Visit', href: '/visit' },
+  ],
+  linkCards: [
+    {
+      id: 'about',
+      eyebrow: 'Brand Story',
+      title: 'Nature & Memory.',
+      description: '일상에 스며드는 식물의 철학.',
+      href: '/about',
+    },
+    {
+      id: 'care',
+      eyebrow: 'Care Guide',
+      title: 'Hydroponic Plants.',
+      description: '수생식물에 대해서.',
+      href: '/care',
+    },
+    {
+      id: 'visit',
+      eyebrow: 'Visit',
+      title: 'Haenggung Store.',
+      description: '공간과 운영 정보를 확인하세요.',
+      href: '/visit',
+    },
+  ],
+}
+
+export const plantsPageContent = {
+  eyebrow: 'Plants',
+  title: 'Living Objects.',
+  lead: 'Explore hydroponic plants prepared for keeping the moment close.',
+  leadMobile: '물과 흙 모두에 자연스럽게 어울리는 식물을 천천히 살펴보세요.',
+  rareEyebrow: 'Rare Foliage',
+  rareTitle: 'Curated Rare Plants.',
+  rareCopy: '무늬, 엽색, 형태가 뚜렷한 희귀 관엽을 따로 모은 셀렉션입니다.',
+  everydayEyebrow: 'Plant Collection',
+  everydayTitle: 'Everyday Greens.',
+}
+
 export const hero = {
   images: [
     {
@@ -150,6 +209,7 @@ export const collections: Collection[] = [
     id: 'plants',
     name: 'Plants',
     tagline: 'Easy to grow. Beautiful to keep.',
+    mobileTagline: '공간의 분위기를 조용히 머금는 식물.',
     image: '/images/collections/plants.png',
     alt: '투명한 유리 화병에서 자라는 몬스테라 수경식물',
     aspectRatio: '3 / 4',
@@ -159,6 +219,7 @@ export const collections: Collection[] = [
     id: 'fragrance',
     name: 'Fragrance',
     tagline: 'The scent stays.',
+    mobileTagline: '오늘의 기분을 은은하게 남기는 향.',
     image: '/images/collections/fragrance.webp',
     alt: '실버 트레이 위에 놓인 미니멀한 향기 제품',
     aspectRatio: '3 / 4',
@@ -168,6 +229,7 @@ export const collections: Collection[] = [
     id: 'gift',
     name: 'Gift',
     tagline: 'Package and wrapping available.',
+    mobileTagline: '그 순간을 마음에 담아 전하는 선물.',
     image: '/images/story/gift-pouch.png',
     alt: '반투명 파우치에 담긴 작은 식물 선물',
     aspectRatio: '3 / 4',

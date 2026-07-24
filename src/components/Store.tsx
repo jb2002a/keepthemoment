@@ -62,8 +62,8 @@ export function Store() {
             <img
               src={storeInfo.mobileBottomImage}
               alt={storeInfo.mobileBottomAlt}
-              width="1536"
-              height="1024"
+              width="1200"
+              height="1200"
               loading="lazy"
             />
           </Reveal>

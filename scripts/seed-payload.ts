@@ -12,10 +12,14 @@ import {
   giftOptions,
   giftPageContent,
   hero,
+  homePageContent,
   hydroponic,
+  mobileNavItems,
+  mobileVisitCta,
   navItems,
   naverStoreUrl,
   plantItems,
+  plantsPageContent,
   privacyPolicyUrl,
   rarePlantItems,
   storeInfo,
@@ -71,7 +75,7 @@ async function seed() {
 
   if (dryRun) {
     console.log(
-      `Dry-run complete. Documents: brand/hero/fragrance/gift/story/hydroponic/store/settings + ${collections.length} collections + ${rarePlantItems.length + plantItems.length} plants + ${storyBlocks.length} story blocks.`,
+      `Dry-run complete. Documents: brand/hero/home/plants-page/fragrance/gift/story/hydroponic/store/settings + ${collections.length} collections + ${rarePlantItems.length + plantItems.length} plants + ${storyBlocks.length} story blocks.`,
     )
     return
   }
@@ -202,6 +206,7 @@ async function seed() {
       slug: item.id,
       name: item.name,
       tagline: item.tagline,
+      mobileTagline: item.mobileTagline,
       alt: item.alt,
       aspectRatio: item.aspectRatio,
       href: item.href,
@@ -325,6 +330,25 @@ async function seed() {
   console.log('  upserted gift-page')
 
   await payload.updateGlobal({
+    slug: 'home-page',
+    data: {
+      introTitle: homePageContent.introTitle,
+      introDescription: homePageContent.introDescription,
+      introActions: homePageContent.introActions,
+      linkCards: homePageContent.linkCards,
+    },
+  })
+  console.log('  upserted home-page')
+
+  await payload.updateGlobal({
+    slug: 'plants-page',
+    data: {
+      ...plantsPageContent,
+    },
+  })
+  console.log('  upserted plants-page')
+
+  await payload.updateGlobal({
     slug: 'story-page',
     data: {
       ...storyPageContent,
@@ -393,6 +417,9 @@ async function seed() {
     slug: 'site-settings',
     data: {
       navItems,
+      mobileNavItems,
+      mobileVisitCtaLabel: mobileVisitCta.label,
+      mobileVisitCtaHref: mobileVisitCta.href,
       footerLinks,
       naverStoreUrl,
       privacyPolicyUrl,

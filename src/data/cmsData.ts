@@ -23,6 +23,8 @@ type MediaLike =
 type PayloadSeedLike = {
   brand: Record<string, unknown> | null
   hero: Record<string, unknown> | null
+  homePage: Record<string, unknown> | null
+  plantsPage: Record<string, unknown> | null
   fragrancePage: Record<string, unknown> | null
   giftPage: Record<string, unknown> | null
   storyPage: Record<string, unknown> | null
@@ -196,6 +198,7 @@ function mapCollection(
     slug?: string | null
     name?: string | null
     tagline?: string | null
+    mobileTagline?: string | null
     image?: MediaLike
     alt?: string | null
     aspectRatio?: string | null
@@ -209,6 +212,7 @@ function mapCollection(
     id: item.slug || fallback.id,
     name: item.name || fallback.name,
     tagline: item.tagline || fallback.tagline,
+    mobileTagline: item.mobileTagline || fallback.mobileTagline || item.tagline || fallback.tagline,
     image: resolveMediaUrl(item.image, fallback.image),
     alt: resolveAlt(item.image, item.alt, fallback.alt),
     aspectRatio: item.aspectRatio || fallback.aspectRatio,
@@ -300,6 +304,31 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
     }>
   } | null
 
+  const homePage = input.homePage as {
+    introTitle?: string
+    introDescription?: string
+    introActions?: Array<{ label?: string; href?: string }>
+    linkCards?: Array<{
+      id?: string
+      eyebrow?: string
+      title?: string
+      description?: string
+      href?: string
+    }>
+  } | null
+
+  const plantsPage = input.plantsPage as {
+    eyebrow?: string
+    title?: string
+    lead?: string
+    leadMobile?: string
+    rareEyebrow?: string
+    rareTitle?: string
+    rareCopy?: string
+    everydayEyebrow?: string
+    everydayTitle?: string
+  } | null
+
   const fragrancePage = input.fragrancePage as {
     eyebrow?: string
     title?: string
@@ -361,6 +390,9 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
 
   const settings = input.siteSettings as {
     navItems?: SiteContent['navItems']
+    mobileNavItems?: SiteContent['mobileNavItems']
+    mobileVisitCtaLabel?: string
+    mobileVisitCtaHref?: string
     footerLinks?: SiteContent['footerLinks']
     naverStoreUrl?: string
     privacyPolicyUrl?: string
@@ -388,6 +420,13 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       shortDescription: brand?.shortDescription || fallback.brand.shortDescription,
     },
     navItems: settings?.navItems?.length ? settings.navItems : fallback.navItems,
+    mobileNavItems: settings?.mobileNavItems?.length
+      ? settings.mobileNavItems
+      : fallback.mobileNavItems,
+    mobileVisitCta: {
+      label: settings?.mobileVisitCtaLabel || fallback.mobileVisitCta.label,
+      href: settings?.mobileVisitCtaHref || fallback.mobileVisitCta.href,
+    },
     hero: {
       images: hero?.slides?.length
         ? hero.slides.map((slide, index) => {
@@ -421,6 +460,40 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
             }
           })
         : fallback.hero.images,
+    },
+    homePage: {
+      introTitle: homePage?.introTitle || fallback.homePage.introTitle,
+      introDescription: homePage?.introDescription || fallback.homePage.introDescription,
+      introActions: homePage?.introActions?.length
+        ? homePage.introActions.map((action) => ({
+            label: action.label || '',
+            href: action.href || '',
+          }))
+        : fallback.homePage.introActions,
+      linkCards: homePage?.linkCards?.length
+        ? homePage.linkCards.map((card, index) => {
+            const fallbackCard =
+              fallback.homePage.linkCards[index] ?? fallback.homePage.linkCards[0]
+            return {
+              id: card.id || fallbackCard.id,
+              eyebrow: card.eyebrow || fallbackCard.eyebrow,
+              title: card.title || fallbackCard.title,
+              description: card.description || fallbackCard.description,
+              href: card.href || fallbackCard.href,
+            }
+          })
+        : fallback.homePage.linkCards,
+    },
+    plantsPage: {
+      eyebrow: plantsPage?.eyebrow || fallback.plantsPage.eyebrow,
+      title: plantsPage?.title || fallback.plantsPage.title,
+      lead: plantsPage?.lead || fallback.plantsPage.lead,
+      leadMobile: plantsPage?.leadMobile || fallback.plantsPage.leadMobile,
+      rareEyebrow: plantsPage?.rareEyebrow || fallback.plantsPage.rareEyebrow,
+      rareTitle: plantsPage?.rareTitle || fallback.plantsPage.rareTitle,
+      rareCopy: plantsPage?.rareCopy || fallback.plantsPage.rareCopy,
+      everydayEyebrow: plantsPage?.everydayEyebrow || fallback.plantsPage.everydayEyebrow,
+      everydayTitle: plantsPage?.everydayTitle || fallback.plantsPage.everydayTitle,
     },
     collections: input.collections.length
       ? input.collections.map((item, index) =>
@@ -541,6 +614,8 @@ export async function loadSiteContent(): Promise<SiteContent> {
     const [
       brand,
       hero,
+      homePage,
+      plantsPage,
       fragrancePage,
       giftPage,
       storyPage,
@@ -553,6 +628,8 @@ export async function loadSiteContent(): Promise<SiteContent> {
     ] = await Promise.all([
       payload.findGlobal({ slug: 'brand', depth: 1 }),
       payload.findGlobal({ slug: 'hero', depth: 2 }),
+      payload.findGlobal({ slug: 'home-page', depth: 0 }),
+      payload.findGlobal({ slug: 'plants-page', depth: 0 }),
       payload.findGlobal({ slug: 'fragrance-page', depth: 2 }),
       payload.findGlobal({ slug: 'gift-page', depth: 2 }),
       payload.findGlobal({ slug: 'story-page', depth: 0 }),
@@ -590,6 +667,8 @@ export async function loadSiteContent(): Promise<SiteContent> {
     return mapPayloadContent({
       brand: brand as unknown as Record<string, unknown>,
       hero: hero as unknown as Record<string, unknown>,
+      homePage: homePage as unknown as Record<string, unknown>,
+      plantsPage: plantsPage as unknown as Record<string, unknown>,
       fragrancePage: fragrancePage as unknown as Record<string, unknown>,
       giftPage: giftPage as unknown as Record<string, unknown>,
       storyPage: storyPage as unknown as Record<string, unknown>,

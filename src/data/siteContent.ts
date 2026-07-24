@@ -17,10 +17,14 @@ import {
   giftOptions as fallbackGiftOptions,
   giftPageContent as fallbackGiftPageContent,
   hero as fallbackHero,
+  homePageContent as fallbackHomePageContent,
   hydroponic as fallbackHydroponic,
+  mobileNavItems as fallbackMobileNavItems,
+  mobileVisitCta as fallbackMobileVisitCta,
   navItems as fallbackNavItems,
   naverStoreUrl as fallbackNaverStoreUrl,
   plantItems as fallbackPlantItems,
+  plantsPageContent as fallbackPlantsPageContent,
   privacyPolicyUrl as fallbackPrivacyPolicyUrl,
   rarePlantItems as fallbackRarePlantItems,
   storeInfo as fallbackStoreInfo,
@@ -35,6 +39,11 @@ export type SiteContent = {
     shortDescription: string
   }
   navItems: NavItem[]
+  mobileNavItems: NavItem[]
+  mobileVisitCta: {
+    label: string
+    href: string
+  }
   hero: {
     images: {
       src: string
@@ -43,6 +52,29 @@ export type SiteContent = {
       mobileOnly?: boolean
       objectPosition?: string
     }[]
+  }
+  homePage: {
+    introTitle: string
+    introDescription: string
+    introActions: { label: string; href: string }[]
+    linkCards: {
+      id: string
+      eyebrow: string
+      title: string
+      description: string
+      href: string
+    }[]
+  }
+  plantsPage: {
+    eyebrow: string
+    title: string
+    lead: string
+    leadMobile: string
+    rareEyebrow: string
+    rareTitle: string
+    rareCopy: string
+    everydayEyebrow: string
+    everydayTitle: string
   }
   collections: Collection[]
   rarePlantItems: PlantItem[]
@@ -102,7 +134,11 @@ export function getFallbackSiteContent(): SiteContent {
   return {
     brand: fallbackBrand,
     navItems: fallbackNavItems,
+    mobileNavItems: fallbackMobileNavItems,
+    mobileVisitCta: fallbackMobileVisitCta,
     hero: fallbackHero,
+    homePage: fallbackHomePageContent,
+    plantsPage: fallbackPlantsPageContent,
     collections: fallbackCollections,
     rarePlantItems: fallbackRarePlantItems,
     plantItems: fallbackPlantItems,

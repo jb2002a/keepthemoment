@@ -96,6 +96,8 @@ export interface Config {
   globals: {
     brand: Brand;
     hero: Hero;
+    'home-page': HomePage;
+    'plants-page': PlantsPage;
     'fragrance-page': FragrancePage;
     'gift-page': GiftPage;
     'story-page': StoryPage;
@@ -106,6 +108,8 @@ export interface Config {
   globalsSelect: {
     brand: BrandSelect<false> | BrandSelect<true>;
     hero: HeroSelect<false> | HeroSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'plants-page': PlantsPageSelect<false> | PlantsPageSelect<true>;
     'fragrance-page': FragrancePageSelect<false> | FragrancePageSelect<true>;
     'gift-page': GiftPageSelect<false> | GiftPageSelect<true>;
     'story-page': StoryPageSelect<false> | StoryPageSelect<true>;
@@ -522,6 +526,57 @@ export interface Hero {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  /**
+   * 줄바꿈은 Enter로 입력하세요. 사이트에서 줄바꿈으로 표시됩니다.
+   */
+  introTitle: string;
+  /**
+   * 줄바꿈은 Enter로 입력하세요.
+   */
+  introDescription: string;
+  introActions?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  linkCards?:
+    | {
+        id?: string | null;
+        eyebrow: string;
+        title: string;
+        description: string;
+        href: string;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plants-page".
+ */
+export interface PlantsPage {
+  id: number;
+  eyebrow?: string | null;
+  title: string;
+  lead: string;
+  leadMobile: string;
+  rareEyebrow?: string | null;
+  rareTitle: string;
+  rareCopy?: string | null;
+  everydayEyebrow?: string | null;
+  everydayTitle: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "fragrance-page".
  */
 export interface FragrancePage {
@@ -711,6 +766,51 @@ export interface HeroSelect<T extends boolean = true> {
         objectPosition?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  introTitle?: T;
+  introDescription?: T;
+  introActions?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  linkCards?:
+    | T
+    | {
+        id?: T;
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+        href?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "plants-page_select".
+ */
+export interface PlantsPageSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  lead?: T;
+  leadMobile?: T;
+  rareEyebrow?: T;
+  rareTitle?: T;
+  rareCopy?: T;
+  everydayEyebrow?: T;
+  everydayTitle?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

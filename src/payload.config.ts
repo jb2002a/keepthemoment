@@ -15,7 +15,9 @@ import { Brand } from './globals/Brand'
 import { FragrancePage } from './globals/FragrancePage'
 import { GiftPage } from './globals/GiftPage'
 import { Hero } from './globals/Hero'
+import { HomePage } from './globals/HomePage'
 import { Hydroponic } from './globals/Hydroponic'
+import { PlantsPage } from './globals/PlantsPage'
 import { SiteSettings } from './globals/SiteSettings'
 import { StoreInfo } from './globals/StoreInfo'
 import { StoryPage } from './globals/StoryPage'
@@ -37,6 +39,8 @@ export default buildConfig({
   globals: [
     Brand,
     Hero,
+    HomePage,
+    PlantsPage,
     FragrancePage,
     GiftPage,
     StoryPage,
