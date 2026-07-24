@@ -1,5 +1,6 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { resolveObjectPosition } from '../lib/mediaFocus'
 import { getFallbackSiteContent, type SiteContent } from './siteContent'
 import type {
   Collection,
@@ -203,6 +204,8 @@ function mapCollection(
     alt?: string | null
     aspectRatio?: string | null
     href?: string | null
+    objectPositionDesktop?: number | null
+    objectPositionMobile?: number | null
   },
   index: number,
   fallbackList: Collection[],
@@ -217,6 +220,14 @@ function mapCollection(
     alt: resolveAlt(item.image, item.alt, fallback.alt),
     aspectRatio: item.aspectRatio || fallback.aspectRatio,
     href: item.href || fallback.href,
+    objectPositionDesktop: resolveObjectPosition(
+      item.objectPositionDesktop,
+      fallback.objectPositionDesktop,
+    ),
+    objectPositionMobile: resolveObjectPosition(
+      item.objectPositionMobile,
+      fallback.objectPositionMobile,
+    ),
   }
 }
 
@@ -226,6 +237,8 @@ function mapStoryBlock(
     image?: MediaLike
     alt?: string | null
     size?: 'wide' | 'portrait' | null
+    objectPositionDesktop?: number | null
+    objectPositionMobile?: number | null
   },
   index: number,
   fallbackList: StoryBlock[],
@@ -236,6 +249,14 @@ function mapStoryBlock(
     image: resolveMediaUrl(item.image, fallback.image),
     alt: resolveAlt(item.image, item.alt, fallback.alt),
     size: item.size || fallback.size,
+    objectPositionDesktop: resolveObjectPosition(
+      item.objectPositionDesktop,
+      fallback.objectPositionDesktop,
+    ),
+    objectPositionMobile: resolveObjectPosition(
+      item.objectPositionMobile,
+      fallback.objectPositionMobile,
+    ),
   }
 }
 
@@ -248,6 +269,8 @@ function mapFragranceBrand(
     href?: string | null
     logoWidth?: string | null
     darkLogo?: boolean | null
+    objectPositionDesktop?: number | null
+    objectPositionMobile?: number | null
   },
   index: number,
   fallbackList: FragranceBrand[],
@@ -261,6 +284,14 @@ function mapFragranceBrand(
     href: item.href || fallback.href,
     logoWidth: item.logoWidth || fallback.logoWidth,
     darkLogo: item.darkLogo ?? fallback.darkLogo,
+    objectPositionDesktop: resolveObjectPosition(
+      item.objectPositionDesktop,
+      fallback.objectPositionDesktop,
+    ),
+    objectPositionMobile: resolveObjectPosition(
+      item.objectPositionMobile,
+      fallback.objectPositionMobile,
+    ),
   }
 }
 
@@ -271,6 +302,8 @@ function mapGiftOption(
     image?: MediaLike
     alt?: string | null
     copy?: string | null
+    objectPositionDesktop?: number | null
+    objectPositionMobile?: number | null
   },
   index: number,
   fallbackList: GiftOption[],
@@ -282,6 +315,14 @@ function mapGiftOption(
     image: resolveMediaUrl(item.image, fallback.image),
     alt: resolveAlt(item.image, item.alt, fallback.alt),
     copy: item.copy || fallback.copy,
+    objectPositionDesktop: resolveObjectPosition(
+      item.objectPositionDesktop,
+      fallback.objectPositionDesktop,
+    ),
+    objectPositionMobile: resolveObjectPosition(
+      item.objectPositionMobile,
+      fallback.objectPositionMobile,
+    ),
   }
 }
 
@@ -300,7 +341,8 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       mobileImage?: MediaLike
       alt?: string
       mobileOnly?: boolean
-      objectPosition?: string
+      objectPositionDesktop?: number | null
+      objectPositionMobile?: number | null
     }>
   } | null
 
@@ -385,6 +427,8 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
     instagramUrl?: string
     image?: MediaLike
     alt?: string
+    objectPositionDesktop?: number | null
+    objectPositionMobile?: number | null
   } | null
 
   const settings = input.siteSettings as {
@@ -442,7 +486,14 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
                 mobileSrc,
                 alt: slide.alt || fallbackSlide.alt,
                 mobileOnly: true,
-                objectPosition: slide.objectPosition || fallbackSlide.objectPosition,
+                objectPositionDesktop: resolveObjectPosition(
+                  slide.objectPositionDesktop,
+                  fallbackSlide.objectPositionDesktop,
+                ),
+                objectPositionMobile: resolveObjectPosition(
+                  slide.objectPositionMobile,
+                  fallbackSlide.objectPositionMobile,
+                ),
               }
             }
 
@@ -455,7 +506,14 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
               mobileSrc,
               alt: slide.alt || fallbackSlide.alt,
               mobileOnly: false,
-              objectPosition: slide.objectPosition || fallbackSlide.objectPosition,
+              objectPositionDesktop: resolveObjectPosition(
+                slide.objectPositionDesktop,
+                fallbackSlide.objectPositionDesktop,
+              ),
+              objectPositionMobile: resolveObjectPosition(
+                slide.objectPositionMobile,
+                fallbackSlide.objectPositionMobile,
+              ),
             }
           })
         : fallback.hero.images,
@@ -584,6 +642,14 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       instagramUrl: store?.instagramUrl || fallback.storeInfo.instagramUrl,
       image: resolveMediaUrl(store?.image, fallback.storeInfo.image),
       alt: resolveAlt(store?.image, store?.alt, fallback.storeInfo.alt),
+      objectPositionDesktop: resolveObjectPosition(
+        store?.objectPositionDesktop,
+        fallback.storeInfo.objectPositionDesktop,
+      ),
+      objectPositionMobile: resolveObjectPosition(
+        store?.objectPositionMobile,
+        fallback.storeInfo.objectPositionMobile,
+      ),
     },
     footerLinks: settings?.footerLinks?.length ? settings.footerLinks : fallback.footerLinks,
     naverStoreUrl: settings?.naverStoreUrl || fallback.naverStoreUrl,

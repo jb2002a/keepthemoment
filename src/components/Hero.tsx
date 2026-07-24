@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { mediaFocusProps } from '../lib/mediaFocus'
 import { useSiteContent } from '../hooks/useSiteContent'
 
 const AUTO_ADVANCE_MS = 5500
@@ -165,18 +166,13 @@ export function Hero() {
                   />
                 ) : null}
                 <img
-                  className="hero__image"
                   src={image.src}
                   alt={image.alt}
                   width="1024"
                   height="682"
                   loading={isActive ? 'eager' : 'lazy'}
                   fetchPriority={isActive ? 'high' : 'auto'}
-                  style={
-                    image.objectPosition && (isMobile || image.mobileOnly)
-                      ? { objectPosition: image.objectPosition }
-                      : undefined
-                  }
+                  {...mediaFocusProps(image, { className: 'hero__image' })}
                 />
               </picture>
             </figure>

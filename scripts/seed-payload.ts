@@ -172,7 +172,8 @@ async function seed() {
             return {
               alt: slide.alt,
               mobileOnly: true,
-              objectPosition: slide.objectPosition,
+              objectPositionDesktop: slide.objectPositionDesktop,
+              objectPositionMobile: slide.objectPositionMobile,
               mobileImage: await uploadImageFromDisk(
                 slide.mobileSrc || slide.src,
                 slide.alt,
@@ -183,7 +184,8 @@ async function seed() {
           return {
             alt: slide.alt,
             mobileOnly: false,
-            objectPosition: slide.objectPosition,
+            objectPositionDesktop: slide.objectPositionDesktop,
+            objectPositionMobile: slide.objectPositionMobile,
             desktopImage: await uploadImageFromDisk(slide.src, slide.alt),
             mobileImage:
               slide.mobileSrc && slide.mobileSrc !== slide.src
@@ -211,6 +213,8 @@ async function seed() {
       aspectRatio: item.aspectRatio,
       href: item.href,
       order: index,
+      objectPositionDesktop: item.objectPositionDesktop,
+      objectPositionMobile: item.objectPositionMobile,
       image: await uploadImageFromDisk(item.image, item.alt),
     }
     if (existing.docs[0]) {
@@ -279,6 +283,8 @@ async function seed() {
       alt: block.alt,
       size: block.size,
       order: index,
+      objectPositionDesktop: block.objectPositionDesktop,
+      objectPositionMobile: block.objectPositionMobile,
       image: await uploadImageFromDisk(block.image, block.alt),
     }
     if (existing.docs[0]) {
@@ -305,6 +311,8 @@ async function seed() {
           href: item.href,
           logoWidth: item.logoWidth,
           darkLogo: item.darkLogo ?? false,
+          objectPositionDesktop: item.objectPositionDesktop,
+          objectPositionMobile: item.objectPositionMobile,
           image: await uploadImageFromDisk(item.image, item.alt),
         })),
       ),
@@ -322,6 +330,8 @@ async function seed() {
           title: item.title,
           alt: item.alt,
           copy: item.copy,
+          objectPositionDesktop: item.objectPositionDesktop,
+          objectPositionMobile: item.objectPositionMobile,
           image: await uploadImageFromDisk(item.image, item.alt),
         })),
       ),
@@ -404,6 +414,8 @@ async function seed() {
       placeUrl: storeInfo.placeUrl,
       instagramUrl: storeInfo.instagramUrl,
       alt: storeInfo.alt,
+      objectPositionDesktop: storeInfo.objectPositionDesktop,
+      objectPositionMobile: storeInfo.objectPositionMobile,
       image: await uploadImageFromDisk(storeInfo.image, storeInfo.alt),
     },
   })

@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { objectPositionFields } from '../fields/objectPosition'
 
 export const FragrancePage: GlobalConfig = {
   slug: 'fragrance-page',
@@ -60,6 +61,7 @@ export const FragrancePage: GlobalConfig = {
           required: true,
           label: '이미지 설명',
         },
+        ...objectPositionFields,
         {
           name: 'href',
           type: 'text',

@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { objectPositionFields } from '../fields/objectPosition'
 
 export const GiftPage: GlobalConfig = {
   slug: 'gift-page',
@@ -60,6 +61,7 @@ export const GiftPage: GlobalConfig = {
           required: true,
           label: '이미지 설명',
         },
+        ...objectPositionFields,
         {
           name: 'copy',
           type: 'textarea',

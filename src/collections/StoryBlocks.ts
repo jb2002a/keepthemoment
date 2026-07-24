@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { objectPositionFields } from '../fields/objectPosition'
 
 export const StoryBlocks: CollectionConfig = {
   slug: 'story-blocks',
@@ -33,6 +34,7 @@ export const StoryBlocks: CollectionConfig = {
       type: 'text',
       label: '이미지 설명',
     },
+    ...objectPositionFields,
     {
       name: 'size',
       type: 'select',

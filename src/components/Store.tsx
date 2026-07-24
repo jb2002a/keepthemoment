@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { mediaFocusProps } from '../lib/mediaFocus'
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
@@ -9,6 +10,7 @@ export function Store() {
   const { storeInfo } = content
   const pathname = usePathname()
   const showMobileImage = pathname !== '/visit'
+  const focus = mediaFocusProps(storeInfo)
 
   return (
     <section
@@ -25,6 +27,7 @@ export function Store() {
               width="1536"
               height="1024"
               loading="lazy"
+              {...focus}
             />
           </Reveal>
 
@@ -42,6 +45,7 @@ export function Store() {
                   width="1200"
                   height="1200"
                   loading="lazy"
+                  {...focus}
                 />
               </div>
             ) : null}

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { objectPositionFields } from '../fields/objectPosition'
 
 export const Collections: CollectionConfig = {
   slug: 'collections',
@@ -56,6 +57,7 @@ export const Collections: CollectionConfig = {
       type: 'text',
       label: '이미지 설명',
     },
+    ...objectPositionFields,
     {
       name: 'aspectRatio',
       type: 'text',

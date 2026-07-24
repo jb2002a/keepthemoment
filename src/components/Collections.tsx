@@ -1,5 +1,6 @@
 'use client'
 
+import { mediaFocusProps } from '../lib/mediaFocus'
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
@@ -21,6 +22,9 @@ export function Collections() {
                 : item.id === 'fragrance'
                   ? '/fragrance'
                   : item.href
+            const focus = mediaFocusProps(item, {
+              style: { aspectRatio: item.aspectRatio },
+            })
 
             return (
               <Reveal as="li" key={item.id} delay={index * 90}>
@@ -37,7 +41,7 @@ export function Collections() {
                       width="768"
                       height="1024"
                       loading="lazy"
-                      style={{ aspectRatio: item.aspectRatio }}
+                      {...focus}
                     />
                   </div>
                   {index === 0 && (

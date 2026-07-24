@@ -1,6 +1,7 @@
 'use client'
 
 import type { CSSProperties } from 'react'
+import { mediaFocusProps } from '../lib/mediaFocus'
 import { useSiteContent } from '../hooks/useSiteContent'
 
 export function Fragrance() {
@@ -21,32 +22,36 @@ export function Fragrance() {
         </div>
 
         <ul className="fragrance-page__grid" aria-label="입점 프래그런스 브랜드">
-          {fragrancePage.brands.map((brand) => (
-            <li key={brand.id}>
-              <a
-                href={brand.href}
-                className={
-                  brand.darkLogo
-                    ? 'fragrance-brand-card fragrance-brand-card--dark-logo'
-                    : 'fragrance-brand-card'
-                }
-                style={{ '--logo-width': brand.logoWidth } as CSSProperties}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${brand.name} 공식 사이트로 이동`}
-              >
-                <div className="fragrance-brand-card__media">
-                  <img
-                    src={brand.image}
-                    alt={brand.alt}
-                    width="700"
-                    height="460"
-                    loading="lazy"
-                  />
-                </div>
-              </a>
-            </li>
-          ))}
+          {fragrancePage.brands.map((brand) => {
+            const focus = mediaFocusProps(brand)
+            return (
+              <li key={brand.id}>
+                <a
+                  href={brand.href}
+                  className={
+                    brand.darkLogo
+                      ? 'fragrance-brand-card fragrance-brand-card--dark-logo'
+                      : 'fragrance-brand-card'
+                  }
+                  style={{ '--logo-width': brand.logoWidth } as CSSProperties}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${brand.name} 공식 사이트로 이동`}
+                >
+                  <div className="fragrance-brand-card__media">
+                    <img
+                      src={brand.image}
+                      alt={brand.alt}
+                      width="700"
+                      height="460"
+                      loading="lazy"
+                      {...focus}
+                    />
+                  </div>
+                </a>
+              </li>
+            )
+          })}
         </ul>
 
         <div className="fragrance-page__note">

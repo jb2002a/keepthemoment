@@ -13,6 +13,8 @@ export type Collection = {
   alt: string
   aspectRatio: string
   href: string
+  objectPositionDesktop?: number
+  objectPositionMobile?: number
 }
 
 export type PlantItem = {
@@ -39,6 +41,8 @@ export type FragranceBrand = {
   /** Display width so wordmark letter size matches VINOIR */
   logoWidth: string
   darkLogo?: boolean
+  objectPositionDesktop?: number
+  objectPositionMobile?: number
 }
 
 export type GiftOption = {
@@ -47,6 +51,8 @@ export type GiftOption = {
   image: string
   alt: string
   copy: string
+  objectPositionDesktop?: number
+  objectPositionMobile?: number
 }
 
 export type StoryBlock = {
@@ -54,6 +60,8 @@ export type StoryBlock = {
   image: string
   alt: string
   size: 'wide' | 'portrait'
+  objectPositionDesktop?: number
+  objectPositionMobile?: number
 }
 
 export type SocialLink = {
@@ -168,38 +176,38 @@ export const hero = {
       src: '/images/hero/main.jpeg',
       mobileSrc: '/images/hero/main-mobile.png',
       alt: '화이트 테이블 위 리프 파우치가 진열된 KEEP THE MOMENT 쇼룸',
-      objectPosition: 'center 38%',
+      objectPositionMobile: 38,
     },
     {
       src: '/images/hero/shelf-mobile.png',
       mobileSrc: '/images/hero/shelf-mobile.png',
       alt: '우드 선반에 진열된 KEEP THE MOMENT 향기·기프트 제품',
       mobileOnly: true,
-      objectPosition: 'center bottom',
+      objectPositionMobile: 100,
     },
     {
       src: '/images/hero/shelf-begonia.png',
       alt: '화이트 선반에 진열된 베고니아와 양치식물',
       mobileOnly: true,
-      objectPosition: 'center center',
+      objectPositionMobile: 50,
     },
     {
       src: '/images/hero/plants-sunlight.png',
       alt: '햇살이 드는 화이트 선반 위 어린 관엽식물들',
       mobileOnly: true,
-      objectPosition: 'center 40%',
+      objectPositionMobile: 40,
     },
     {
       src: '/images/hero/monstera-wall.png',
       alt: '텍스처 벽 앞에 자리한 몬스테라와 안스리움',
       mobileOnly: true,
-      objectPosition: 'center center',
+      objectPositionMobile: 50,
     },
     {
       src: '/images/hero/caladium-triostar.png',
       alt: '칼라디움과 스트로만테 트리오스타가 있는 식물 디스플레이',
       mobileOnly: true,
-      objectPosition: 'center 45%',
+      objectPositionMobile: 45,
     },
   ],
 }
@@ -214,6 +222,7 @@ export const collections: Collection[] = [
     alt: '투명한 유리 화병에서 자라는 몬스테라 수경식물',
     aspectRatio: '3 / 4',
     href: '/plants',
+    objectPositionMobile: 28,
   },
   {
     id: 'fragrance',
@@ -224,6 +233,7 @@ export const collections: Collection[] = [
     alt: '실버 트레이 위에 놓인 미니멀한 향기 제품',
     aspectRatio: '3 / 4',
     href: '/fragrance',
+    objectPositionMobile: 68,
   },
   {
     id: 'gift',
@@ -234,6 +244,7 @@ export const collections: Collection[] = [
     alt: '반투명 파우치에 담긴 작은 식물 선물',
     aspectRatio: '3 / 4',
     href: '/gift',
+    objectPositionMobile: 70,
   },
 ]
 
@@ -766,6 +777,7 @@ export const storeInfo = {
   instagramUrl: 'https://www.instagram.com/keepthemoment_official/',
   image: '/images/story/store-visit.png',
   alt: '자연광이 가득한 KEEP THE MOMENT 행궁 매장 인테리어',
+  objectPositionMobile: 32,
 }
 
 export const footerLinks: SocialLink[] = [

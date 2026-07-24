@@ -1,5 +1,6 @@
 'use client'
 
+import { mediaFocusProps } from '../lib/mediaFocus'
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
@@ -21,17 +22,27 @@ export function Gift() {
         </Reveal>
 
         <div className="gift-page__grid">
-          {giftPage.options.map((item, index) => (
-            <Reveal as="article" key={item.id} className="gift-card" delay={index * 80}>
-              <div className="gift-card__media">
-                <img src={item.image} alt={item.alt} width="900" height="1200" loading="lazy" />
-              </div>
-              <div className="gift-card__body">
-                <h2>{item.title}</h2>
-                <p>{item.copy}</p>
-              </div>
-            </Reveal>
-          ))}
+          {giftPage.options.map((item, index) => {
+            const focus = mediaFocusProps(item)
+            return (
+              <Reveal as="article" key={item.id} className="gift-card" delay={index * 80}>
+                <div className="gift-card__media">
+                  <img
+                    src={item.image}
+                    alt={item.alt}
+                    width="900"
+                    height="1200"
+                    loading="lazy"
+                    {...focus}
+                  />
+                </div>
+                <div className="gift-card__body">
+                  <h2>{item.title}</h2>
+                  <p>{item.copy}</p>
+                </div>
+              </Reveal>
+            )
+          })}
         </div>
 
         <Reveal className="gift-page__note">

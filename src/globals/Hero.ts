@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { objectPositionFields } from '../fields/objectPosition'
 
 export const Hero: GlobalConfig = {
   slug: 'hero',
@@ -69,11 +70,7 @@ export const Hero: GlobalConfig = {
           required: true,
           label: '이미지 설명(대체 텍스트)',
         },
-        {
-          name: 'objectPosition',
-          type: 'text',
-          label: '이미지 위치 조정 (선택)',
-        },
+        ...objectPositionFields,
       ],
     },
   ],

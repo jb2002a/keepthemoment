@@ -206,6 +206,14 @@ export interface Collection {
   mobileTagline?: string | null;
   image: number | Media;
   alt?: string | null;
+  /**
+   * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+   */
+  objectPositionDesktop?: number | null;
+  /**
+   * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+   */
+  objectPositionMobile?: number | null;
   aspectRatio?: string | null;
   href: string;
   /**
@@ -252,6 +260,14 @@ export interface StoryBlock {
   slug: string;
   image: number | Media;
   alt?: string | null;
+  /**
+   * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+   */
+  objectPositionDesktop?: number | null;
+  /**
+   * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+   */
+  objectPositionMobile?: number | null;
   size: 'wide' | 'portrait';
   order?: number | null;
   updatedAt: string;
@@ -395,6 +411,8 @@ export interface CollectionsSelect<T extends boolean = true> {
   mobileTagline?: T;
   image?: T;
   alt?: T;
+  objectPositionDesktop?: T;
+  objectPositionMobile?: T;
   aspectRatio?: T;
   href?: T;
   order?: T;
@@ -438,6 +456,8 @@ export interface StoryBlocksSelect<T extends boolean = true> {
   slug?: T;
   image?: T;
   alt?: T;
+  objectPositionDesktop?: T;
+  objectPositionMobile?: T;
   size?: T;
   order?: T;
   updatedAt?: T;
@@ -518,7 +538,14 @@ export interface Hero {
      */
     mobileImage?: (number | null) | Media;
     alt: string;
-    objectPosition?: string | null;
+    /**
+     * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+     */
+    objectPositionDesktop?: number | null;
+    /**
+     * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+     */
+    objectPositionMobile?: number | null;
     id?: string | null;
   }[];
   updatedAt?: string | null;
@@ -589,6 +616,14 @@ export interface FragrancePage {
     name: string;
     image: number | Media;
     alt: string;
+    /**
+     * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+     */
+    objectPositionDesktop?: number | null;
+    /**
+     * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+     */
+    objectPositionMobile?: number | null;
     href: string;
     logoWidth?: string | null;
     darkLogo?: boolean | null;
@@ -611,6 +646,14 @@ export interface GiftPage {
     title: string;
     image: number | Media;
     alt: string;
+    /**
+     * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+     */
+    objectPositionDesktop?: number | null;
+    /**
+     * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+     */
+    objectPositionMobile?: number | null;
     copy: string;
   }[];
   note?: string | null;
@@ -701,6 +744,14 @@ export interface StoreInfo {
    */
   image: number | Media;
   alt?: string | null;
+  /**
+   * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+   */
+  objectPositionDesktop?: number | null;
+  /**
+   * 0=위쪽, 50=가운데, 100=아래쪽. 비우면 기본값.
+   */
+  objectPositionMobile?: number | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -765,7 +816,8 @@ export interface HeroSelect<T extends boolean = true> {
         desktopImage?: T;
         mobileImage?: T;
         alt?: T;
-        objectPosition?: T;
+        objectPositionDesktop?: T;
+        objectPositionMobile?: T;
         id?: T;
       };
   updatedAt?: T;
@@ -832,6 +884,8 @@ export interface FragrancePageSelect<T extends boolean = true> {
         name?: T;
         image?: T;
         alt?: T;
+        objectPositionDesktop?: T;
+        objectPositionMobile?: T;
         href?: T;
         logoWidth?: T;
         darkLogo?: T;
@@ -856,6 +910,8 @@ export interface GiftPageSelect<T extends boolean = true> {
         title?: T;
         image?: T;
         alt?: T;
+        objectPositionDesktop?: T;
+        objectPositionMobile?: T;
         copy?: T;
       };
   note?: T;
@@ -940,6 +996,8 @@ export interface StoreInfoSelect<T extends boolean = true> {
   instagramUrl?: T;
   image?: T;
   alt?: T;
+  objectPositionDesktop?: T;
+  objectPositionMobile?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

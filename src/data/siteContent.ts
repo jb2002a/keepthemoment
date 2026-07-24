@@ -50,7 +50,8 @@ export type SiteContent = {
       mobileSrc?: string
       alt: string
       mobileOnly?: boolean
-      objectPosition?: string
+      objectPositionDesktop?: number
+      objectPositionMobile?: number
     }[]
   }
   homePage: {
@@ -122,6 +123,8 @@ export type SiteContent = {
     instagramUrl: string
     image: string
     alt: string
+    objectPositionDesktop?: number
+    objectPositionMobile?: number
   }
   footerLinks: SocialLink[]
   naverStoreUrl: string

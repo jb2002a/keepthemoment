@@ -1,5 +1,6 @@
 'use client'
 
+import { mediaFocusProps } from '../lib/mediaFocus'
 import { useSiteContent } from '../hooks/useSiteContent'
 import { Reveal } from './Reveal'
 
@@ -22,21 +23,25 @@ export function BrandStory() {
         </Reveal>
 
         <div className="story-gallery">
-          {storyBlocks.map((block, index) => (
-            <Reveal
-              key={block.id}
-              className={`story-gallery__item story-gallery__item--${block.size}`}
-              delay={index * 100}
-            >
-              <img
-                src={block.image}
-                alt={block.alt}
-                width={block.size === 'wide' ? 1536 : 768}
-                height={block.size === 'wide' ? 1024 : 1024}
-                loading="lazy"
-              />
-            </Reveal>
-          ))}
+          {storyBlocks.map((block, index) => {
+            const focus = mediaFocusProps(block)
+            return (
+              <Reveal
+                key={block.id}
+                className={`story-gallery__item story-gallery__item--${block.size}`}
+                delay={index * 100}
+              >
+                <img
+                  src={block.image}
+                  alt={block.alt}
+                  width={block.size === 'wide' ? 1536 : 768}
+                  height={block.size === 'wide' ? 1024 : 1024}
+                  loading="lazy"
+                  {...focus}
+                />
+              </Reveal>
+            )
+          })}
         </div>
 
         <div className="story__body">

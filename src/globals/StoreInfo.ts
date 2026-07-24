@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { objectPositionFields } from '../fields/objectPosition'
 
 export const StoreInfo: GlobalConfig = {
   slug: 'store-info',
@@ -90,5 +91,6 @@ export const StoreInfo: GlobalConfig = {
       type: 'text',
       label: '이미지 설명',
     },
+    ...objectPositionFields,
   ],
 }
