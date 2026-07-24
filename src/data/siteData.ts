@@ -766,8 +766,6 @@ export const storeInfo = {
   instagramUrl: 'https://www.instagram.com/keepthemoment_official/',
   image: '/images/story/store-visit.png',
   alt: '자연광이 가득한 KEEP THE MOMENT 행궁 매장 인테리어',
-  mobileBottomImage: '/images/content/visit-mobile-bottom.png',
-  mobileBottomAlt: 'KEEP THE MOMENT 행궁 매장 외관과 테라스',
 }
 
 export const footerLinks: SocialLink[] = [

@@ -385,8 +385,6 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
     instagramUrl?: string
     image?: MediaLike
     alt?: string
-    mobileBottomImage?: MediaLike
-    mobileBottomAlt?: string
   } | null
 
   const settings = input.siteSettings as {
@@ -586,15 +584,6 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       instagramUrl: store?.instagramUrl || fallback.storeInfo.instagramUrl,
       image: resolveMediaUrl(store?.image, fallback.storeInfo.image),
       alt: resolveAlt(store?.image, store?.alt, fallback.storeInfo.alt),
-      mobileBottomImage: resolveMediaUrl(
-        store?.mobileBottomImage,
-        fallback.storeInfo.mobileBottomImage,
-      ),
-      mobileBottomAlt: resolveAlt(
-        store?.mobileBottomImage,
-        store?.mobileBottomAlt,
-        fallback.storeInfo.mobileBottomAlt,
-      ),
     },
     footerLinks: settings?.footerLinks?.length ? settings.footerLinks : fallback.footerLinks,
     naverStoreUrl: settings?.naverStoreUrl || fallback.naverStoreUrl,

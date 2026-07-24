@@ -122,8 +122,6 @@ export type SiteContent = {
     instagramUrl: string
     image: string
     alt: string
-    mobileBottomImage: string
-    mobileBottomAlt: string
   }
   footerLinks: SocialLink[]
   naverStoreUrl: string

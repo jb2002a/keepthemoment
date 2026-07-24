@@ -8,8 +8,7 @@ export function Store() {
   const { content } = useSiteContent()
   const { storeInfo } = content
   const pathname = usePathname()
-  const showMobileBottom =
-    pathname !== '/visit' && Boolean(storeInfo.mobileBottomImage)
+  const showMobileImage = pathname !== '/visit'
 
   return (
     <section
@@ -35,11 +34,11 @@ export function Store() {
               {storeInfo.title}
             </h2>
 
-            {showMobileBottom ? (
+            {showMobileImage ? (
               <div className="store__mobile-bottom">
                 <img
-                  src={storeInfo.mobileBottomImage}
-                  alt={storeInfo.mobileBottomAlt}
+                  src={storeInfo.image}
+                  alt={storeInfo.alt}
                   width="1200"
                   height="1200"
                   loading="lazy"

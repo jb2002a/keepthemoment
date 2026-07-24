@@ -405,11 +405,6 @@ async function seed() {
       instagramUrl: storeInfo.instagramUrl,
       alt: storeInfo.alt,
       image: await uploadImageFromDisk(storeInfo.image, storeInfo.alt),
-      mobileBottomAlt: storeInfo.mobileBottomAlt,
-      mobileBottomImage: await uploadImageFromDisk(
-        storeInfo.mobileBottomImage,
-        storeInfo.mobileBottomAlt,
-      ),
     },
   })
   console.log('  upserted store-info')

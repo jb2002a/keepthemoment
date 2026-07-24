@@ -696,13 +696,11 @@ export interface StoreInfo {
   mapUrl?: string | null;
   placeUrl?: string | null;
   instagramUrl?: string | null;
+  /**
+   * 모바일 홈 Visit 섹션과 Visit 페이지에 공통으로 표시됩니다.
+   */
   image: number | Media;
   alt?: string | null;
-  /**
-   * 모바일 Visit 페이지 하단에만 표시되는 이미지입니다.
-   */
-  mobileBottomImage?: (number | null) | Media;
-  mobileBottomAlt?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -942,8 +940,6 @@ export interface StoreInfoSelect<T extends boolean = true> {
   instagramUrl?: T;
   image?: T;
   alt?: T;
-  mobileBottomImage?: T;
-  mobileBottomAlt?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
