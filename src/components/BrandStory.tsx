@@ -19,7 +19,6 @@ export function BrandStory() {
           <h2 id="story-heading" className="section__title">
             {storyPage.title}
           </h2>
-          <p className="section__lead">{storyPage.lead}</p>
         </Reveal>
 
         <div className="story-gallery">
@@ -39,6 +38,10 @@ export function BrandStory() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="story__body" delay={200}>
+          <p className="section__lead">{storyPage.lead}</p>
+        </Reveal>
       </div>
     </section>
   )

@@ -577,6 +577,12 @@ button {
 .page-main .story__statement {
   margin-bottom: clamp(1rem, 3vw, 2rem);
 }
+.page-main .story-gallery {
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+}
+.page-main .story__body {
+  margin-top: 0;
+}
 .page-main .brand-story .section__inner {
   padding-inline: clamp(1rem, 2vw, 2rem);
 }
@@ -587,13 +593,17 @@ button {
 }
 .story__statement {
   max-width: 46rem;
-  margin-bottom: clamp(3rem, 8vw, 7rem);
+  margin-bottom: clamp(2rem, 5vw, 4rem);
 }
 .story-gallery {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(8rem, 0.36fr);
   gap: clamp(0.75rem, 2vw, 2rem);
   align-items: end;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
+}
+.story__body {
+  max-width: 46rem;
 }
 .story-gallery__item { overflow: hidden; }
 .story-gallery__item img {
