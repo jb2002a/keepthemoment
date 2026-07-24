@@ -1402,6 +1402,9 @@ button {
   .collections__grid > li:nth-child(2) .collection-card__media img {
     object-position: center 68%;
   }
+  .collections__grid > li:nth-child(3) .collection-card__media img {
+    object-position: center 70%;
+  }
   .gift-card__media,
   .plant-card__media {
     aspect-ratio: 4 / 3;
