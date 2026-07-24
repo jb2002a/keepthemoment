@@ -98,6 +98,7 @@ export interface Config {
     hero: Hero;
     'fragrance-page': FragrancePage;
     'gift-page': GiftPage;
+    'story-page': StoryPage;
     hydroponic: Hydroponic;
     'store-info': StoreInfo;
     'site-settings': SiteSetting;
@@ -107,6 +108,7 @@ export interface Config {
     hero: HeroSelect<false> | HeroSelect<true>;
     'fragrance-page': FragrancePageSelect<false> | FragrancePageSelect<true>;
     'gift-page': GiftPageSelect<false> | GiftPageSelect<true>;
+    'story-page': StoryPageSelect<false> | StoryPageSelect<true>;
     hydroponic: HydroponicSelect<false> | HydroponicSelect<true>;
     'store-info': StoreInfoSelect<false> | StoreInfoSelect<true>;
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
@@ -557,6 +559,18 @@ export interface GiftPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "story-page".
+ */
+export interface StoryPage {
+  id: number;
+  eyebrow?: string | null;
+  title: string;
+  lead: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hydroponic".
  */
 export interface Hydroponic {
@@ -601,6 +615,8 @@ export interface Hydroponic {
  */
 export interface StoreInfo {
   id: number;
+  eyebrow?: string | null;
+  title: string;
   name: string;
   address: string;
   addressDetail?: string | null;
@@ -724,6 +740,18 @@ export interface GiftPageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "story-page_select".
+ */
+export interface StoryPageSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  lead?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "hydroponic_select".
  */
 export interface HydroponicSelect<T extends boolean = true> {
@@ -767,6 +795,8 @@ export interface HydroponicSelect<T extends boolean = true> {
  * via the `definition` "store-info_select".
  */
 export interface StoreInfoSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
   name?: T;
   address?: T;
   addressDetail?: T;

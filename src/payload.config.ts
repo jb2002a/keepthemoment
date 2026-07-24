@@ -18,6 +18,7 @@ import { Hero } from './globals/Hero'
 import { Hydroponic } from './globals/Hydroponic'
 import { SiteSettings } from './globals/SiteSettings'
 import { StoreInfo } from './globals/StoreInfo'
+import { StoryPage } from './globals/StoryPage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,7 +34,16 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Collections, Plants, StoryBlocks],
-  globals: [Brand, Hero, FragrancePage, GiftPage, Hydroponic, StoreInfo, SiteSettings],
+  globals: [
+    Brand,
+    Hero,
+    FragrancePage,
+    GiftPage,
+    StoryPage,
+    Hydroponic,
+    StoreInfo,
+    SiteSettings,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || 'change-me-in-production',
   typescript: {

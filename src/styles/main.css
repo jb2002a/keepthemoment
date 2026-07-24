@@ -423,6 +423,7 @@ button {
   margin-top: 1.25rem;
   font-size: clamp(0.9rem, 1.3vw, 1.1rem);
   color: var(--color-muted-strong);
+  white-space: pre-line;
 }
 .text-link {
   flex: 0 0 auto;

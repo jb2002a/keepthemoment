@@ -8,6 +8,19 @@ export const StoreInfo: GlobalConfig = {
   },
   fields: [
     {
+      name: 'eyebrow',
+      type: 'text',
+      defaultValue: 'Visit',
+      label: '작은 제목',
+    },
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      defaultValue: 'Haenggung Store.',
+      label: '큰 제목',
+    },
+    {
       name: 'name',
       type: 'text',
       required: true,

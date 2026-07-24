@@ -25,6 +25,7 @@ type PayloadSeedLike = {
   hero: Record<string, unknown> | null
   fragrancePage: Record<string, unknown> | null
   giftPage: Record<string, unknown> | null
+  storyPage: Record<string, unknown> | null
   hydroponic: Record<string, unknown> | null
   storeInfo: Record<string, unknown> | null
   siteSettings: Record<string, unknown> | null
@@ -315,6 +316,12 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
     options?: Array<Record<string, unknown>>
   } | null
 
+  const storyPage = input.storyPage as {
+    eyebrow?: string
+    title?: string
+    lead?: string
+  } | null
+
   const hydroponic = input.hydroponic as {
     title?: string
     description?: string
@@ -335,6 +342,8 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
   } | null
 
   const store = input.storeInfo as {
+    eyebrow?: string
+    title?: string
     name?: string
     address?: string
     addressDetail?: string
@@ -434,6 +443,11 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
           ),
         )
       : fallback.storyBlocks,
+    storyPage: {
+      eyebrow: storyPage?.eyebrow || fallback.storyPage.eyebrow,
+      title: storyPage?.title || fallback.storyPage.title,
+      lead: storyPage?.lead || fallback.storyPage.lead,
+    },
     fragrancePage: {
       eyebrow: fragrancePage?.eyebrow || fallback.fragrancePage.eyebrow,
       title: fragrancePage?.title || fallback.fragrancePage.title,
@@ -476,6 +490,8 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       ),
     },
     storeInfo: {
+      eyebrow: store?.eyebrow || fallback.storeInfo.eyebrow,
+      title: store?.title || fallback.storeInfo.title,
       name: store?.name || fallback.storeInfo.name,
       address: store?.address || fallback.storeInfo.address,
       addressDetail: store?.addressDetail || fallback.storeInfo.addressDetail,
@@ -514,6 +530,7 @@ export async function loadSiteContent(): Promise<SiteContent> {
       hero,
       fragrancePage,
       giftPage,
+      storyPage,
       hydroponic,
       storeInfo,
       siteSettings,
@@ -525,6 +542,7 @@ export async function loadSiteContent(): Promise<SiteContent> {
       payload.findGlobal({ slug: 'hero', depth: 2 }),
       payload.findGlobal({ slug: 'fragrance-page', depth: 2 }),
       payload.findGlobal({ slug: 'gift-page', depth: 2 }),
+      payload.findGlobal({ slug: 'story-page', depth: 0 }),
       payload.findGlobal({ slug: 'hydroponic', depth: 1 }),
       payload.findGlobal({ slug: 'store-info', depth: 1 }),
       payload.findGlobal({ slug: 'site-settings', depth: 0 }),
@@ -561,6 +579,7 @@ export async function loadSiteContent(): Promise<SiteContent> {
       hero: hero as unknown as Record<string, unknown>,
       fragrancePage: fragrancePage as unknown as Record<string, unknown>,
       giftPage: giftPage as unknown as Record<string, unknown>,
+      storyPage: storyPage as unknown as Record<string, unknown>,
       hydroponic: hydroponic as unknown as Record<string, unknown>,
       storeInfo: storeInfo as unknown as Record<string, unknown>,
       siteSettings: siteSettings as unknown as Record<string, unknown>,

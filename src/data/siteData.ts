@@ -188,6 +188,12 @@ export const giftPageContent = {
   note: '선물 포장은 식물 상태와 재고에 따라 가능한 구성이 달라질 수 있어요. 방문 전 원하는 분위기나 예산을 알려주시면 더 알맞게 준비해드립니다.',
 }
 
+export const storyPageContent = {
+  eyebrow: 'Our Story',
+  title: 'Nature & Memory.',
+  lead: '식물과 향, 그리고 작은 선물은 오늘의 분위기를 조용히 머금습니다.\n그리고 그 순간을 집으로 가져갈 수 있는 경험을 드리고 싶습니다.',
+}
+
 export const fragranceBrands: FragranceBrand[] = [
   {
     id: 'nudara',
@@ -679,6 +685,8 @@ export const hydroponic: HydroponicContent = {
 }
 
 export const storeInfo = {
+  eyebrow: 'Visit',
+  title: 'Haenggung Store.',
   name: 'KEEP THE MOMENT',
   address: '경기 수원시 팔달구 신풍로63번길 14 2층',
   addressDetail: '2F, 14, Sinpung-ro 63beon-gil, Paldal-gu, Suwon-si, Gyeonggi-do',

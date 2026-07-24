@@ -25,6 +25,7 @@ import {
   rarePlantItems as fallbackRarePlantItems,
   storeInfo as fallbackStoreInfo,
   storyBlocks as fallbackStoryBlocks,
+  storyPageContent as fallbackStoryPageContent,
 } from './siteData'
 
 export type SiteContent = {
@@ -47,6 +48,11 @@ export type SiteContent = {
   rarePlantItems: PlantItem[]
   plantItems: PlantItem[]
   storyBlocks: StoryBlock[]
+  storyPage: {
+    eyebrow: string
+    title: string
+    lead: string
+  }
   fragrancePage: {
     eyebrow: string
     title: string
@@ -70,6 +76,8 @@ export type SiteContent = {
     sections: HydroponicGuideSection[]
   }
   storeInfo: {
+    eyebrow: string
+    title: string
     name: string
     address: string
     addressDetail: string
@@ -96,6 +104,7 @@ export function getFallbackSiteContent(): SiteContent {
     rarePlantItems: fallbackRarePlantItems,
     plantItems: fallbackPlantItems,
     storyBlocks: fallbackStoryBlocks,
+    storyPage: fallbackStoryPageContent,
     fragrancePage: {
       ...fallbackFragrancePageContent,
       brands: fallbackFragranceBrands,

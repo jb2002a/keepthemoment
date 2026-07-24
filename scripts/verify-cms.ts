@@ -13,6 +13,7 @@ async function main() {
     hero: null,
     fragrancePage: null,
     giftPage: null,
+    storyPage: null,
     hydroponic: null,
     storeInfo: null,
     siteSettings: null,
@@ -28,7 +29,7 @@ async function main() {
     `[verify] live counts plants=${live.plantItems.length} rare=${live.rarePlantItems.length} collections=${live.collections.length}`,
   )
   console.log(
-    `[verify] store hours=${live.storeInfo.hours.length} footerLinks=${live.footerLinks.length}`,
+    `[verify] story="${live.storyPage.title}" visit="${live.storeInfo.title}" hours=${live.storeInfo.hours.length} footerLinks=${live.footerLinks.length}`,
   )
 }
 

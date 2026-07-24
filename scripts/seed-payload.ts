@@ -20,6 +20,7 @@ import {
   rarePlantItems,
   storeInfo,
   storyBlocks,
+  storyPageContent,
 } from '../src/data/siteData'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -70,7 +71,7 @@ async function seed() {
 
   if (dryRun) {
     console.log(
-      `Dry-run complete. Documents: brand/hero/fragrance/gift/hydroponic/store/settings + ${collections.length} collections + ${rarePlantItems.length + plantItems.length} plants + ${storyBlocks.length} story blocks.`,
+      `Dry-run complete. Documents: brand/hero/fragrance/gift/story/hydroponic/store/settings + ${collections.length} collections + ${rarePlantItems.length + plantItems.length} plants + ${storyBlocks.length} story blocks.`,
     )
     return
   }
@@ -324,6 +325,14 @@ async function seed() {
   console.log('  upserted gift-page')
 
   await payload.updateGlobal({
+    slug: 'story-page',
+    data: {
+      ...storyPageContent,
+    },
+  })
+  console.log('  upserted story-page')
+
+  await payload.updateGlobal({
     slug: 'hydroponic',
     data: {
       title: hydroponic.title,
@@ -358,6 +367,8 @@ async function seed() {
   await payload.updateGlobal({
     slug: 'store-info',
     data: {
+      eyebrow: storeInfo.eyebrow,
+      title: storeInfo.title,
       name: storeInfo.name,
       address: storeInfo.address,
       addressDetail: storeInfo.addressDetail,

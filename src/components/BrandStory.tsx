@@ -5,7 +5,7 @@ import { Reveal } from './Reveal'
 
 export function BrandStory() {
   const { content } = useSiteContent()
-  const { storyBlocks } = content
+  const { storyPage, storyBlocks } = content
 
   return (
     <section
@@ -15,15 +15,11 @@ export function BrandStory() {
     >
       <div className="section__inner">
         <Reveal className="story__statement">
-          <p className="section__eyebrow">Our Story</p>
+          <p className="section__eyebrow">{storyPage.eyebrow}</p>
           <h2 id="story-heading" className="section__title">
-            Nature & Memory.
+            {storyPage.title}
           </h2>
-          <p className="section__lead">
-            식물과 향, 그리고 작은 선물은 오늘의 분위기를 조용히 머금습니다.
-            <br />
-            그리고 그 순간을 집으로 가져갈 수 있는 경험을 드리고 싶습니다.
-          </p>
+          <p className="section__lead">{storyPage.lead}</p>
         </Reveal>
 
         <div className="story-gallery">

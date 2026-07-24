@@ -26,9 +26,9 @@ export function Store() {
           </Reveal>
 
           <Reveal className="store__info" delay={100}>
-            <p className="section__eyebrow">Visit</p>
+            <p className="section__eyebrow">{storeInfo.eyebrow}</p>
             <h2 id="store-heading" className="section__title">
-              Haenggung Store.
+              {storeInfo.title}
             </h2>
             <h3 className="store__name">{storeInfo.name}</h3>
             <p className="store__address">
