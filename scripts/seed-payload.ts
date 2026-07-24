@@ -330,6 +330,27 @@ async function seed() {
       description: hydroponic.description,
       alt: hydroponic.alt,
       image: await uploadImageFromDisk(hydroponic.image, hydroponic.alt),
+      intro: hydroponic.intro.map((text) => ({ text })),
+      sections: hydroponic.sections.map((section) => ({
+        sectionId: section.id,
+        title: section.title,
+        blocks: section.blocks.map((block) => {
+          if (block.type === 'list') {
+            return {
+              blockType: 'list' as const,
+              items: block.items.map((item) => ({
+                title: item.title,
+                body: item.body,
+              })),
+            }
+          }
+
+          return {
+            blockType: block.type,
+            text: block.text,
+          }
+        }),
+      })),
     },
   })
   console.log('  upserted hydroponic')

@@ -2,6 +2,7 @@ import type {
   Collection,
   FragranceBrand,
   GiftOption,
+  HydroponicGuideSection,
   NavItem,
   PlantItem,
   SocialLink,
@@ -65,6 +66,8 @@ export type SiteContent = {
     description: string
     image: string
     alt: string
+    intro: string[]
+    sections: HydroponicGuideSection[]
   }
   storeInfo: {
     name: string

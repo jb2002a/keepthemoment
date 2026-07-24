@@ -1,61 +1,103 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useSiteContent } from '../hooks/useSiteContent'
 
 const AUTO_ADVANCE_MS = 5500
 const MOBILE_MQ = '(max-width: 720px)'
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(() =>
-    typeof window !== 'undefined' ? window.matchMedia(MOBILE_MQ).matches : false,
-  )
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia(MOBILE_MQ)
-    const onChange = () => setIsMobile(mediaQuery.matches)
-    onChange()
-    mediaQuery.addEventListener('change', onChange)
-    return () => mediaQuery.removeEventListener('change', onChange)
+function getVisibleSlideIndices(
+  slides: { mobileOnly?: boolean }[],
+  isMobile: boolean,
+) {
+  return slides.reduce<number[]>((indices, image, index) => {
+    if (isMobile || !image.mobileOnly) indices.push(index)
+    return indices
   }, [])
-
-  return isMobile
 }
 
 export function Hero() {
   const { content } = useSiteContent()
-  const isMobile = useIsMobile()
-  const slides = content.hero.images.filter(
-    (image) => isMobile || !image.mobileOnly,
-  )
-  const [activeIndex, setActiveIndex] = useState(0)
+  const slides = content.hero.images
+  const [isMobile, setIsMobile] = useState(false)
+  const [ready, setReady] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const firstDesktopSlide = slides.findIndex((image) => !image.mobileOnly)
+    return firstDesktopSlide === -1 ? 0 : firstDesktopSlide
+  })
   const [isPaused, setIsPaused] = useState(false)
   const touchStartX = useRef<number | null>(null)
+  const readyRef = useRef(false)
 
   useEffect(() => {
-    setActiveIndex((index) => (index >= slides.length ? 0 : index))
-  }, [slides.length])
+    const mediaQuery = window.matchMedia(MOBILE_MQ)
+
+    const applyViewport = () => {
+      const mobile = mediaQuery.matches
+      const nextVisible = getVisibleSlideIndices(slides, mobile)
+      setIsMobile(mobile)
+
+      if (!readyRef.current) {
+        setActiveIndex(nextVisible[0] ?? 0)
+        readyRef.current = true
+        setReady(true)
+        return
+      }
+
+      setActiveIndex((current) =>
+        nextVisible.includes(current) ? current : (nextVisible[0] ?? 0),
+      )
+    }
+
+    applyViewport()
+    mediaQuery.addEventListener('change', applyViewport)
+    return () => mediaQuery.removeEventListener('change', applyViewport)
+  }, [slides])
+
+  const visibleSlideIndices = useMemo(
+    () => getVisibleSlideIndices(slides, isMobile),
+    [isMobile, slides],
+  )
+  const visibleSlideSet = useMemo(
+    () => new Set(visibleSlideIndices),
+    [visibleSlideIndices],
+  )
+  const visibleSlideCount = visibleSlideIndices.length
 
   const goTo = useCallback(
     (index: number) => {
-      if (slides.length === 0) return
-      setActiveIndex((index + slides.length) % slides.length)
+      if (!visibleSlideSet.has(index)) return
+      setActiveIndex(index)
     },
-    [slides.length],
+    [visibleSlideSet],
   )
 
   const goNext = useCallback(() => {
-    if (slides.length === 0) return
-    setActiveIndex((index) => (index + 1) % slides.length)
-  }, [slides.length])
+    if (visibleSlideCount === 0) return
+    setActiveIndex((index) => {
+      const currentVisibleIndex = visibleSlideIndices.indexOf(index)
+      const nextVisibleIndex =
+        currentVisibleIndex === -1
+          ? 0
+          : (currentVisibleIndex + 1) % visibleSlideCount
+      return visibleSlideIndices[nextVisibleIndex] ?? index
+    })
+  }, [visibleSlideCount, visibleSlideIndices])
 
   const goPrev = useCallback(() => {
-    if (slides.length === 0) return
-    setActiveIndex((index) => (index - 1 + slides.length) % slides.length)
-  }, [slides.length])
+    if (visibleSlideCount === 0) return
+    setActiveIndex((index) => {
+      const currentVisibleIndex = visibleSlideIndices.indexOf(index)
+      const prevVisibleIndex =
+        currentVisibleIndex === -1
+          ? visibleSlideCount - 1
+          : (currentVisibleIndex - 1 + visibleSlideCount) % visibleSlideCount
+      return visibleSlideIndices[prevVisibleIndex] ?? index
+    })
+  }, [visibleSlideCount, visibleSlideIndices])
 
   useEffect(() => {
-    if (slides.length <= 1 || isPaused) return
+    if (!ready || visibleSlideCount <= 1 || isPaused) return
 
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mediaQuery.matches) return
@@ -65,16 +107,16 @@ export function Hero() {
     }, AUTO_ADVANCE_MS)
 
     return () => window.clearInterval(timer)
-  }, [slides.length, isPaused, goNext])
+  }, [ready, visibleSlideCount, isPaused, goNext])
 
   if (slides.length === 0) return null
 
   return (
     <section
-      className="hero"
+      className={['hero', ready ? '' : 'hero--pending'].filter(Boolean).join(' ')}
       id="top"
       aria-label="KEEP THE MOMENT main hero"
-      aria-roledescription={slides.length > 1 ? 'carousel' : undefined}
+      aria-roledescription={ready && visibleSlideCount > 1 ? 'carousel' : undefined}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocusCapture={() => setIsPaused(true)}
@@ -87,7 +129,7 @@ export function Hero() {
         touchStartX.current = event.changedTouches[0]?.clientX ?? null
       }}
       onTouchEnd={(event) => {
-        if (touchStartX.current === null || slides.length <= 1) return
+        if (!ready || touchStartX.current === null || visibleSlideCount <= 1) return
         const deltaX =
           (event.changedTouches[0]?.clientX ?? touchStartX.current) -
           touchStartX.current
@@ -98,45 +140,51 @@ export function Hero() {
       }}
     >
       <div className="hero__track">
-        {slides.map((image, index) => (
-          <figure
-            key={image.mobileSrc ?? image.src}
-            className={[
-              'hero__slide',
-              index === activeIndex ? 'is-active' : '',
-              image.mobileOnly ? 'hero__slide--focus-bottom' : '',
-            ]
-              .filter(Boolean)
-              .join(' ')}
-            aria-hidden={index !== activeIndex}
-          >
-            <picture>
-              {image.mobileSrc ? (
-                <source
-                  media="(max-width: 720px)"
-                  srcSet={image.mobileSrc}
+        {slides.map((image, index) => {
+          const isVisible = ready && visibleSlideSet.has(index)
+          const isActive = isVisible && index === activeIndex
+
+          return (
+            <figure
+              key={image.mobileSrc ?? image.src}
+              className={[
+                'hero__slide',
+                isActive ? 'is-active' : '',
+                image.mobileOnly ? 'hero__slide--mobile-only' : '',
+                image.mobileOnly ? 'hero__slide--focus-bottom' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              aria-hidden={!isActive}
+            >
+              <picture>
+                {image.mobileSrc ? (
+                  <source
+                    media="(max-width: 720px)"
+                    srcSet={image.mobileSrc}
+                  />
+                ) : null}
+                <img
+                  className="hero__image"
+                  src={image.src}
+                  alt={image.alt}
+                  width="1024"
+                  height="682"
+                  loading={isActive ? 'eager' : 'lazy'}
+                  fetchPriority={isActive ? 'high' : 'auto'}
+                  style={
+                    image.objectPosition && (isMobile || image.mobileOnly)
+                      ? { objectPosition: image.objectPosition }
+                      : undefined
+                  }
                 />
-              ) : null}
-              <img
-                className="hero__image"
-                src={image.src}
-                alt={image.alt}
-                width="1024"
-                height="682"
-                loading={index === 0 ? 'eager' : 'lazy'}
-                fetchPriority={index === 0 ? 'high' : 'auto'}
-                style={
-                  image.objectPosition && (isMobile || image.mobileOnly)
-                    ? { objectPosition: image.objectPosition }
-                    : undefined
-                }
-              />
-            </picture>
-          </figure>
-        ))}
+              </picture>
+            </figure>
+          )
+        })}
       </div>
 
-      {slides.length > 1 ? (
+      {ready && visibleSlideCount > 1 ? (
         <>
           <div className="hero__controls">
             <button
@@ -158,17 +206,22 @@ export function Hero() {
           </div>
 
           <div className="hero__dots" role="tablist" aria-label="히어로 슬라이드">
-            {slides.map((image, index) => (
-              <button
-                key={image.mobileSrc ?? image.src}
-                type="button"
-                role="tab"
-                className={`hero__dot${index === activeIndex ? ' is-active' : ''}`}
-                aria-label={`${index + 1}번째 이미지`}
-                aria-selected={index === activeIndex}
-                onClick={() => goTo(index)}
-              />
-            ))}
+            {visibleSlideIndices.map((slideIndex, dotIndex) => {
+              const image = slides[slideIndex]
+              if (!image) return null
+
+              return (
+                <button
+                  key={image.mobileSrc ?? image.src}
+                  type="button"
+                  role="tab"
+                  className={`hero__dot${slideIndex === activeIndex ? ' is-active' : ''}`}
+                  aria-label={`${dotIndex + 1}번째 이미지`}
+                  aria-selected={slideIndex === activeIndex}
+                  onClick={() => goTo(slideIndex)}
+                />
+              )
+            })}
           </div>
         </>
       ) : null}

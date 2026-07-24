@@ -61,6 +61,34 @@ export type SocialLink = {
   href: string
 }
 
+export type HydroponicGuideBlock =
+  | {
+      type: 'paragraph' | 'quote'
+      text: string
+    }
+  | {
+      type: 'list'
+      items: {
+        title: string
+        body: string
+      }[]
+    }
+
+export type HydroponicGuideSection = {
+  id: string
+  title: string
+  blocks: HydroponicGuideBlock[]
+}
+
+export type HydroponicContent = {
+  title: string
+  description: string
+  image: string
+  alt: string
+  intro: string[]
+  sections: HydroponicGuideSection[]
+}
+
 export const brand = {
   name: 'KEEP THE MOMENT',
   tagline: 'Nature meets Memory.',
@@ -527,11 +555,127 @@ export const storyBlocks: StoryBlock[] = [
   },
 ]
 
-export const hydroponic = {
-  title: 'Water & Soil.',
-  description: '수경식물은 물속에서도 건강하게 자라고, 흙으로 옮겨 심어도 자연스럽게 적응합니다.',
+export const hydroponic: HydroponicContent = {
+  title: 'Hydroponic Plants.',
+  description: '물만 채워주세요.',
   image: '/images/content/hydroponic.webp',
   alt: '맑은 물 안으로 섬세한 뿌리가 보이는 수경식물',
+  intro: [
+    'Keep The Moment',
+    '물만 채워주세요.',
+    '흙 없이도 식물은 건강하게 자랄 수 있습니다.',
+    '깨끗한 물과 적당한 빛,\n그리고 가끔의 관심만으로도\n식물은 오랫동안 당신의 공간을 함께 채워갑니다.',
+  ],
+  sections: [
+    {
+      id: 'what-is-hydroponic',
+      title: '수경식물이란',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: '흙 대신 물에서 키우는 식물.',
+        },
+        {
+          type: 'paragraph',
+          text: '식물은 뿌리를 통해 물과 영양분을 흡수하며 성장하는데\n수경재배는 흙 대신 물이 이러한 역할을 대신하기 때문에,\n흙이 없어도 식물은 충분히 건강하게 자랄 수 있습니다.',
+        },
+      ],
+    },
+    {
+      id: 'hydroponic-growth',
+      title: '수경식물의 성장',
+      blocks: [
+        {
+          type: 'quote',
+          text: '흙이 없는데 정말 잘 자랄까요?',
+        },
+        {
+          type: 'paragraph',
+          text: '식물은 사실 흙을 먹고 자라는 것이 아닙니다.',
+        },
+        {
+          type: 'paragraph',
+          text: '식물이 성장하는 데 필요한 것은\n\n물ㅣ산소ㅣ빛ㅣ영양분 입니다.',
+        },
+        {
+          type: 'paragraph',
+          text: '흙은 이 네 가지를 공급하고 저장하는 역할을 하는 매개체일 뿐입니다.',
+        },
+        {
+          type: 'paragraph',
+          text: '따라서 깨끗한 물과 적절한 환경이 갖춰진다면 흙 없이도 건강하게 성장할 수 있습니다.',
+        },
+      ],
+    },
+    {
+      id: 'hydroponic-benefits',
+      title: '수경식물의 장점',
+      blocks: [
+        {
+          type: 'list',
+          items: [
+            {
+              title: '간편한 관리.',
+              body: '흙을 갈아주거나 분갈이를 하지 않아도 됩니다.\n물만 보충하고 주기적으로 깨끗한 물로 교체해 주면 누구나 쉽게 관리할 수 있습니다.',
+            },
+            {
+              title: '물 주기 쉬움.',
+              body: '물을 언제, 얼마만큼 주어야하는지에 대한 어려움 없이\n수경식물은 물이 줄어든 만큼만 보충하면 되어 관리가 훨씬 직관적입니다.',
+            },
+            {
+              title: '벌레 발생이 적음.',
+              body: '흙에서 자주 발생하는 버섯파리나 작은 해충이 거의 생기지 않아\n실내에서 더욱 깔끔하게 키울 수 있습니다.',
+            },
+            {
+              title: '뿌리 성장 감상.',
+              body: '수경식물은 뿌리도 식물의 아름다움 중 하나입니다.\n깨끗한 물속에서 자라는 뿌리를 함께 감상할 수 있어 일반 화분과는 또 다른 매력을 느낄 수 있습니다.',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'hydroponic-care',
+      title: '수경식물 관리방법',
+      blocks: [
+        {
+          type: 'list',
+          items: [
+            {
+              title: '물의 양',
+              body: '뿌리가 충분히 잠길 정도로만 채워주세요.\n용기 가득 물을 채우는 것보다 뿌리가 잠길 정도를 유지하는 것이 가장 좋습니다.',
+            },
+            {
+              title: '물 교체 시기',
+              body: '약 2주에 한 번 깨끗한 물로 교체해 주세요.\n중간에 물이 줄어들면 새 물만 보충해 주시면 됩니다.\n물을 오래 교체하지 않으면 산소가 부족해지고 뿌리 상태가 나빠질 수 있습니다.',
+            },
+            {
+              title: '햇빛',
+              body: '수경식물도 일반 식물과 마찬가지로 빛이 필요합니다.\n햇빛이 잘 드는 밝은 간접광이 가장 적합하며,\n강한 여름철 직사광선은 잎이 탈 수 있으므로 피해 주세요.',
+            },
+            {
+              title: '영양제',
+              body: '처음에는 깨끗한 물만으로도 충분히 잘 자랍니다.\n다만 오랫동안 건강하게 키우거나 잎 색감, 뿌리 성장, 새잎 발달을 돕고 싶다면\n킵더모먼트의 수경 전용 영양제를 아주 소량 사용하는 것을 추천합니다.',
+            },
+            {
+              title: '뿌리 색',
+              body: '모든 갈색 뿌리가 문제가 있는 것은 아닙니다.\n건강한 뿌리는 아이보리색부터 연갈색까지 다양할 수 있으며 단단한 촉감을 유지합니다.\n반대로 뿌리가 검게 변하고 물러지거나 냄새가 난다면 썩기 시작한 것이므로\n해당 부분을 소독한 가위로 잘라 제거하고 깨끗한 물로 교체해 주세요.',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'hydroponic-note',
+      title: '참고사항',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: '대부분의 식물은 수경으로 키울 수 있지만, 성장 속도와 적응력은 식물의 종류에 따라 다를 수 있습니다.\n킵더모먼트에서는 수경 재배에 적합한 품종을 선별하여 초보자도 비교적 쉽게 관리할 수 있습니다.',
+        },
+      ],
+    },
+  ],
 }
 
 export const storeInfo = {

@@ -565,6 +565,33 @@ export interface Hydroponic {
   description: string;
   image: number | Media;
   alt?: string | null;
+  intro?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  sections?:
+    | {
+        sectionId?: string | null;
+        title: string;
+        blocks?:
+          | {
+              blockType: 'paragraph' | 'quote' | 'list';
+              text?: string | null;
+              items?:
+                | {
+                    title: string;
+                    body: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -704,6 +731,33 @@ export interface HydroponicSelect<T extends boolean = true> {
   description?: T;
   image?: T;
   alt?: T;
+  intro?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  sections?:
+    | T
+    | {
+        sectionId?: T;
+        title?: T;
+        blocks?:
+          | T
+          | {
+              blockType?: T;
+              text?: T;
+              items?:
+                | T
+                | {
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

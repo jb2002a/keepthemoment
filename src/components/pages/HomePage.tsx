@@ -60,8 +60,8 @@ function HomeLinks() {
           </a>
           <a href="/care" className="home-link-card">
             <span className="section__eyebrow">Care Guide</span>
-            <strong>Water & Soil.</strong>
-            <span>물과 흙 모두에 잘 적응하는 식물.</span>
+            <strong>Hydroponic Plants.</strong>
+            <span>수생식물에 대해서.</span>
           </a>
           <a href="/#visit" className="home-link-card">
             <span className="section__eyebrow">Visit</span>

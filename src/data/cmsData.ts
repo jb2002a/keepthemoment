@@ -5,6 +5,8 @@ import type {
   Collection,
   FragranceBrand,
   GiftOption,
+  HydroponicGuideBlock,
+  HydroponicGuideSection,
   PlantItem,
   StoryBlock,
 } from './siteData'
@@ -59,6 +61,98 @@ function resolveAlt(
   if (explicitAlt) return explicitAlt
   if (media && typeof media !== 'number' && media.alt) return media.alt
   return fallback
+}
+
+function mapHydroponicIntro(
+  intro:
+    | Array<{ text?: string | null } | string | null>
+    | null
+    | undefined,
+  fallback: string[],
+): string[] {
+  if (!intro?.length) return fallback
+
+  const lines = intro
+    .map((item) => {
+      if (typeof item === 'string') return item.trim()
+      return item?.text?.trim() || ''
+    })
+    .filter(Boolean)
+
+  return lines.length ? lines : fallback
+}
+
+function mapHydroponicBlock(
+  block: {
+    blockType?: string | null
+    type?: string | null
+    text?: string | null
+    items?: Array<{ title?: string | null; body?: string | null }> | null
+  },
+): HydroponicGuideBlock | null {
+  const blockType = block.blockType || block.type
+
+  if (blockType === 'list') {
+    const items =
+      block.items
+        ?.map((item) => ({
+          title: item.title?.trim() || '',
+          body: item.body?.trim() || '',
+        }))
+        .filter((item) => item.title || item.body) || []
+
+    if (!items.length) return null
+    return { type: 'list', items }
+  }
+
+  const text = block.text?.trim() || ''
+  if (!text) return null
+
+  if (blockType === 'quote') {
+    return { type: 'quote', text }
+  }
+
+  return { type: 'paragraph', text }
+}
+
+function mapHydroponicSections(
+  sections:
+    | Array<{
+        sectionId?: string | null
+        id?: string | null
+        title?: string | null
+        blocks?: Array<{
+          blockType?: string | null
+          type?: string | null
+          text?: string | null
+          items?: Array<{ title?: string | null; body?: string | null }> | null
+        }> | null
+      }>
+    | null
+    | undefined,
+  fallback: HydroponicGuideSection[],
+): HydroponicGuideSection[] {
+  if (!sections?.length) return fallback
+
+  const mapped = sections
+    .map((section, index) => {
+      const title = section.title?.trim() || ''
+      const blocks =
+        section.blocks
+          ?.map((block) => mapHydroponicBlock(block))
+          .filter((block): block is HydroponicGuideBlock => Boolean(block)) || []
+
+      if (!title && !blocks.length) return null
+
+      return {
+        id: section.sectionId || section.id || `section-${index + 1}`,
+        title: title || fallback[index]?.title || `Section ${index + 1}`,
+        blocks: blocks.length ? blocks : fallback[index]?.blocks || [],
+      }
+    })
+    .filter((section): section is HydroponicGuideSection => Boolean(section))
+
+  return mapped.length ? mapped : fallback
 }
 
 function mapPlant(
@@ -226,6 +320,18 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
     description?: string
     image?: MediaLike
     alt?: string
+    intro?: Array<{ text?: string | null } | string | null>
+    sections?: Array<{
+      sectionId?: string | null
+      id?: string | null
+      title?: string | null
+      blocks?: Array<{
+        blockType?: string | null
+        type?: string | null
+        text?: string | null
+        items?: Array<{ title?: string | null; body?: string | null }> | null
+      }> | null
+    }>
   } | null
 
   const store = input.storeInfo as {
@@ -363,6 +469,11 @@ export function mapPayloadContent(input: PayloadSeedLike): SiteContent {
       description: hydroponic?.description || fallback.hydroponic.description,
       image: resolveMediaUrl(hydroponic?.image, fallback.hydroponic.image),
       alt: resolveAlt(hydroponic?.image, hydroponic?.alt, fallback.hydroponic.alt),
+      intro: mapHydroponicIntro(hydroponic?.intro, fallback.hydroponic.intro),
+      sections: mapHydroponicSections(
+        hydroponic?.sections,
+        fallback.hydroponic.sections,
+      ),
     },
     storeInfo: {
       name: store?.name || fallback.storeInfo.name,

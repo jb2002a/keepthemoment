@@ -1,0 +1,16 @@
+---
+description: Client prefers accordion-style expandable product info lists
+alwaysApply: true
+---
+
+# Product Info List UI (Client Preference)
+
+When showing product detail information (details, fragrance notes, shipping/returns, precautions, etc.), use a **minimal accordion list**:
+
+- Full-width rows separated by thin horizontal lines (top, between, bottom)
+- Left-aligned section titles only when collapsed (no plus/arrow icons required)
+- Click a row → content smoothly expands/unfolds beneath it
+- Expanded content can include subheadings, key-value lines, paragraphs, and numbered lists
+- Other sections stay collapsed unless opened; headers shift down as content opens
+
+Do not replace this with static long-form blocks or card-based FAQ layouts unless the client changes direction.
