@@ -39,9 +39,9 @@ export function BrandStory() {
           ))}
         </div>
 
-        <Reveal className="story__body" delay={200}>
+        <div className="story__body">
           <p className="section__lead">{storyPage.lead}</p>
-        </Reveal>
+        </div>
       </div>
     </section>
   )
